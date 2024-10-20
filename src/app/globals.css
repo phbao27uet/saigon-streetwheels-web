@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 247, 247, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 247, 247, 255;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  /* background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
+    rgb(var(--background-start-rgb)); */
+  background: #f7f7ff;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .flex-responsive {
+    @apply flex flex-col md:flex-row;
+  }
+
+  .section-title-white {
+    @apply text-center text-2xl capitalize text-white lg:text-3xl;
+  }
+
+  .section-title {
+    @apply text-center text-2xl capitalize text-primary lg:text-3xl;
+  }
+
+  .section-description-white {
+    @apply text-center text-base text-white;
+  }
+
+  .section-description {
+    @apply text-center text-base text-primary;
+  }
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination-bullets {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background-color: #1b264a !important;
+  opacity: 0.2 !important;
+}
+
+.swiper-pagination-bullet-active {
+  width: 16px !important;
+  height: 16px !important;
+  opacity: 1 !important;
+}
+
+.swiper-horizontal {
+  padding-bottom: 80px !important;
+}
+.swiper-container-horizontal > .swiper-pagination {
+  position: absolute;
+  bottom: 0;
+}

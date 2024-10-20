@@ -1,0 +1,50 @@
+.title {
+  background-color: #c1392b;
+  padding: 10px;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 0;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.title::before {
+  content: '';
+  background: url(https://dathangquangchau.com/newdhqc/images/bg-title.png) no-repeat scroll 0 0
+    transparent;
+  height: 79px;
+  width: 11px;
+  top: 0;
+  left: -10px;
+  position: absolute;
+}
+
+.title:after {
+  background: url(https://dathangquangchau.com/newdhqc/images/bg-title-right.png) no-repeat scroll 0
+    0 transparent;
+  right: -10px;
+  transform: skewX(-360deg);
+  content: '';
+  height: 79px;
+  width: 11px;
+  top: 0;
+  position: absolute;
+}
+
+@media (min-width: 48em) {
+  .title {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 47.9375em) {
+  .title:before,
+  .title:after {
+    background-size: auto 65px;
+  }
+}

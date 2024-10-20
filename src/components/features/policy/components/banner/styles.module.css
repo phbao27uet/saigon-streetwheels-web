@@ -1,0 +1,53 @@
+.background {
+  min-height: 45rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: #c1392d;
+  color: #fff;
+  position: relative;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.background::before {
+  background: url('https://dathangquangchau.com/newdhqc/images/bg-style-1.png') no-repeat scroll 0 0
+    #fff;
+  background-size: 100% auto;
+  content: '';
+  left: 0;
+  right: 0;
+  position: absolute;
+  bottom: -70px;
+  width: 100%;
+  height: 100px;
+}
+
+@media (min-width: 768px) {
+  .background::before {
+    bottom: -100px;
+    height: 150px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .background {
+    min-height: 54rem;
+
+    padding-bottom: 80px;
+    margin-bottom: 60px;
+  }
+
+  .background::before {
+    bottom: -150px;
+    height: 200px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .background::before {
+    bottom: -200px;
+    height: 250px;
+  }
+}

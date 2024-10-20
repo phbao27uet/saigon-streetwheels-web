@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  landing-page:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: landing-page
+    restart: unless-stopped
+    ports:
+      - '3309:3309'
+    env_file:
+      - .env
