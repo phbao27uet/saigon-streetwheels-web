@@ -1,38 +1,47 @@
-'use client';
+'use client'
 
-import React, { ButtonHTMLAttributes, CSSProperties, PropsWithChildren } from 'react';
-import { Button, ButtonProps, ButtonVariant } from '@mantine/core';
-import { tss } from '@libs/utils/tss-style';
+import { tss } from '@libs/utils/tss-style'
+import { Button, type ButtonProps, type ButtonVariant } from '@mantine/core'
+import type {
+  ButtonHTMLAttributes,
+  CSSProperties,
+  PropsWithChildren,
+} from 'react'
 
-type ButtonAttributes = Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof ButtonProps>;
+type ButtonAttributes = Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  keyof ButtonProps
+>
 
 interface Props extends ButtonProps, ButtonAttributes {}
 
 const cssDefault = {
   gradientBorderRefill: {
-    background: `linear-gradient(#1B264A 0 0) padding-box, linear-gradient(138deg, #455589 0%, #B4B4B4 100%) border-box`,
+    background:
+      'linear-gradient(#C50F18 0 0) padding-box, linear-gradient(138deg, #7B070C 0%, #B4B4B4 100%) border-box',
     border: '2px solid transparent',
   },
   color: '#fff',
-};
+}
 
 const cssByVariant: Record<
   ButtonVariant,
   {
-    gradientBorderRefill?: CSSProperties;
-    color: string;
+    gradientBorderRefill?: CSSProperties
+    color: string
   }
 > = {
   outline: {
-    color: '#1B264A',
+    color: '#C50F18',
     gradientBorderRefill: {
-      background: `linear-gradient(#fff 0 0) padding-box, linear-gradient(138deg, #455589 0%, #B4B4B4 100%) border-box`,
+      background:
+        'linear-gradient(#fff 0 0) padding-box, linear-gradient(138deg, #7B070C 0%, #B4B4B4 100%) border-box',
       border: '2px solid transparent',
     },
   },
   transparent: {
     gradientBorderRefill: {
-      background: `transparent`,
+      background: 'transparent',
       borderBottom: '2px solid #fff',
       borderRadius: '0 !important',
     },
@@ -40,7 +49,8 @@ const cssByVariant: Record<
   },
   default: {
     gradientBorderRefill: {
-      background: `linear-gradient(#1B264A 0 0) padding-box, linear-gradient(138deg, #455589 0%, #B4B4B4 100%) border-box`,
+      background:
+        'linear-gradient(#C50F18 0 0) padding-box, linear-gradient(138deg, #7B070C 0%, #B4B4B4 100%) border-box',
       border: '2px solid transparent',
     },
     color: '#fff',
@@ -65,43 +75,53 @@ const cssByVariant: Record<
     gradientBorderRefill: undefined,
     color: '',
   },
-};
+}
 
-export const ButtonCustom = ({ children, className, ...props }: PropsWithChildren<Props>) => {
+export const ButtonCustom = ({
+  children,
+  className,
+  ...props
+}: PropsWithChildren<Props>) => {
   const { classes, cx } = useStyles({
     variant: props.variant as ButtonVariant | undefined,
-  });
+  })
 
   return (
-    <Button className={cx(classes.button, classes.gradientBorderRefill, className)} {...props}>
+    <Button
+      className={cx(classes.button, classes.gradientBorderRefill, className)}
+      {...props}
+    >
       {children}
     </Button>
-  );
-};
+  )
+}
 
-const useStyles = tss.withParams<{ variant: ButtonVariant | undefined }>().create(({ variant }) => {
-  const color = (variant && cssByVariant[variant].color) || cssDefault.color;
-  const gradientBorderRefill =
-    (variant && cssByVariant[variant].gradientBorderRefill) || cssDefault.gradientBorderRefill;
+const useStyles = tss
+  .withParams<{ variant: ButtonVariant | undefined }>()
+  .create(({ variant }) => {
+    const color = (variant && cssByVariant[variant].color) || cssDefault.color
+    const gradientBorderRefill =
+      (variant && cssByVariant[variant].gradientBorderRefill) ||
+      cssDefault.gradientBorderRefill
 
-  return {
-    button: {
-      color: color,
-      fontSize: 'clamp(0.6875rem, 0.4012rem + 0.4469vw, 0.9375rem)',
-      fontWeight: 600,
-      transition: 'transform 0.3s ease',
-      textTransform: 'uppercase',
-      position: 'relative',
-      borderRadius: '20px',
-
-      '&:hover': {
-        transform: 'translateY(-8px)',
+    return {
+      button: {
         color: color,
-      },
-    },
+        fontSize: 'clamp(0.6875rem, 0.4012rem + 0.4469vw, 0.9375rem)',
+        fontWeight: 600,
+        transition: 'transform 0.3s ease',
+        textTransform: 'uppercase',
+        position: 'relative',
+        borderRadius: '20px',
 
-    gradientBorderRefill: {
-      ...gradientBorderRefill,
-    },
-  };
-});
+        '&:hover': {
+          transform: 'translateY(-8px)',
+          color: color,
+        },
+      },
+
+      gradientBorderRefill: {
+        ...gradientBorderRefill,
+      },
+    }
+  })

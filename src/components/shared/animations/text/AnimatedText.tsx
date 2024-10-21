@@ -1,18 +1,17 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ClassNameValue, twMerge } from 'tailwind-merge';
+import { motion } from 'framer-motion'
+import { type ClassNameValue, twMerge } from 'tailwind-merge'
 
 interface Props {
-  text: string;
-  delay?: number;
-  className?: ClassNameValue;
+  text: string
+  delay?: number
+  className?: ClassNameValue
 }
 
 export const AnimatedText = ({ text, delay = 0.15, className }: Props) => {
   // Chia văn bản thành các từ, giữ nguyên khoảng trắng và dấu câu
-  const words = text.split(/(\s+)/);
+  const words = text.split(/(\s+)/)
 
   const container = {
     hidden: { opacity: 0 },
@@ -20,14 +19,14 @@ export const AnimatedText = ({ text, delay = 0.15, className }: Props) => {
       opacity: 1,
       transition: { staggerChildren: delay, delayChildren: delay * i },
     }),
-  };
+  }
 
   const wordVariants = {
     hidden: {},
     visible: {
       transition: { staggerChildren: delay / 2 },
     },
-  };
+  }
 
   const letter = {
     visible: {
@@ -50,7 +49,7 @@ export const AnimatedText = ({ text, delay = 0.15, className }: Props) => {
         stiffness: 100,
       },
     },
-  };
+  }
 
   return (
     <motion.div
@@ -60,14 +59,22 @@ export const AnimatedText = ({ text, delay = 0.15, className }: Props) => {
       animate="visible"
     >
       {words.map((word, index) => (
-        <motion.span key={index} variants={wordVariants} className="inline-block whitespace-pre">
+        <motion.span
+          key={index}
+          variants={wordVariants}
+          className="inline-block whitespace-pre"
+        >
           {Array.from(word).map((char, charIndex) => (
-            <motion.span key={charIndex} variants={letter} className="inline-block">
+            <motion.span
+              key={charIndex}
+              variants={letter}
+              className="inline-block"
+            >
               {char === ' ' ? '\u00A0' : char}
             </motion.span>
           ))}
         </motion.span>
       ))}
     </motion.div>
-  );
-};
+  )
+}

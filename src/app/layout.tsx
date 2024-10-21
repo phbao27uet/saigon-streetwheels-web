@@ -42,31 +42,9 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
-        <link
-          rel="preload"
-          as="video"
-          href="https://vimeo.com/942971586?share=copy"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="https://yourbestpartner.eu/wp-content/uploads/2024/05/bg-video-6639c7b0520cd.webp"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="https://yourbestpartner.eu/wp-content/uploads/2024/05/img-66698-66462d09b8d4b.webp"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="https://yourbestpartner.eu/wp-content/uploads/2024/05/img-022-6645f1e5d22f5.webp"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="https://yourbestpartner.eu/wp-content/uploads/2024/05/img-9-66437d05d04c5.webp"
-        />
+        <link rel="preload" as="image" href="/images/logo.png" />
+        <link rel="preload" as="image" href="/svgs/motorbike.svg" />
+        <link rel="preload" as="image" href="/images/introduction/bg.webp" />
       </head>
       <body className={inter.className}>
         <WebVitals />

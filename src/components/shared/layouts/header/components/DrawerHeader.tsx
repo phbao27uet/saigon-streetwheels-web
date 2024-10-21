@@ -1,25 +1,24 @@
-'use client';
+'use client'
 
-import { tss } from '@/libs/utils/tss-style';
-import { Box, Divider, Drawer, Text } from '@mantine/core';
-import React from 'react';
+import { tss } from '@/libs/utils/tss-style'
+import { Box, Divider, Drawer, Text } from '@mantine/core'
 
-import { Flex, Image } from '@mantine/core';
-import Link from 'next/link';
+import { Flex, Image } from '@mantine/core'
+import Link from 'next/link'
 
-import { IconMail, IconPhone, IconX } from '@tabler/icons-react';
-import { ButtonCustom } from '@/components/shared/buttons';
-import { HEADER } from '../Header';
-import { usePathname } from 'next/navigation';
+import { ButtonCustom } from '@/components/shared/buttons'
+import { IconMail, IconPhone, IconX } from '@tabler/icons-react'
+import { usePathname } from 'next/navigation'
+import { HEADER } from '../Header'
 
 interface Props {
-  drawerOpened: boolean;
-  toggleDrawer: () => void;
+  drawerOpened: boolean
+  toggleDrawer: () => void
 }
 
 export const DrawerHeader = ({ drawerOpened, toggleDrawer }: Props) => {
-  const { classes } = useStyles();
-  const pathname = usePathname();
+  const { classes } = useStyles()
+  const pathname = usePathname()
 
   return (
     <Drawer
@@ -38,7 +37,11 @@ export const DrawerHeader = ({ drawerOpened, toggleDrawer }: Props) => {
       maw={300}
     >
       <Box className={classes.drawerContent}>
-        <IconX onClick={toggleDrawer} size={24} className="absolute right-5 top-5 cursor-pointer" />
+        <IconX
+          onClick={toggleDrawer}
+          size={24}
+          className="absolute right-5 top-5 cursor-pointer"
+        />
 
         <Flex justify="space-between" align="center" className="pt-12">
           <Image
@@ -62,7 +65,7 @@ export const DrawerHeader = ({ drawerOpened, toggleDrawer }: Props) => {
           {HEADER.map((item, index) => (
             <Link
               href={item.href}
-              key={index}
+              key={item.title}
               onClick={toggleDrawer}
               className={`${classes.drawerNavLink} ${pathname === `${item.href}/` || pathname === `${item.href}` ? 'active' : ''}`}
             >
@@ -85,13 +88,13 @@ export const DrawerHeader = ({ drawerOpened, toggleDrawer }: Props) => {
         </Flex>
       </Box>
     </Drawer>
-  );
-};
+  )
+}
 
 const useStyles = tss.create(() => ({
   drawer: {
     '& .mantine-Drawer-content': {
-      backgroundColor: '#1B264A',
+      backgroundColor: '#000',
       borderLeftWidth: '10px',
       borderRadius: '50px 0 0 50px',
       boxShadow: '2px 8px 23px 3px rgba(0,0,0,0.2)',
@@ -135,4 +138,4 @@ const useStyles = tss.create(() => ({
       fontWeight: 700,
     },
   },
-}));
+}))

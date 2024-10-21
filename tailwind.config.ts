@@ -1,5 +1,5 @@
-import type { Config } from 'tailwindcss';
-import plugin from 'tailwindcss/plugin';
+import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 
 const config: Config = {
   content: [
@@ -11,7 +11,8 @@ const config: Config = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       textColor: {
         primary: '#1B264A',
@@ -31,23 +32,22 @@ const config: Config = {
       ringColor: {
         primary: '#1B264A',
       },
-     
     },
     container: {
       padding: '1rem',
     },
   },
   plugins: [
-    plugin(function ({ addUtilities }) {
+    plugin(({ addUtilities }) => {
       const newUtilities = {
         '.text-stroke': {
           '-webkit-text-stroke-width': '1px',
           '-webkit-text-stroke-color': '#F5F5F5',
           color: 'transparent',
         },
-      };
-      addUtilities(newUtilities);
+      }
+      addUtilities(newUtilities)
     }),
   ],
-};
-export default config;
+}
+export default config

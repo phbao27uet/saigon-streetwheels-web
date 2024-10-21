@@ -24,6 +24,7 @@
       "@/auth": ["./src/libs/auth/auth"], // Config path alias for Auth.js
       "@libs/*": ["./src/libs/*"],
       "@assets/*": ["./src/assets/*"],
+      "@public/*": ["./public/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

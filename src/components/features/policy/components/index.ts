@@ -1,5 +1,0 @@
-export * from './banner'
-export * from './problem'
-export * from './list-services'
-export * from './service-price'
-export * from './introduction'

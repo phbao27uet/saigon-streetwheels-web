@@ -1,78 +1,76 @@
-'use client';
+'use client'
 
-import { useState, useEffect } from 'react';
-import { Burger, Flex, Group, Image } from '@mantine/core';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { tss } from '@libs/utils/tss-style';
-import { MainContainer } from '@shared/layouts';
-import React from 'react';
-import { ButtonCustom } from '../../buttons';
-import { IconMail, IconPhone } from '@tabler/icons-react';
-import { DrawerHeader } from './components';
-import { twMerge } from 'tailwind-merge';
+import { cn } from '@/libs/utils'
+import { tss } from '@libs/utils/tss-style'
+import { Burger, Flex, Group, Image } from '@mantine/core'
+import { MainContainer } from '@shared/layouts'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { ButtonCustom } from '../../buttons'
+import { DrawerHeader } from './components'
 
 export const HEADER = [
-  { title: 'Trang chủ', href: '/' },
-  { title: 'Bảng giá', href: '/bang-gia' },
-  { title: 'Check vận đơn', href: '/check-van-don' },
-  { title: 'Chính sách', href: '/chinh-sach' },
-];
+  { title: 'ABOUT US', href: '/' },
+  { title: 'TRAVEL TRIP', href: '/bang-gia' },
+  { title: 'OUR TOUR', href: '/check-van-don' },
+  { title: 'CONTACT US', href: '/chinh-sach' },
+  { title: 'BLOG', href: '/chinh-sach' },
+  { title: 'Q&A ', href: '/chinh-sach' },
+]
 
 const isActiveHeader = (pathname: string, href: string[]) =>
-  href.some((h) => pathname === `${h}/` || pathname === `${h}`);
+  href.some((h) => pathname === `${h}/` || pathname === `${h}`)
 
 export function Header() {
-  const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-  const [drawerOpened, setDrawerOpened] = useState(false);
+  const pathname = usePathname()
+  const [scrolled, setScrolled] = useState(false)
+  const [drawerOpened, setDrawerOpened] = useState(false)
   const { classes, cx } = useStyles({
     headerScrolled: scrolled,
-    hasBackgroundHeader: isActiveHeader(pathname, ['/check-van-don', '/chinh-sach']),
-  });
+    hasBackgroundHeader: isActiveHeader(pathname, ['/booking', '/chinh-sach']),
+  })
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
+      setScrolled(window.scrollY > 0)
+    }
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-  const toggleDrawer = () => setDrawerOpened((o) => !o);
+  const toggleDrawer = () => setDrawerOpened((o) => !o)
 
   return (
     <>
-      <header className={cx(classes.header, { [classes.headerScrolled]: scrolled })}>
+      <header
+        className={cx(classes.header, { [classes.headerScrolled]: scrolled })}
+      >
         <MainContainer>
           <Group h="100%" px="md" className={classes.headerContent}>
             <Link href={'/'}>
               <Image
-                src={
-                  'https://yourbestpartner.eu/wp-content/uploads/2024/04/logo_Y_B_PARTNER_light-1024x157.png'
-                }
+                src="/svgs/logo.svg"
                 alt="logo"
-                className={twMerge(classes.logo)}
+                className={cn(classes.logo)}
               />
             </Link>
 
             <Flex className={classes.desktopMenu}>
-              {HEADER.map((item, index) => (
+              {HEADER.map((item) => (
                 <Link
                   href={item.href}
-                  key={index}
+                  key={item.title}
                   prefetch
                   className={`${classes.headerNavLink} ${pathname === `${item.href}/` || pathname === `${item.href}` ? 'active' : ''}`}
                 >
                   {item.title}
                 </Link>
               ))}
-              <ButtonCustom variant="outline" className="w-fit px-4" size="lg">
-                <IconPhone size={20} />
-              </ButtonCustom>
-              <ButtonCustom className="w-fit" size="lg" rightSection={<IconMail size={20} />}>
-                Get a quote
+
+              <ButtonCustom className="w-fit" size="lg">
+                Buy Tickets
               </ButtonCustom>
             </Flex>
 
@@ -88,7 +86,7 @@ export function Header() {
 
       <DrawerHeader drawerOpened={drawerOpened} toggleDrawer={toggleDrawer} />
     </>
-  );
+  )
 }
 
 const useStyles = tss
@@ -99,11 +97,11 @@ const useStyles = tss
       zIndex: 1000,
       transition: 'background-color 0.3s ease',
       height: 90,
-      backgroundColor: hasBackgroundHeader ? '#1B264A' : 'transparent',
+      backgroundColor: hasBackgroundHeader ? '#000' : 'transparent',
     },
 
     headerScrolled: {
-      backgroundColor: '#1B264A',
+      backgroundColor: '#000',
     },
 
     headerContent: {
@@ -123,7 +121,7 @@ const useStyles = tss
 
     headerNavLink: {
       color: '#FFFFFF',
-      fontSize: 'clamp(0.75rem, 0.6068rem + 0.2235vw, 0.875rem)',
+      fontSize: 'clamp(1rem, 0.6068rem + 0.2235vw, 0.875rem)',
       fontWeight: 600,
       textDecoration: 'none',
       position: 'relative',
@@ -158,7 +156,7 @@ const useStyles = tss
     },
 
     logo: {
-      height: headerScrolled ? 25 : 30,
+      height: headerScrolled ? 64 : 80,
       transition: 'height 0.3s ease',
       objectFit: 'contain',
       width: 'auto',
@@ -177,4 +175,4 @@ const useStyles = tss
         display: 'flex',
       },
     },
-  }));
+  }))
