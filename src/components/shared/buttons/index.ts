@@ -1,2 +1,2 @@
-export * from './ButtonCustom';
-export * from './ButtonCustomRed'
+export * from './ButtonCustom'
+export * from './ButtonCustomGreen'

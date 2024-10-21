@@ -17,10 +17,10 @@ interface Props extends ButtonProps, ButtonAttributes {}
 
 const cssDefault = {
   gradientBorderRefill: {
-    background: '#fff',
-    border: '2px solid #c1392d',
+    background: '#2aa73c',
+    border: '2px solid transparent',
   },
-  color: '#c1392d',
+  color: '#fff',
 }
 
 const cssByVariant: Record<
@@ -31,10 +31,10 @@ const cssByVariant: Record<
   }
 > = {
   outline: {
-    color: '#c1392d',
+    color: '#2aa73c',
     gradientBorderRefill: {
       background: '#fff',
-      border: '2px solid #c1392d',
+      border: '2px solid #2aa73c',
     },
   },
   transparent: {
@@ -48,7 +48,7 @@ const cssByVariant: Record<
   default: {
     gradientBorderRefill: {
       background: '#fff',
-      border: '2px solid #c1392d',
+      border: '2px solid #2aa73c',
     },
     color: '#fff',
   },
@@ -74,7 +74,7 @@ const cssByVariant: Record<
   },
 }
 
-export const ButtonCustomRed = ({
+export const ButtonCustomGreen = ({
   children,
   className,
   ...props
@@ -113,9 +113,8 @@ const useStyles = tss
 
         '&:hover': {
           transform: 'translateY(-8px)',
-          background: variant === 'outline' ? '#fff' : 'transparent',
-          color: variant === 'outline' ? '#c1392d' : '#fff',
-          borderColor: variant === 'outline' ? '#c1392d' : '#fff',
+          color: color,
+          background: '#2aa73c',
         },
       },
 

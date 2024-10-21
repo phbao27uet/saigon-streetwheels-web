@@ -1,2 +1,5 @@
 export * from './here-section'
 export * from './about-us'
+export * from './our-tour'
+export * from './Section'
+export * from './album-tour'

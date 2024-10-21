@@ -60,7 +60,7 @@ export const AboutUs = () => {
 
 const AboutUsImage = ({ src, alt }: { src: string; alt: string }) => {
   return (
-    <div className="h-[150px] w-[300px] basis-1/4 ">
+    <div className="h-[150px] w-[300px] basis-1/3 md:basis-1/4 ">
       <Image className="block rounded-lg h-full w-full" src={src} alt={alt} />
     </div>
   )
