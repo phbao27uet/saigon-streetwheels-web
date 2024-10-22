@@ -13,10 +13,10 @@ import { DrawerHeader } from './components'
 export const HEADER = [
   { title: 'ABOUT US', href: '#about-us' },
   { title: 'TRAVEL TRIP', href: '#' },
-  { title: 'OUR TOUR', href: '#our-tour' },
-  { title: 'CONTACT US', href: '#' },
-  { title: 'BLOG', href: '#' },
-  { title: 'Q&A ', href: '#' },
+  { title: 'OUR TOUR', href: '/our-tour' },
+  { title: 'CONTACT US', href: '#footer' },
+  { title: 'BLOG', href: '#tourism-news' },
+  { title: 'Q&A', href: '#' },
 ]
 
 const isActiveHeader = (pathname: string, href: string[]) =>

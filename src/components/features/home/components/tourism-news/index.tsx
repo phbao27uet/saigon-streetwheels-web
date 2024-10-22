@@ -35,7 +35,8 @@ export const TourismNews = () => {
   }
 
   return (
-    <div id="tourism-news" className="bg-white">
+    <div className="bg-white">
+      <div id="tourism-news" className="relative -top-[6rem]" />
       <Section title="TOURISM NEWS" titleClassName="text-[#C80D13]">
         <Swiper
           style={{
