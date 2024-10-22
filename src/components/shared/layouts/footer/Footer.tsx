@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <>
       <div className="bg-[url('/images/bgft.png')] bg-cover bg-center flex items-center justify-center">
-        <Container size="md" className="py-8">
+        <Container size="lg" className="py-8">
           <div className="flex flex-col items-center gap-8">
             <Link href="/">
               <div className="w-full h-full max-w-[150px] max-h-[150px]">

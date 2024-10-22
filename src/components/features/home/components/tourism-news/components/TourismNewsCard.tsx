@@ -8,7 +8,7 @@ interface Props {
 
 export const LatestNewsCard = ({ date, image, title }: Props) => {
   return (
-    <div className="h-fit rounded-[33px]">
+    <div className="h-fit">
       <div className="relative overflow-hidden rounded-[33px] pt-[100%]">
         <Image
           alt="A globe surrounded by packages and a plane flying over it, representing global transport"
