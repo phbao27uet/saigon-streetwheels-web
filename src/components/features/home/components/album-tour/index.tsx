@@ -1,4 +1,8 @@
+'use client'
+
+import { ButtonCustomGreen } from '@/components/shared/buttons'
 import { Image } from '@mantine/core'
+import { useState } from 'react'
 import { Section } from '../Section'
 
 const tours = [
@@ -86,23 +90,12 @@ const tours = [
     departureDate: '05/12/2024',
     price: 65,
   },
-  {
-    image: '/images/home/tour-1.png',
-    title: 'Phong Nha Cave Exploration',
-    departureLocation: 'Dong Hoi',
-    departureDate: '10/12/2024',
-    price: 85,
-  },
-  {
-    image: '/images/home/tour-1.png',
-    title: 'Ninh Binh Scenic Tour',
-    departureLocation: 'Hanoi',
-    departureDate: '15/12/2024',
-    price: 60,
-  },
 ]
 
 export const AlbumTour = () => {
+  const [showAllAlbumTours, setShowAllAlbumTours] = useState(false)
+  const displayedTours = showAllAlbumTours ? tours : tours.slice(0, 6)
+
   return (
     <div
       id="album-tour"
@@ -110,8 +103,8 @@ export const AlbumTour = () => {
     >
       <Section title="Album Tours" className="z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-          {tours.map((tour) => (
-            <div key={tour.title} className="w-full">
+          {displayedTours.map((tour) => (
+            <div key={tour.title} className="w-full h-[300px]">
               <Image
                 className="w-full h-full object-cover"
                 src={tour.image}
@@ -119,6 +112,13 @@ export const AlbumTour = () => {
               />
             </div>
           ))}
+        </div>
+        <div className="text-center mt-6">
+          <ButtonCustomGreen
+            onClick={() => setShowAllAlbumTours(!showAllAlbumTours)}
+          >
+            {showAllAlbumTours ? 'View Less Album' : 'View All Album'}
+          </ButtonCustomGreen>
         </div>
       </Section>
     </div>

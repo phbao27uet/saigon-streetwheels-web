@@ -37,7 +37,7 @@ export const Feedback = () => {
   return (
     <div id="feedback">
       <Section title="FEEDBACK FROM CUSTOMER" className="pb-28">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-[150px] lg:gap-y-4 gap-4 p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-[150px] lg:gap-y-6 gap-6 p-4">
           {feedbacks.map((fb) => (
             <div
               key={fb.image}
@@ -50,21 +50,24 @@ export const Feedback = () => {
                   alt={fb.image}
                 />
               </div>
-              <p className="text-3xl font-bold px-4">{fb.name}</p>
-              <p className="text-lg px-4 text-justify">{fb.feedback}</p>
 
-              <div className="flex items-center">
-                {Array.from({ length: fb.stars }).map((_, index) => (
-                  <span key={index} className="text-xl text-yellow-500">
-                    ★
-                  </span>
-                ))}
+              <div className="flex flex-col items-center border-r-[3px] pb-1 border-l-[3px] border-white">
+                <p className="text-3xl font-bold px-4">{fb.name}</p>
+                <p className="text-lg px-4 text-justify">{fb.feedback}</p>
+
+                <div className="flex items-center">
+                  {Array.from({ length: fb.stars }).map((_, index) => (
+                    <span key={index} className="text-xl text-yellow-500">
+                      ★
+                    </span>
+                  ))}
+                </div>
+
+                <Image
+                  src="/svgs/fb-bottom.svg"
+                  className="absolute bottom-0 translate-y-[95%]"
+                />
               </div>
-
-              <Image
-                src="/svgs/feedback.svg"
-                className="absolute bottom-0 translate-y-[30%]"
-              />
             </div>
           ))}
         </div>

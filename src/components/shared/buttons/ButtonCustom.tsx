@@ -18,7 +18,7 @@ interface Props extends ButtonProps, ButtonAttributes {}
 const cssDefault = {
   gradientBorderRefill: {
     background:
-      'linear-gradient(#C50F18 0 0) padding-box, linear-gradient(138deg, #7B070C 0%, #B4B4B4 100%) border-box',
+      'linear-gradient(#C50F18 0 0) padding-box, linear-gradient(#C50F18 0 0) border-box',
     border: '2px solid transparent',
   },
   color: '#fff',
@@ -35,22 +35,22 @@ const cssByVariant: Record<
     color: '#C50F18',
     gradientBorderRefill: {
       background:
-        'linear-gradient(#fff 0 0) padding-box, linear-gradient(138deg, #7B070C 0%, #B4B4B4 100%) border-box',
+        'linear-gradient(#fff 0 0) padding-box, linear-gradient(#C50F18 0 0) border-box',
       border: '2px solid transparent',
     },
   },
   transparent: {
     gradientBorderRefill: {
       background: 'transparent',
-      borderBottom: '2px solid #fff',
-      borderRadius: '0 !important',
+      border: '2px solid #fff',
+      borderRadius: '50px',
     },
     color: '#fff',
   },
   default: {
     gradientBorderRefill: {
       background:
-        'linear-gradient(#C50F18 0 0) padding-box, linear-gradient(138deg, #7B070C 0%, #B4B4B4 100%) border-box',
+        'linear-gradient( 0 0) padding-box, linear-gradient(138deg, #7B070C 0%, #B4B4B4 100%) border-box',
       border: '2px solid transparent',
     },
     color: '#fff',

@@ -96,7 +96,7 @@ const useStyles = tss
       padding: '8px 0px',
       zIndex: 1000,
       transition: 'background-color 0.3s ease',
-      height: 90,
+      height: 150,
       backgroundColor: hasBackgroundHeader ? '#000' : 'transparent',
     },
 
@@ -156,7 +156,7 @@ const useStyles = tss
     },
 
     logo: {
-      height: headerScrolled ? 64 : 80,
+      height: headerScrolled ? 100 : 120,
       transition: 'height 0.3s ease',
       objectFit: 'contain',
       width: 'auto',

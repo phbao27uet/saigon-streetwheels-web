@@ -18,7 +18,7 @@ export const Section = ({
     <Container size="lg" className={cn('flex flex-col gap-4 py-10', className)}>
       <p
         className={cn(
-          'text-3xl font-bold text-white text-center',
+          'text-3xl font-bold text-white text-center uppercase',
           titleClassName,
         )}
       >

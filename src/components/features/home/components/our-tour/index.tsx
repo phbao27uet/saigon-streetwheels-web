@@ -1,4 +1,8 @@
+'use client'
+
+import { ButtonCustomGreen } from '@/components/shared/buttons'
 import { TourCard } from '@/components/shared/cards'
+import { useState } from 'react'
 import { Section } from '../Section'
 
 const tours = [
@@ -86,37 +90,24 @@ const tours = [
     departureDate: '05/12/2024',
     price: 65,
   },
-  {
-    image: '/images/home/tour-1.png',
-    title: 'Phong Nha Cave Exploration',
-    departureLocation: 'Dong Hoi',
-    departureDate: '10/12/2024',
-    price: 85,
-  },
-  {
-    image: '/images/home/tour-1.png',
-    title: 'Ninh Binh Scenic Tour',
-    departureLocation: 'Hanoi',
-    departureDate: '15/12/2024',
-    price: 60,
-  },
-  {
-    image: '/images/home/tour-1.png',
-    title: 'Con Dao Islands Discovery',
-    departureLocation: 'Ho Chi Minh City',
-    departureDate: '20/12/2024',
-    price: 180,
-  },
 ]
 
 export const OurTour = () => {
+  const [showAllTours, setShowAllTours] = useState(false)
+  const displayedTours = showAllTours ? tours : tours.slice(0, 6)
+
   return (
     <Section title="Our Tours">
       <div id="our-tour" className="relative -top-[12rem]" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-        {tours.map((tour) => (
+        {displayedTours.map((tour) => (
           <TourCard key={tour.title} {...tour} />
         ))}
+      </div>
+      <div className="text-center mt-6">
+        <ButtonCustomGreen onClick={() => setShowAllTours(!showAllTours)}>
+          {showAllTours ? 'View Less Tours' : 'View All Tours'}
+        </ButtonCustomGreen>
       </div>
     </Section>
   )
