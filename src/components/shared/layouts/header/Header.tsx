@@ -11,12 +11,12 @@ import { ButtonCustom } from '../../buttons'
 import { DrawerHeader } from './components'
 
 export const HEADER = [
-  { title: 'ABOUT US', href: '/' },
-  { title: 'TRAVEL TRIP', href: '/bang-gia' },
-  { title: 'OUR TOUR', href: '/check-van-don' },
-  { title: 'CONTACT US', href: '/chinh-sach' },
-  { title: 'BLOG', href: '/chinh-sach' },
-  { title: 'Q&A ', href: '/chinh-sach' },
+  { title: 'ABOUT US', href: '#about-us' },
+  { title: 'TRAVEL TRIP', href: '#' },
+  { title: 'OUR TOUR', href: '#our-tour' },
+  { title: 'CONTACT US', href: '#' },
+  { title: 'BLOG', href: '#' },
+  { title: 'Q&A ', href: '#' },
 ]
 
 const isActiveHeader = (pathname: string, href: string[]) =>

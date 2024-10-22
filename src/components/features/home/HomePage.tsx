@@ -1,4 +1,11 @@
-import { AboutUs, AlbumTour, HereSection, OurTour } from './components'
+import {
+  AboutUs,
+  AlbumTour,
+  Feedback,
+  HereSection,
+  OurTour,
+  TourismNews,
+} from './components'
 
 export const HomePage = () => {
   return (
@@ -7,6 +14,8 @@ export const HomePage = () => {
       <AboutUs />
       <OurTour />
       <AlbumTour />
+      <Feedback />
+      <TourismNews />
     </div>
   )
 }

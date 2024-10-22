@@ -104,7 +104,10 @@ const tours = [
 
 export const AlbumTour = () => {
   return (
-    <div className="bg-[url('/images/home/album-tour.webp')] bg-cover py-8">
+    <div
+      id="album-tour"
+      className="bg-[url('/images/home/album-tour.webp')] bg-cover py-8"
+    >
       <div className="absolute inset-0 bg-[#D9D9D9] bg-opacity-40" />
       <Section title="Album Tours">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">

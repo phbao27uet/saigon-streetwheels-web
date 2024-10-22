@@ -20,6 +20,7 @@ const IMAGES = [
 export const AboutUs = () => {
   return (
     <div className="min-h-[70vh] md:min-h-screen relative bg-[url('/images/home/about-us.webp')] bg-cover bg-center py-8">
+      <div id="about-us" className="relative -top-[6rem]" />
       <Container size="md" className="relative flex-responsive gap-8">
         <div className="basis-1/2 py-5 text-center flex justify-center">
           <Image
