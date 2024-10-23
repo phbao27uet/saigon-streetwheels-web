@@ -27,11 +27,11 @@ export const AboutUs = () => {
       <div id="about-us" className="relative -top-[8rem]" />
       <Section title="ABOUT US" className="pb-28">
         <div className="relative flex-responsive gap-8">
-          <div className="basis-1/2 text-center flex justify-center h-[80%] relative">
-            <div className="absolute -top-5 -left-5 w-1/5 h-[4px] bg-[#FFBF00]" />
-            <div className="absolute -top-5 -left-5 w-[4px] h-1/5 bg-[#FFBF00]" />
-            <div className="absolute -bottom-5 -right-5 w-1/5 h-[4px] bg-[#FFBF00]" />
-            <div className="absolute -bottom-5 -right-5 w-[4px] h-1/5 bg-[#FFBF00]" />
+          <div className="basis-1/2 text-center flex justify-center h-[80%] w-fit self-center mt-8 relative px-8">
+            <div className="absolute -top-5 left-3 w-1/5 h-[4px] bg-[#FFBF00]" />
+            <div className="absolute -top-5 left-3 w-[4px] h-1/5 bg-[#FFBF00]" />
+            <div className="absolute -bottom-5 right-3 w-1/5 h-[4px] bg-[#FFBF00]" />
+            <div className="absolute -bottom-5 right-3 w-[4px] h-1/5 bg-[#FFBF00]" />
 
             <Image
               className="md:w-full sm:w-[500px] w-[300px]"

@@ -44,7 +44,7 @@ export default function RootLayout({
         <ColorSchemeScript defaultColorScheme="light" />
         <link rel="preload" as="image" href="/images/logo.png" />
         <link rel="preload" as="image" href="/svgs/motorbike.svg" />
-        <link rel="preload" as="image" href="/images/introduction/bg.webp" />
+        <link rel="preload" as="image" href="/images/introduction/bg.jpeg" />
         <link rel="preload" as="image" href="/images/home/hero-1.jpg" />
       </head>
       <body className={inter.className}>

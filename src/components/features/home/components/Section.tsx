@@ -15,7 +15,7 @@ export const Section = ({
   titleClassName,
 }: React.PropsWithChildren<SectionProps>) => {
   return (
-    <Container size="lg" className={cn('flex flex-col gap-4 py-10', className)}>
+    <Container size="xl" className={cn('flex flex-col gap-4 py-10', className)}>
       <p
         className={cn(
           'text-3xl font-bold text-white text-center uppercase',

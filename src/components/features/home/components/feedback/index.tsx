@@ -31,13 +31,20 @@ const feedbacks: IFeedback[] = [
       'I had a great experience with the tour. The guide was very friendly and the food was delicious. I would definitely recommend this tour to anyone who wants to explore Vietnam.',
     stars: 5,
   },
+  {
+    name: 'Ms.Xs',
+    image: '/images/home/fb-2.jpeg',
+    feedback:
+      'I had a great experience with the tour. The guide was very friendly and the food was delicious. I would definitely recommend this tour to anyone who wants to explore Vietnam.',
+    stars: 4,
+  },
 ]
 
 export const Feedback = () => {
   return (
     <div id="feedback">
       <Section title="FEEDBACK FROM CUSTOMER" className="pb-28">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-[150px] lg:gap-y-6 gap-6 p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-[150px] lg:gap-y-[100px] gap-6 p-4">
           {feedbacks.map((fb) => (
             <div
               key={fb.image}

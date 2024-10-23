@@ -27,6 +27,26 @@ const DATA = [
     date: 'May 12, 2021',
     title: 'Category 3 Animal By-Products: What You Need to Know',
   },
+  {
+    image: '/images/home/tn-1.png',
+    date: 'May 12, 2021',
+    title: 'Category 3 Animal By-Products: What You Need to Know',
+  },
+  {
+    image: '/images/home/tn-2.png',
+    date: 'July 3, 2024',
+    title: 'Exploring Hidden Gems in Saigon',
+  },
+  {
+    image: '/images/home/tn-3.png',
+    date: 'August 15, 2024',
+    title: 'Top 10 Street Foods You Must Try in Vietnam',
+  },
+  {
+    image: '/images/home/tn-1.png',
+    date: 'September 22, 2024',
+    title: 'Eco-Tourism: Sustainable Travel in Vietnam',
+  },
 ]
 
 export const TourismNews = () => {
@@ -50,11 +70,15 @@ export const TourismNews = () => {
             delay: 5000,
           }}
           breakpoints={{
-            900: {
+            1280: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+            1024: {
               slidesPerView: 3,
               spaceBetween: 40,
             },
-            600: {
+            768: {
               slidesPerView: 2,
               spaceBetween: 20,
             },

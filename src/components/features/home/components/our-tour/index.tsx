@@ -90,16 +90,100 @@ const tours = [
     departureDate: '05/12/2024',
     price: 65,
   },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Ho Chi Minh City Food Tour',
+    departureLocation: 'Ho Chi Minh City',
+    departureDate: '10/12/2024',
+    price: 55,
+  },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Phong Nha Cave Exploration',
+    departureLocation: 'Dong Hoi',
+    departureDate: '15/12/2024',
+    price: 85,
+  },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Ninh Binh Scenic Tour',
+    departureLocation: 'Hanoi',
+    departureDate: '20/12/2024',
+    price: 60,
+  },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Con Dao Islands Discovery',
+    departureLocation: 'Ho Chi Minh City',
+    departureDate: '25/12/2024',
+    price: 130,
+  },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Cao Bang Ban Gioc Waterfall Trip',
+    departureLocation: 'Hanoi',
+    departureDate: '02/01/2025',
+    price: 95,
+  },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Cham Islands Snorkeling Adventure',
+    departureLocation: 'Hoi An',
+    departureDate: '07/01/2025',
+    price: 70,
+  },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Mai Chau Valley Retreat',
+    departureLocation: 'Hanoi',
+    departureDate: '12/01/2025',
+    price: 55,
+  },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Halong Bay Kayaking Experience',
+    departureLocation: 'Halong City',
+    departureDate: '17/01/2025',
+    price: 80,
+  },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Mekong Delta Homestay',
+    departureLocation: 'Can Tho',
+    departureDate: '22/01/2025',
+    price: 65,
+  },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Sapa Rice Terrace Trekking',
+    departureLocation: 'Lao Cai',
+    departureDate: '27/01/2025',
+    price: 75,
+  },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Hue Perfume River Cruise',
+    departureLocation: 'Hue',
+    departureDate: '01/02/2025',
+    price: 45,
+  },
+  {
+    image: '/images/home/tour-1.png',
+    title: 'Dalat Countryside Cycling Tour',
+    departureLocation: 'Da Lat',
+    departureDate: '06/02/2025',
+    price: 50,
+  },
 ]
 
 export const OurTour = () => {
   const [showAllTours, setShowAllTours] = useState(false)
-  const displayedTours = showAllTours ? tours : tours.slice(0, 6)
+  const displayedTours = showAllTours ? tours : tours.slice(0, 12)
 
   return (
     <Section title="Our Tours">
       <div id="our-tour" className="relative -top-[12rem]" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
         {displayedTours.map((tour) => (
           <TourCard key={tour.title} {...tour} />
         ))}

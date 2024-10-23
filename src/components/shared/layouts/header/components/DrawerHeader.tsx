@@ -4,10 +4,8 @@ import { tss } from '@/libs/utils/tss-style'
 import { Box, Divider, Drawer, Text } from '@mantine/core'
 
 import { Flex, Image } from '@mantine/core'
+import { IconX } from '@tabler/icons-react'
 import Link from 'next/link'
-
-import { ButtonCustom } from '@/components/shared/buttons'
-import { IconMail, IconPhone, IconX } from '@tabler/icons-react'
 import { usePathname } from 'next/navigation'
 import { HEADER } from '../Header'
 
@@ -43,19 +41,13 @@ export const DrawerHeader = ({ drawerOpened, toggleDrawer }: Props) => {
           className="absolute right-5 top-5 cursor-pointer"
         />
 
-        <Flex justify="space-between" align="center" className="pt-12">
+        <Link href={'/home'}>
           <Image
-            src={
-              'https://yourbestpartner.eu/wp-content/uploads/2024/04/logo_Y_B_PARTNER_light-1024x157.png'
-            }
+            src="/svgs/logo.svg"
             alt="logo"
             className={classes.drawerLogo}
           />
-        </Flex>
-
-        <Text className={classes.drawerTagline}>
-          Logistics With Passion, Partnership With Commitment.
-        </Text>
+        </Link>
 
         <Divider color="#414c6e" className="my-8" />
 
@@ -73,19 +65,6 @@ export const DrawerHeader = ({ drawerOpened, toggleDrawer }: Props) => {
             </Link>
           ))}
         </Flex>
-
-        <Divider color="#414c6e" className="my-8" />
-
-        <Text className={classes.drawerMenuTitle}>FAST CONTACT</Text>
-
-        <Flex gap="md" mt="md">
-          <ButtonCustom variant="outline" size="lg">
-            <IconPhone size={20} />
-          </ButtonCustom>
-          <ButtonCustom variant="outline" size="lg">
-            <IconMail size={20} />
-          </ButtonCustom>
-        </Flex>
       </Box>
     </Drawer>
   )
@@ -94,7 +73,7 @@ export const DrawerHeader = ({ drawerOpened, toggleDrawer }: Props) => {
 const useStyles = tss.create(() => ({
   drawer: {
     '& .mantine-Drawer-content': {
-      backgroundColor: '#000',
+      backgroundColor: '#414c6e',
       borderLeftWidth: '10px',
       borderRadius: '50px 0 0 50px',
       boxShadow: '2px 8px 23px 3px rgba(0,0,0,0.2)',
