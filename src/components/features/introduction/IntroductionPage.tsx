@@ -1,16 +1,30 @@
+'use client'
+
 import SkewButton from '@/components/shared/buttons/SkewButton'
 import { Container } from '@mantine/core'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 import { SliderCustom } from './components'
 
 export const IntroductionPage = () => {
+  const [backgroundImage, setBackgroundImage] = useState(
+    '/images/introduction/bg.jpeg',
+  )
+
+  const handleBackgroundChange = (newImageUrl: string) => {
+    setBackgroundImage(newImageUrl)
+  }
+
   return (
-    <div className="min-h-screen relative bg-[url('/images/introduction/bg.jpeg')] bg-cover bg-center">
+    <div
+      className="min-h-screen relative bg-cover bg-center transition-all duration-500 ease-in-out"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
       <div className="absolute inset-0 bg-[#D9D9D9] bg-opacity-20 mix-blend-multiply" />
 
       <Container
-        size="xl"
+        size={1640}
         className="flex flex-col md:flex-row gap-10 py-5 min-h-screen"
       >
         <div className="w-full md:w-1/3 flex flex-col items-center md:items-start z-10">
@@ -47,7 +61,7 @@ export const IntroductionPage = () => {
         </div>
 
         <div className="w-full md:w-2/3 flex flex-col z-10 self-center md:self-end mt-10 md:mt-0">
-          <SliderCustom />
+          <SliderCustom onBackgroundChange={handleBackgroundChange} />
         </div>
       </Container>
     </div>

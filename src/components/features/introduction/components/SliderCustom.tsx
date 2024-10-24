@@ -51,10 +51,12 @@ const DATA = [
 
 export interface SwiperProps {
   defaultActiveSlide?: number
+  onBackgroundChange?: (newImageUrl: string) => void
 }
 
 const SliderCustom: React.FC<SwiperProps> = ({
   defaultActiveSlide,
+  onBackgroundChange,
   ...props
 }) => {
   const swiperRef = useRef<SwiperCore>()
@@ -112,6 +114,10 @@ const SliderCustom: React.FC<SwiperProps> = ({
           setIsBeginning(swiper.isBeginning)
           setIsEnd(swiper.isEnd)
           setActiveIndex(swiper.realIndex) // Update active index
+
+          if (onBackgroundChange) {
+            onBackgroundChange(DATA[swiper.realIndex].image)
+          }
         }}
         {...props}
       >
@@ -163,7 +169,7 @@ const SliderCustom: React.FC<SwiperProps> = ({
           </Button>
         </div>
 
-        <div className="w-full sm:w-1/2 h-[1px] bg-white my-4 sm:my-0" />
+        <div className="w-full sm:w-1/2 md:w-2/3 h-[1px] bg-white my-4 sm:my-0" />
 
         <p className="text-white text-4xl sm:text-5xl md:text-6xl font-bold w-[70px]">
           {(activeIndex + 1).toString().padStart(2, '0')}
