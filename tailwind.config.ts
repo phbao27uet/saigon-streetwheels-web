@@ -38,7 +38,7 @@ const config: Config = {
     },
   },
   plugins: [
-    plugin(({ addUtilities }) => {
+    plugin(({ addUtilities, addComponents }) => {
       const newUtilities = {
         '.text-stroke': {
           '-webkit-text-stroke-width': '1px',
@@ -47,6 +47,15 @@ const config: Config = {
         },
       }
       addUtilities(newUtilities)
+
+      const newComponents = {
+        '.swiper-container': {
+          '& .swiper-horizontal': {
+            paddingBottom: 'unset !important',
+          },
+        },
+      }
+      addComponents(newComponents)
     }),
   ],
 }

@@ -1,9 +1,9 @@
 'use client'
 
 import { ButtonCustomGreen } from '@/components/shared/buttons'
+import { Section } from '@/components/shared/layouts'
 import { Image } from '@mantine/core'
 import { useState } from 'react'
-import { Section } from '../Section'
 
 const tours = [
   {

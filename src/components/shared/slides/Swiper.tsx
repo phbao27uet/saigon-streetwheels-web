@@ -1,23 +1,24 @@
-'use client';
+'use client'
 
-import React, { useRef, useState } from 'react';
-import SwiperCore from 'swiper';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import { Swiper as ReactSwiper } from 'swiper/react';
+import type React from 'react'
+import { useRef, useState } from 'react'
+import SwiperCore from 'swiper'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
+import { Swiper as ReactSwiper } from 'swiper/react'
 
-import 'swiper/css';
-import 'swiper/css/pagination';
+import 'swiper/css'
+import 'swiper/css/pagination'
 
-import { Box, Button } from '@mantine/core';
-import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
-import { twMerge } from 'tailwind-merge';
+import { Box, Button } from '@mantine/core'
+import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
+import { twMerge } from 'tailwind-merge'
 
-SwiperCore.use([Autoplay, Navigation, Pagination]);
+SwiperCore.use([Autoplay, Navigation, Pagination])
 
 export interface SwiperProps extends React.ComponentProps<typeof ReactSwiper> {
-  hideNavigation?: boolean;
-  isOverflowHidden?: boolean;
-  defaultActiveSlide?: number;
+  hideNavigation?: boolean
+  isOverflowHidden?: boolean
+  defaultActiveSlide?: number
 }
 
 const Swiper: React.FC<SwiperProps> = ({
@@ -29,9 +30,9 @@ const Swiper: React.FC<SwiperProps> = ({
   modules,
   ...props
 }) => {
-  const swiperRef = useRef<SwiperCore>();
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
+  const swiperRef = useRef<SwiperCore>()
+  const [isBeginning, setIsBeginning] = useState(true)
+  const [isEnd, setIsEnd] = useState(false)
 
   return (
     <div className={twMerge('relative', className)}>
@@ -57,16 +58,19 @@ const Swiper: React.FC<SwiperProps> = ({
         modules={[Navigation, ...(modules || [])]}
         grabCursor
         onBeforeInit={(swiper) => {
-          if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
-            swiperRef.current = swiper;
+          if (
+            swiper.params.navigation &&
+            typeof swiper.params.navigation !== 'boolean'
+          ) {
+            swiperRef.current = swiper
             if (defaultActiveSlide) {
-              swiper.slideTo(defaultActiveSlide);
+              swiper.slideTo(defaultActiveSlide)
             }
           }
         }}
         onSlideChange={(swiper) => {
-          setIsBeginning(swiper.isBeginning);
-          setIsEnd(swiper.isEnd);
+          setIsBeginning(swiper.isBeginning)
+          setIsEnd(swiper.isEnd)
         }}
         {...props}
       >
@@ -116,7 +120,7 @@ const Swiper: React.FC<SwiperProps> = ({
         </Box>
       )}
     </div>
-  );
-};
+  )
+}
 
-export { Swiper };
+export { Swiper }

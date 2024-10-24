@@ -1,7 +1,9 @@
 import { Image } from '@mantine/core'
+import Link from 'next/link'
 import { ButtonCustomGreen } from '../buttons'
 
 interface TourCardProps {
+  id: number
   title: string
   departureLocation: string
   departureDate: string
@@ -10,6 +12,7 @@ interface TourCardProps {
 }
 
 export const TourCard = ({
+  id,
   title,
   departureLocation,
   departureDate,
@@ -17,7 +20,10 @@ export const TourCard = ({
   image,
 }: TourCardProps) => {
   return (
-    <div className="flex flex-col rounded-lg shadow-lg h-full">
+    <Link
+      href={`/our-tour/${id}`}
+      className="flex flex-col rounded-lg shadow-lg h-full"
+    >
       <div className="w-full h-[400px]">
         <Image className="w-full h-full object-cover" src={image} alt={title} />
       </div>
@@ -37,6 +43,6 @@ export const TourCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

@@ -1,5 +1,5 @@
+import { Section } from '@/components/shared/layouts'
 import { Image } from '@mantine/core'
-import { Section } from '../Section'
 
 // biome-ignore lint/style/useNamingConvention: <explanation>
 interface IFeedback {

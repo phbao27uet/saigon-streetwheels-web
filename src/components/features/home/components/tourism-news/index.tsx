@@ -1,9 +1,9 @@
 'use client'
 
+import { Section } from '@/components/shared/layouts'
 import { Swiper } from '@/components/shared/slides'
 import { SwiperSlide } from 'swiper/react'
 import type { PaginationOptions } from 'swiper/types'
-import { Section } from '../Section'
 import { LatestNewsCard } from './components'
 
 const DATA = [

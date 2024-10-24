@@ -1,6 +1,6 @@
 import { ButtonCustom } from '@/components/shared/buttons'
+import { Section } from '@/components/shared/layouts'
 import { Image } from '@mantine/core'
-import { Section } from '../Section'
 
 const IMAGES = [
   {

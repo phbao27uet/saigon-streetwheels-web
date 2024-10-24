@@ -200,23 +200,24 @@ const tours = [
   },
 ]
 
-export const OurTour = () => {
+export const ListTourPage = () => {
   const [showAllTours, setShowAllTours] = useState(false)
   const displayedTours = showAllTours ? tours : tours.slice(0, 12)
 
   return (
-    <Section title="Our Tours">
-      <div id="our-tour" className="relative -top-[12rem]" />
+    <Section title="OUR TOUR - SAIGON URBAN TOUR" titleClassName="text-black">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
         {displayedTours.map((tour) => (
           <TourCard key={tour.title} {...tour} />
         ))}
       </div>
-      <div className="text-center mt-6">
-        <ButtonCustomGreen onClick={() => setShowAllTours(!showAllTours)}>
-          {showAllTours ? 'View Less Tours' : 'View All Tours'}
-        </ButtonCustomGreen>
-      </div>
+      {!showAllTours && (
+        <div className="text-center mt-6">
+          <ButtonCustomGreen onClick={() => setShowAllTours(true)}>
+            View All Tours
+          </ButtonCustomGreen>
+        </div>
+      )}
     </Section>
   )
 }

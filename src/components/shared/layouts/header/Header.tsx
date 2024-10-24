@@ -11,16 +11,16 @@ import { ButtonCustom } from '../../buttons'
 import { DrawerHeader } from './components'
 
 export const HEADER = [
-  { title: 'ABOUT US', href: '#about-us' },
-  { title: 'TRAVEL TRIP', href: '#' },
+  { title: 'ABOUT US', href: '/home#about-us' },
+  { title: 'TRAVEL TRIP', href: '/home#' },
   { title: 'OUR TOUR', href: '/our-tour' },
   { title: 'CONTACT US', href: '#footer' },
-  { title: 'BLOG', href: '#tourism-news' },
-  { title: 'Q&A', href: '#' },
+  { title: 'BLOG', href: '/home#tourism-news' },
+  { title: 'Q&A', href: '/home#' },
 ]
 
 const isActiveHeader = (pathname: string, href: string[]) =>
-  href.some((h) => pathname === `${h}/` || pathname === `${h}`)
+  href.some((h) => pathname.includes(`${h}/`) || pathname.includes(`${h}`))
 
 export function Header() {
   const pathname = usePathname()
@@ -28,7 +28,7 @@ export function Header() {
   const [drawerOpened, setDrawerOpened] = useState(false)
   const { classes, cx } = useStyles({
     headerScrolled: scrolled,
-    hasBackgroundHeader: isActiveHeader(pathname, ['/booking', '/chinh-sach']),
+    hasBackgroundHeader: isActiveHeader(pathname, ['/our-tour']),
   })
 
   useEffect(() => {
