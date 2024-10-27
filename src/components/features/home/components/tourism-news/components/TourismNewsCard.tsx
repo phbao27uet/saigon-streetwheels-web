@@ -1,4 +1,3 @@
-import { CardFloating } from '@/components/shared/cards/CardFloating'
 import { Image } from '@mantine/core'
 
 interface Props {
@@ -20,7 +19,7 @@ export const LatestNewsCard = ({ date, image, title }: Props) => {
       <p className="mt-2 text-left text-xl text-black">On {date}</p>
       <p className="mt-1 text-left text-xl text-black">{title}</p>
 
-      <CardFloating />
+      {/* <CardFloating /> */}
     </div>
   )
 }
