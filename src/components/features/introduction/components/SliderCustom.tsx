@@ -15,36 +15,40 @@ import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
 SwiperCore.use([Autoplay, Navigation])
 
 const DATA = [
+  // {
+  //   image: '/images/introduction/i-1.jpeg',
+  //   title: 'he led 3 groups of guests to Saigon',
+  // },
+  // {
+  //   image: '/images/introduction/i-2.jpeg',
+  //   title: 'Category 3 Animal By-Products: What You Need to Know',
+  // },
+  // {
+  //   image: '/images/introduction/i-3.jpeg',
+  //   title: 'Paradoxes of Animal By-Products Transport',
+  // },
+  // {
+  //   image: '/images/introduction/i-4.jpeg',
+  //   title: 'Category 3 Animal By-Products: What You Need to Know',
+  // },
   {
-    image: '/images/introduction/i-1.jpeg',
-    title: 'he led 3 groups of guests to Saigon',
-  },
-  {
-    image: '/images/introduction/i-2.jpeg',
+    image: '/images/introduction/i-5.jpg',
     title: 'Category 3 Animal By-Products: What You Need to Know',
   },
   {
-    image: '/images/introduction/i-3.jpeg',
-    title: 'Paradoxes of Animal By-Products Transport',
-  },
-  {
-    image: '/images/introduction/i-4.jpeg',
-    title: 'Category 3 Animal By-Products: What You Need to Know',
-  },
-  {
-    image: '/images/introduction/i-1.jpeg',
-    title: 'Category 3 Animal By-Products: What You Need to Know',
-  },
-  {
-    image: '/images/introduction/i-2.jpeg',
+    image: '/images/introduction/i-6.jpg',
     title: 'Exploring Hidden Gems in Saigon',
   },
   {
-    image: '/images/introduction/i-3.jpeg',
+    image: '/images/introduction/i-7.jpg',
     title: 'Top 10 Street Foods You Must Try in Vietnam',
   },
   {
-    image: '/images/introduction/i-4.jpeg',
+    image: '/images/introduction/i-8.jpg',
+    title: 'Eco-Tourism: Sustainable Travel in Vietnam',
+  },
+  {
+    image: '/images/introduction/i-9.jpg',
     title: 'Eco-Tourism: Sustainable Travel in Vietnam',
   },
 ]
