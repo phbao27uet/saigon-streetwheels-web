@@ -49,7 +49,7 @@ export function Header() {
       >
         <MainContainer>
           <Group h="100%" px="md" className={classes.headerContent}>
-            <Link href={'/'}>
+            <Link href={'/home'}>
               <Image
                 src="/svgs/logo.svg"
                 alt="logo"

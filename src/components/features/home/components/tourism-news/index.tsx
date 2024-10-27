@@ -89,10 +89,7 @@ export const TourismNews = () => {
           }}
         >
           {DATA?.map((data) => (
-            <SwiperSlide
-              key={data.title}
-              className="h-full overflow-hidden rounded-[30px]"
-            >
+            <SwiperSlide key={data.title} className="h-full ">
               <LatestNewsCard {...data} />
             </SwiperSlide>
           ))}

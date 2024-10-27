@@ -71,10 +71,6 @@ const SliderCustom: React.FC<SwiperProps> = ({
           overflow: 'hidden',
           position: 'relative',
         }}
-        autoplay={{
-          delay: 2000,
-          disableOnInteraction: false,
-        }}
         loop
         breakpoints={{
           1280: {

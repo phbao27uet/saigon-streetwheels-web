@@ -22,7 +22,7 @@ export const TourCard = ({
   return (
     <Link
       href={`/our-tour/${id}`}
-      className="flex flex-col rounded-lg shadow-lg h-full"
+      className="flex flex-col rounded-lg overflow-hidden shadow-lg h-full"
     >
       <div className="w-full h-[400px]">
         <Image className="w-full h-full object-cover" src={image} alt={title} />

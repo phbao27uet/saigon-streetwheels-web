@@ -183,7 +183,7 @@ export const AlbumTour = () => {
   return (
     <div
       id="album-tour"
-      className="relative bg-[url('/images/home/album-tour.webp')] bg-cover py-8"
+      className="relative bg-[url('/images/home/album-tour.webp')] bg-cover bg-no-repeat md:bg-fixed py-8"
     >
       <Section title="Album Tours" className="z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">

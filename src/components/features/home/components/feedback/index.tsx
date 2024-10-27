@@ -50,17 +50,17 @@ export const Feedback = () => {
               key={fb.image}
               className="w-full h-fit flex flex-col gap-2 items-center text-white relative"
             >
-              <div className="w-full h-[250px] flex justify-center">
+              <div className="w-full max-w-[300px] h-[250px]">
                 <Image
-                  className="w-[80%] h-full object-cover rounded-lg"
+                  className="w-full h-full object-cover rounded-lg"
                   src={fb.image}
                   alt={fb.image}
                 />
               </div>
 
-              <div className="flex flex-col items-center border-r-[3px] pb-1 border-l-[3px] border-white">
-                <p className="text-3xl font-bold px-4">{fb.name}</p>
-                <p className="text-lg px-4 text-justify">{fb.feedback}</p>
+              <div className="flex flex-col gap-2 items-center border-r-[3px] pb-1 border-l-[3px] border-white">
+                <p className="text-2xl font-bold px-4">{fb.name}</p>
+                <p className="text-lg px-4">{fb.feedback}</p>
 
                 <div className="flex items-center">
                   {Array.from({ length: fb.stars }).map((_, index) => (
