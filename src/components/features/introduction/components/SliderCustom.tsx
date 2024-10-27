@@ -74,23 +74,23 @@ const SliderCustom: React.FC<SwiperProps> = ({
         loop
         breakpoints={{
           1280: {
-            slidesPerView: 4.5,
+            slidesPerView: 4,
             spaceBetween: 30,
           },
           1024: {
-            slidesPerView: 3.5,
+            slidesPerView: 3,
             spaceBetween: 25,
           },
           768: {
-            slidesPerView: 2.5,
+            slidesPerView: 2,
             spaceBetween: 20,
           },
           480: {
-            slidesPerView: 1.5,
+            slidesPerView: 1,
             spaceBetween: 15,
           },
           0: {
-            slidesPerView: 1.2,
+            slidesPerView: 1,
             spaceBetween: 10,
           },
         }}

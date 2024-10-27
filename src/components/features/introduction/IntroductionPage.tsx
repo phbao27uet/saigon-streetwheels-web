@@ -1,6 +1,7 @@
 'use client'
 
 import SkewButton from '@/components/shared/buttons/SkewButton'
+import { Container } from '@mantine/core'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -22,7 +23,10 @@ export const IntroductionPage = () => {
     >
       <div className="absolute inset-0 bg-[#D9D9D9] bg-opacity-20 mix-blend-multiply" />
 
-      <p className="flex flex-col md:flex-row gap-10 py-5 px-10 min-h-screen">
+      <Container
+        size={1800}
+        className="flex flex-col md:flex-row gap-10 py-5 min-h-screen"
+      >
         <div className="w-full md:w-1/3 flex flex-col items-center md:items-start z-10">
           <div className="w-[200px] h-[200px] md:w-[250px] md:h-[250px] rounded-full bg-white overflow-hidden">
             <Image
@@ -59,7 +63,7 @@ export const IntroductionPage = () => {
         <div className="w-full md:w-2/3 flex flex-col z-10 self-center md:self-end mt-10 md:mt-0">
           <SliderCustom onBackgroundChange={handleBackgroundChange} />
         </div>
-      </p>
+      </Container>
     </div>
   )
 }
