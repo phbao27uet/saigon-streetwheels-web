@@ -31,10 +31,10 @@ const DATA = [
   //   image: '/images/introduction/i-4.jpeg',
   //   title: 'Category 3 Animal By-Products: What You Need to Know',
   // },
-  {
-    image: '/images/introduction/i-5.jpg',
-    title: 'Category 3 Animal By-Products: What You Need to Know',
-  },
+  // {
+  //   image: '/images/introduction/i-5.jpg',
+  //   title: 'Category 3 Animal By-Products: What You Need to Know',
+  // },
   {
     image: '/images/introduction/i-6.jpg',
     title: 'Exploring Hidden Gems in Saigon',
@@ -49,6 +49,10 @@ const DATA = [
   },
   {
     image: '/images/introduction/i-9.jpg',
+    title: 'Eco-Tourism: Sustainable Travel in Vietnam',
+  },
+  {
+    image: '/images/introduction/i-10.jpg',
     title: 'Eco-Tourism: Sustainable Travel in Vietnam',
   },
 ]
