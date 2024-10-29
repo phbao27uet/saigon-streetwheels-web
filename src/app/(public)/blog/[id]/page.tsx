@@ -1,4 +1,4 @@
-import { TourDetailPage } from '@/components/features/tour'
+import { BlogDetailPage } from '@/components/features/blog'
 
 const TourDetail = async ({
   params,
@@ -10,7 +10,7 @@ const TourDetail = async ({
   const tour = await getTour(params.id)
   return (
     <div>
-      <TourDetailPage />
+      <BlogDetailPage />
     </div>
   )
 }

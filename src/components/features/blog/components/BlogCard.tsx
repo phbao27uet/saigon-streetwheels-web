@@ -1,8 +1,11 @@
+import Link from 'next/link'
+
 interface BlogCardProps {
   thumbnail: string
   title: string
   description: string
   createdAt: string
+  id: number
 }
 
 export const BlogCard = ({
@@ -10,9 +13,10 @@ export const BlogCard = ({
   title,
   description,
   createdAt,
+  id,
 }: BlogCardProps) => {
   return (
-    <div className="flex gap-4 p-4">
+    <Link prefetch href={`/blog/${id}`} className="flex gap-4 p-4">
       <div className="w-[400px] h-[200px] flex-shrink-0">
         <img
           src={thumbnail}
@@ -30,6 +34,6 @@ export const BlogCard = ({
 
         <p className="text-lg text-gray-700 line-clamp-4">{description}</p>
       </div>
-    </div>
+    </Link>
   )
 }

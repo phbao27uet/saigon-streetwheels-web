@@ -16,7 +16,7 @@ export const HEADER = [
   { title: 'OUR TOUR', href: '/our-tour' },
   { title: 'CONTACT US', href: '#footer' },
   { title: 'BLOG', href: '/home#tourism-news' },
-  { title: 'Q&A', href: '/blogs' },
+  { title: 'Q&A', href: '/blog' },
 ]
 
 const isActiveHeader = (pathname: string, href: string[]) =>
