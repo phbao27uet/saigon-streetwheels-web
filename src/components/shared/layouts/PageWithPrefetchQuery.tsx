@@ -1,27 +1,28 @@
-import { getQueryClient } from "@/libs/query";
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import React from "react";
+import { getQueryClient } from '@/libs/query'
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
+import type React from 'react'
 
 interface Props {
-  queryKey: string[];
-  queryFn: () => Promise<any>;
+  queryKey: string[]
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  queryFn: () => Promise<any>
 }
 
 export const PageWithPrefetchQuery = async ({
   queryKey,
   queryFn,
-  children
+  children,
 }: React.PropsWithChildren<Props>) => {
-  const queryClient = getQueryClient();
+  const queryClient = getQueryClient()
 
   await queryClient.prefetchQuery({
     queryKey,
-    queryFn
-  });
+    queryFn,
+  })
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       {children}
     </HydrationBoundary>
-  );
-};
+  )
+}

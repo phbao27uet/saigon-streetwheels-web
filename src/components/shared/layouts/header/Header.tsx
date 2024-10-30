@@ -16,7 +16,7 @@ export const HEADER = [
   { title: 'OUR TOUR', href: '/our-tour' },
   { title: 'CONTACT US', href: '#footer' },
   { title: 'BLOG', href: '/home#tourism-news' },
-  { title: 'Q&A', href: '/home#' },
+  { title: 'Q&A', href: '/blog' },
 ]
 
 const isActiveHeader = (pathname: string, href: string[]) =>
@@ -28,7 +28,7 @@ export function Header() {
   const [drawerOpened, setDrawerOpened] = useState(false)
   const { classes, cx } = useStyles({
     headerScrolled: scrolled,
-    hasBackgroundHeader: isActiveHeader(pathname, ['/our-tour']),
+    hasBackgroundHeader: isActiveHeader(pathname, ['/our-tour', '/blog']),
   })
 
   useEffect(() => {
