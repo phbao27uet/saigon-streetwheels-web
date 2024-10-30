@@ -1,7 +1,6 @@
 import { Section } from '@/components/shared/layouts'
 import { Image } from '@mantine/core'
 
-// biome-ignore lint/style/useNamingConvention: <explanation>
 interface IFeedback {
   image: string
   name: string

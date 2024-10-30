@@ -12,7 +12,7 @@ importers:
         specifier: ^11.11.4
         version: 11.13.3(@types/react@18.3.9)(react@18.3.1)
       '@hookform/resolvers':
-        specifier: ^3.4.2
+        specifier: ^3.9.0
         version: 3.9.0(react-hook-form@7.53.0(react@18.3.1))
       '@mantine/core':
         specifier: ^7.9.2
@@ -53,6 +53,9 @@ importers:
       dayjs:
         specifier: ^1.11.11
         version: 1.11.13
+      es-toolkit:
+        specifier: ^1.26.1
+        version: 1.26.1
       framer-motion:
         specifier: ^11.9.0
         version: 11.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -782,6 +785,9 @@ packages:
 
   error-ex@1.3.2:
     resolution: {integrity: sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==}
+
+  es-toolkit@1.26.1:
+    resolution: {integrity: sha512-E3H14lHWk8JpupVpIRA1gfNF4r953abHTFW+X1Rp7zl7eG37ksuthfEA4FinyVF/Y807vzzfQS1nubeZk2LTVA==}
 
   escape-string-regexp@1.0.5:
     resolution: {integrity: sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==}
@@ -2080,6 +2086,8 @@ snapshots:
   error-ex@1.3.2:
     dependencies:
       is-arrayish: 0.2.1
+
+  es-toolkit@1.26.1: {}
 
   escape-string-regexp@1.0.5: {}
 
