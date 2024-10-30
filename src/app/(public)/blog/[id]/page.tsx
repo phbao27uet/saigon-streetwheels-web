@@ -1,6 +1,6 @@
 import { BlogDetailPage } from '@/components/features/blog'
 
-const TourDetail = async ({
+const BlogDetail = async ({
   params,
 }: {
   params: {
@@ -15,10 +15,10 @@ const TourDetail = async ({
   )
 }
 
-export default TourDetail
+export default BlogDetail
 
 const getTour = async (id: string) => {
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+  await new Promise((resolve) => setTimeout(resolve, 5000))
   return {
     id,
     name: 'Tour 1',
