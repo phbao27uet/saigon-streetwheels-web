@@ -9,7 +9,7 @@ import { SliderCustom } from './components'
 
 export const IntroductionPage = () => {
   const [backgroundImage, setBackgroundImage] = useState(
-    '/images/introduction/bg.jpeg',
+    '/images/introduction/i-1.jpeg',
   )
 
   const handleBackgroundChange = (newImageUrl: string) => {
