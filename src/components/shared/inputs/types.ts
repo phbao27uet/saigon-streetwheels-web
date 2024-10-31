@@ -38,6 +38,6 @@ export interface SelectProps<T extends FieldValues>
 
 export interface CalendarProps<T extends FieldValues>
   extends HTMLInputProps<T> {
-  highlightedDates?: Date[]
+  availableDates?: Date[]
   soldOutDates?: Date[]
 }

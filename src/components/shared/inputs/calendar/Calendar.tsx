@@ -8,13 +8,13 @@ import type { CalendarProps } from '../types'
 export const Calendar = <T extends FieldValues>({
   name,
   control,
-  highlightedDates = [],
+  availableDates = [],
   soldOutDates = [],
   className,
   ...props
 }: CalendarProps<T> &
   Omit<DatePickerProps, 'value' | 'onChange'> & {
-    highlightedDates?: Date[]
+    availableDates?: Date[]
   }) => {
   const {
     field: { value, ...other },
@@ -35,7 +35,7 @@ export const Calendar = <T extends FieldValues>({
           let isDisabled = false
 
           if (
-            highlightedDates.some(
+            availableDates.some(
               (highlightDate) =>
                 highlightDate.toDateString() === date.toDateString(),
             )
@@ -54,9 +54,17 @@ export const Calendar = <T extends FieldValues>({
           }
 
           // Check disabled
+          /**
+           * 1. Đã bán hết vé
+           * 2. Ngày nhỏ hơn ngày min
+           * 3. Ngày không có vé nào có sẵn
+           */
           if (
             soldOutDates.some((soldOutDate) => isSameDay(soldOutDate, date)) ||
-            (props.minDate && differenceInDays(date, props.minDate) < 0)
+            (props.minDate && differenceInDays(date, props.minDate) < 0) ||
+            availableDates.every(
+              (availableDate) => !isSameDay(availableDate, date),
+            )
           ) {
             isDisabled = true
           }

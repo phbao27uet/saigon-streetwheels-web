@@ -1,13 +1,12 @@
 'use client'
 
 import { ButtonCustomGreen } from '@/components/shared/buttons'
-import { Calendar } from '@/components/shared/inputs'
 import { SwiperWithThumb } from '@/components/shared/slides'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Image } from '@mantine/core'
 import { Container } from '@mantine/core'
-import { addDays } from 'date-fns'
-import { useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
+import { SelectTour } from './components'
 import { type TourSchema, tourSchema } from './schemas'
 
 const images = [
@@ -21,21 +20,15 @@ const images = [
 ]
 
 export const TourDetailPage = () => {
-  const { control, watch } = useForm<TourSchema>({
+  const methods = useForm<TourSchema>({
     resolver: zodResolver(tourSchema),
   })
 
-  console.log('date', watch('date'))
+  console.log('date', methods.watch('date'))
 
   return (
-    <>
-      <Calendar
-        name="date"
-        control={control}
-        minDate={new Date()}
-        highlightedDates={[new Date(), addDays(new Date(), 1)]}
-        soldOutDates={[addDays(new Date(), 2)]}
-      />
+    <FormProvider {...methods}>
+      <SelectTour />
 
       <Container
         size={'xl'}
@@ -96,6 +89,6 @@ export const TourDetailPage = () => {
           </div>
         </div>
       </Container>
-    </>
+    </FormProvider>
   )
 }
