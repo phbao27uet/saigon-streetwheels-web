@@ -41,3 +41,6 @@ export interface CalendarProps<T extends FieldValues>
   availableDates?: Date[]
   soldOutDates?: Date[]
 }
+
+export interface NumberInputHandlerProps<T extends FieldValues>
+  extends FieldInputProps<T> {}

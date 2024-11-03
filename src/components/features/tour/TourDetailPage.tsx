@@ -3,8 +3,9 @@
 import { ButtonCustomGreen } from '@/components/shared/buttons'
 import { SwiperWithThumb } from '@/components/shared/slides'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Image } from '@mantine/core'
+import { Image, Modal } from '@mantine/core'
 import { Container } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 import { FormProvider, useForm } from 'react-hook-form'
 import { SelectTour } from './components'
 import { type TourSchema, tourSchema } from './schemas'
@@ -20,15 +21,28 @@ const images = [
 ]
 
 export const TourDetailPage = () => {
+  const [opened, { open, close }] = useDisclosure(false)
+
   const methods = useForm<TourSchema>({
     resolver: zodResolver(tourSchema),
+    defaultValues: {
+      adult: 0,
+      children: 0,
+      family: 0,
+    },
   })
-
-  console.log('date', methods.watch('date'))
 
   return (
     <FormProvider {...methods}>
-      <SelectTour />
+      <Modal
+        opened={opened}
+        onClose={close}
+        withCloseButton={false}
+        size="1000px"
+        centered
+      >
+        <SelectTour />
+      </Modal>
 
       <Container
         size={'xl'}
@@ -52,13 +66,18 @@ export const TourDetailPage = () => {
                 </p>
               </div>
 
-              <ButtonCustomGreen size="lg" className="w-full sm:w-auto">
+              <ButtonCustomGreen
+                size="lg"
+                className="w-full sm:w-auto"
+                onClick={open}
+              >
                 Check Availability
               </ButtonCustomGreen>
             </div>
 
             <div className="flex flex-col gap-2 mt-4">
               {[1, 2, 3].map((_, index) => (
+                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 <div key={index} className="flex gap-2 items-center">
                   <Image
                     src="/svgs/checked.svg"
