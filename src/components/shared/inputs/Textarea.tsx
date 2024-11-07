@@ -1,7 +1,9 @@
-import React from 'react';
-import { Textarea as TextareaMantine, TextareaProps as TextareaPropsMantine } from '@mantine/core';
-import { TextareaProps } from './types';
-import { FieldValues, useController } from 'react-hook-form';
+import {
+  Textarea as TextareaMantine,
+  type TextareaProps as TextareaPropsMantine,
+} from '@mantine/core'
+import { type FieldValues, useController } from 'react-hook-form'
+import type { TextareaProps } from './types'
 
 export const Textarea = <T extends FieldValues>({
   name,
@@ -14,11 +16,16 @@ export const Textarea = <T extends FieldValues>({
   } = useController({
     name,
     control,
-  });
+  })
 
   return (
     <>
-      <TextareaMantine value={value || ''} error={error?.message} {...other} {...props} />
+      <TextareaMantine
+        value={value || ''}
+        error={error?.message}
+        {...other}
+        {...props}
+      />
     </>
-  );
-};
+  )
+}

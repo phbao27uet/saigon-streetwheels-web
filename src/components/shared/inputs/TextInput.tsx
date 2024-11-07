@@ -1,10 +1,9 @@
-import React from 'react';
 import {
   TextInput as TextInputMantine,
-  TextInputProps as TextInputPropsMantine,
-} from '@mantine/core';
-import { TextInputProps } from './types';
-import { FieldValues, useController } from 'react-hook-form';
+  type TextInputProps as TextInputPropsMantine,
+} from '@mantine/core'
+import { type FieldValues, useController } from 'react-hook-form'
+import type { TextInputProps } from './types'
 
 export const TextInput = <T extends FieldValues>({
   name,
@@ -17,11 +16,16 @@ export const TextInput = <T extends FieldValues>({
   } = useController({
     name,
     control,
-  });
+  })
 
   return (
     <>
-      <TextInputMantine value={value || ''} error={error?.message} {...other} {...props} />
+      <TextInputMantine
+        value={value || ''}
+        error={error?.message}
+        {...other}
+        {...props}
+      />
     </>
-  );
-};
+  )
+}

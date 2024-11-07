@@ -2,13 +2,11 @@ export interface ReactChildren {
   children: React.ReactNode
 }
 
-// biome-ignore lint/style/useNamingConvention: <explanation>
 export interface IBaseMaster {
   id: number
   name: string
 }
 
-// biome-ignore lint/style/useNamingConvention: <explanation>
 export interface IError {
   response: {
     data: {
@@ -24,7 +22,6 @@ export interface PaginationState {
   pageSize: number
 }
 
-// biome-ignore lint/style/useNamingConvention: <explanation>
 export interface IMetaPagination {
   currentPage: number
   perPage: number
@@ -38,7 +35,6 @@ export interface DataPagination<T extends any[]> {
   meta: IMetaPagination
 }
 
-// biome-ignore lint/style/useNamingConvention: <explanation>
 export interface IOption {
   label: string
   value: string
