@@ -5,7 +5,7 @@ import { TourCard } from '@/components/shared/cards'
 import { Section } from '@/components/shared/layouts'
 import { useState } from 'react'
 
-const tours = [
+export const tours = [
   {
     id: 1,
     image: '/images/home/tour-1.png',

@@ -1,8 +1,7 @@
-import { dateSchema } from '@/libs/schemas'
 import { z } from 'zod'
 
 export const tourSchema = z.object({
-  date: dateSchema,
+  date: z.date(),
   adult: z.number().min(0),
   children: z.number().min(0),
   family: z.number().min(0),

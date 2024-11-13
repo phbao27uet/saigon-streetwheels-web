@@ -8,6 +8,7 @@ import 'mantine-react-table/styles.css'
 
 import { theme } from '@libs/theme'
 import { ColorSchemeScript, MantineProvider } from '@mantine/core'
+import NextTopLoader from 'nextjs-toploader'
 import { NextAppDirEmotionCacheProvider } from 'tss-react/next/appDir'
 
 import WebVitals from '@/components/shared/web-vitals'
@@ -46,33 +47,44 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/images/logo.jpg" />
         <link rel="preload" as="image" href="/images/logo-removebg.png" />
         <link rel="preload" as="image" href="/svgs/motorbike.svg" />
-        <link rel="preload" as="image" href="/images/introduction/bg.jpeg" />
         <link rel="preload" as="image" href="/images/home/hero-1.jpg" />
       </head>
       <body className={inter.className}>
         <WebVitals />
         <JotaiProvider>
-          <SessionProvider>
-            <QueryClientProvider>
-              <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
-                <MantineProvider defaultColorScheme="light" theme={theme}>
-                  <DatesProvider
-                    settings={{
-                      locale: 'ru',
-                      firstDayOfWeek: 0,
-                      weekendDays: [0],
-                      timezone: 'UTC',
-                    }}
-                  >
-                    <ModalProvider>
-                      <ToastProvider />
-                      <Provider>{children}</Provider>
-                    </ModalProvider>
-                  </DatesProvider>
-                </MantineProvider>
-              </NextAppDirEmotionCacheProvider>
-            </QueryClientProvider>
-          </SessionProvider>
+          <QueryClientProvider>
+            <SessionProvider>
+            <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
+              <MantineProvider defaultColorScheme="light" theme={theme}>
+                <DatesProvider
+                  settings={{
+                    locale: 'ru',
+                    firstDayOfWeek: 0,
+                    weekendDays: [0],
+                    timezone: 'UTC',
+                  }}
+                >
+                  <ModalProvider>
+                    <NextTopLoader
+                      showSpinner={false}
+                      color="#C80D13"
+                      initialPosition={0.08}
+                      crawlSpeed={200}
+                      height={3}
+                      crawl={true}
+                      zIndex={1600}
+                      template={
+                        '<div class="bar" role="bar"><div class="peg"></div></div>'
+                      }
+                    />
+                    <ToastProvider />
+                    <Provider>{children}</Provider>
+                  </ModalProvider>
+                </DatesProvider>
+              </MantineProvider>
+            </NextAppDirEmotionCacheProvider>
+            </SessionProvider>
+          </QueryClientProvider>
         </JotaiProvider>
       </body>
     </html>
