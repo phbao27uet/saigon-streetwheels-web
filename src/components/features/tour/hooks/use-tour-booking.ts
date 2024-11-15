@@ -9,6 +9,9 @@ export const useTourBooking = () => {
   const [booking, setBooking] = useAtom(tourBookingAtom)
   const isExpired = useAtomValue(isBookingExpiredAtom)
 
+  console.log('isExpired', isExpired)
+  console.log('booking', booking)
+
   const saveBooking = (data: Omit<TourBooking, 'timestamp'>) => {
     setBooking({
       ...data,

@@ -28,7 +28,7 @@ export function Header() {
   const [drawerOpened, setDrawerOpened] = useState(false)
   const { classes, cx } = useStyles({
     headerScrolled: scrolled,
-    hasBackgroundHeader: isActiveHeader(pathname, ['/our-tour', '/blog']),
+    hasBackgroundHeader: isActiveHeader(pathname, ['/our-tour', '/blog', '/payment']),
   })
 
   useEffect(() => {
