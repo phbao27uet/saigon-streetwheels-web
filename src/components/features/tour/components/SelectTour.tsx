@@ -57,7 +57,7 @@ export const SelectTour = () => {
       tourId: params.id,
     })
 
-    router.push('/basket')
+    router.push('/payment')
   }
 
   return (

@@ -1,5 +1,11 @@
+import { BookingConfirmation } from '@/components/features/payment'
+
 const Payment = () => {
-  return <div>Payment</div>
+  return (
+    <div>
+      <BookingConfirmation />
+    </div>
+  )
 }
 
 export default Payment
