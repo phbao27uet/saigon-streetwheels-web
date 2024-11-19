@@ -6,4 +6,5 @@ export const ERROR_MESSAGE = {
   integerNumber: 'Trường này phải là số nguyên',
   maxNumberInput: 'Trường này không được vượt quá 7 chữ số',
   positiveNumber: 'Trường này phải là số dương',
+  invalidUrl: 'Trường này không phải là URL',
 }

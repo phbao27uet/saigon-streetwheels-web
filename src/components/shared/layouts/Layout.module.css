@@ -1,4 +1,7 @@
 .layout {
-  /* padding-top: var(--app-shell-header-height); */
   padding-top: unset;
+}
+
+.layoutWithNavbar {
+  padding-top: var(--app-shell-header-height);
 }

@@ -51,7 +51,7 @@ export function Header() {
           <Group h="100%" px="md" className={classes.headerContent}>
             <Link href={'/home'}>
               <Image
-                src="/svgs/logo.svg"
+                src="/images/logo-removebg.png"
                 alt="logo"
                 className={cn(classes.logo)}
               />
@@ -156,7 +156,7 @@ const useStyles = tss
     },
 
     logo: {
-      height: headerScrolled ? 100 : 120,
+      height: headerScrolled ? 30 : 40,
       transition: 'height 0.3s ease',
       objectFit: 'contain',
       width: 'auto',

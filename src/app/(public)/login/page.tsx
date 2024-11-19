@@ -6,7 +6,7 @@ const LoginPage = async () => {
   const sessions = await auth()
 
   if (sessions) {
-    redirect('/redirect')
+    redirect('/admin')
   }
 
   return (

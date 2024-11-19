@@ -12,7 +12,7 @@ const Footer = () => {
             <Link href="/">
               <div className="w-full h-full max-w-[150px] max-h-[150px]">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo.jpg"
                   alt="logo"
                   className="h-full w-full"
                 />

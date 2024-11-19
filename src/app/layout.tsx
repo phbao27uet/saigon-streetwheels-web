@@ -18,6 +18,7 @@ import {
   QueryClientProvider,
   ToastProvider,
 } from '@/providers'
+import SessionProvider from '@/providers/sessionProvider'
 import { DatesProvider } from '@mantine/dates'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -42,7 +43,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
-        <link rel="preload" as="image" href="/images/logo.png" />
+        <link rel="preload" as="image" href="/images/logo.jpg" />
+        <link rel="preload" as="image" href="/images/logo-removebg.png" />
         <link rel="preload" as="image" href="/svgs/motorbike.svg" />
         <link rel="preload" as="image" href="/images/introduction/bg.jpeg" />
         <link rel="preload" as="image" href="/images/home/hero-1.jpg" />
@@ -50,25 +52,27 @@ export default function RootLayout({
       <body className={inter.className}>
         <WebVitals />
         <JotaiProvider>
-          <QueryClientProvider>
-            <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
-              <MantineProvider defaultColorScheme="light" theme={theme}>
-                <DatesProvider
-                  settings={{
-                    locale: 'ru',
-                    firstDayOfWeek: 0,
-                    weekendDays: [0],
-                    timezone: 'UTC',
-                  }}
-                >
-                  <ModalProvider>
-                    <ToastProvider />
-                    <Provider>{children}</Provider>
-                  </ModalProvider>
-                </DatesProvider>
-              </MantineProvider>
-            </NextAppDirEmotionCacheProvider>
-          </QueryClientProvider>
+          <SessionProvider>
+            <QueryClientProvider>
+              <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
+                <MantineProvider defaultColorScheme="light" theme={theme}>
+                  <DatesProvider
+                    settings={{
+                      locale: 'ru',
+                      firstDayOfWeek: 0,
+                      weekendDays: [0],
+                      timezone: 'UTC',
+                    }}
+                  >
+                    <ModalProvider>
+                      <ToastProvider />
+                      <Provider>{children}</Provider>
+                    </ModalProvider>
+                  </DatesProvider>
+                </MantineProvider>
+              </NextAppDirEmotionCacheProvider>
+            </QueryClientProvider>
+          </SessionProvider>
         </JotaiProvider>
       </body>
     </html>

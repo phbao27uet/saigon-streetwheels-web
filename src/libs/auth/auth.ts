@@ -67,7 +67,7 @@ export const { handlers, signIn, signOut, auth, unstable_update } = NextAuth({
           console.log('payload', payload)
           console.log('url', `${API_URL}/auth/login`)
 
-          // const user = await axios.post<IUserLoginResponse>(
+           // const user = await axios.post<IUserLoginResponse>(
           //   `${API_URL}/auth/login`,
           //   // `http://192.168.1.8:9981/auth/login`, // Call server to server
           //   payload,
