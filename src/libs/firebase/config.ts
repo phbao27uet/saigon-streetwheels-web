@@ -43,6 +43,8 @@ export const uploadToFirebase = async (
   if (file) {
     const storeRef = ref(fbStorage, generateFirebaseStoragePath(file.name))
 
+    console.log('storeRef', storeRef)
+
     const uploadTask = uploadBytesResumable(storeRef, file)
 
     return new Promise((resolve, reject) => {

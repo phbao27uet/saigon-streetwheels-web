@@ -335,7 +335,7 @@ export const ReactTable = <T extends Record<string, any>>({
   })
 
   return (
-    <Stack>
+    <Stack mt={20}>
       {modal && (
         <Modal opened={modalOpened} onClose={closeModal} {...modal.modalProps}>
           {modal.children}

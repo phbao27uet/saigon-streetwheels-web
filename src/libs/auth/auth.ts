@@ -67,31 +67,31 @@ export const { handlers, signIn, signOut, auth, unstable_update } = NextAuth({
           console.log('payload', payload)
           console.log('url', `${API_URL}/auth/login`)
 
-           // const user = await axios.post<IUserLoginResponse>(
-          //   `${API_URL}/auth/login`,
-          //   // `http://192.168.1.8:9981/auth/login`, // Call server to server
-          //   payload,
-          //   {
-          //     headers: {
-          //       'Content-Type': 'application/json',
-          //     },
-          //   },
-          // )
-
-          const user: {
-            data: IUserLoginResponse
-          } = {
-            data: {
-              user: {
-                id: 1,
-                name: 'John Doe',
-                email: 'john.doe@example.com',
-                role: 'ADMIN',
+           const user = await axios.post<IUserLoginResponse>(
+            `${API_URL}/auth/login`,
+            // `http://192.168.1.8:9981/auth/login`, // Call server to server
+            payload,
+            {
+              headers: {
+                'Content-Type': 'application/json',
               },
-              accessToken: '123',
-              refreshToken: '123',
             },
-          }
+          )
+
+          // const user: {
+          //   data: IUserLoginResponse
+          // } = {
+          //   data: {
+          //     user: {
+          //       id: 1,
+          //       name: 'John Doe',
+          //       email: 'john.doe@example.com',
+          //       role: 'ADMIN',
+          //     },
+          //     accessToken: '123',
+          //     refreshToken: '123',
+          //   },
+          // }
 
           return user.data
           // biome-ignore lint/suspicious/noExplicitAny: <explanation>

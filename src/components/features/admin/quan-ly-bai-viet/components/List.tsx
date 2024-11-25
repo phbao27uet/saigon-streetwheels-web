@@ -3,13 +3,13 @@ import { TableContextProvider } from '@/components/shared/tables/components/Tabl
 import { disableOptions } from '@/components/shared/tables/hooks/useTable'
 import { BlogAPIQueryKey, columns } from '../configs'
 
-export const ListArticle = () => {
+export const ListBlogAdmin = () => {
   return (
     <div>
       <TableContextProvider>
         <ReactTable
-          endpointAPI={'/articles'}
-          endpointResourceAPI={'/articles'}
+          endpointAPI={'/blog'}
+          endpointResourceAPI={'/blog'}
           name={BlogAPIQueryKey.GET_BLOGS}
           columns={columns}
           data={[]}

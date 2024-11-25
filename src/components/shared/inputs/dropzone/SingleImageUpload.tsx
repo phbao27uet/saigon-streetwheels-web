@@ -14,7 +14,6 @@ import { useState } from 'react'
 import { useController } from 'react-hook-form'
 import type { Control, Path } from 'react-hook-form'
 import type { FieldValues } from 'react-hook-form'
-import { TextInput } from '../TextInput'
 
 interface ImageUploaderProps<T extends FieldValues> {
   control: Control<T>
@@ -169,12 +168,23 @@ export function SingleImageUploader<T extends FieldValues>({
 
       <Box mt={12}>
         {field.value && (
-          <Box mt={12}>
-            <TextInput
-              name={name}
-              control={control}
-              readOnly
-              rightSection={<CloseButton onClick={handleRemoveUploaded} />}
+          <Box mt={12} style={{ position: 'relative' }}>
+            <Image
+              src={field.value}
+              alt="Uploaded image"
+              width={200}
+              height={200}
+              style={{ objectFit: 'cover' }}
+            />
+            <CloseButton
+              style={{
+                position: 'absolute',
+                top: 5,
+                right: 5,
+                background: 'white',
+                borderRadius: '50%',
+              }}
+              onClick={handleRemoveUploaded}
             />
           </Box>
         )}

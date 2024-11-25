@@ -16,12 +16,13 @@ import type { IUserToken } from '../types/user'
 export const request = Axios.create({
   baseURL: API_URL,
   withCredentials: true,
+  maxBodyLength: Number.POSITIVE_INFINITY, // Cho phép kích thước body không giới hạn
+  maxContentLength: Number.POSITIVE_INFINITY, // Cho phép kích thước nội dung không giới hạn
 })
 
 request.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
     const session = await getSession()
-
     const accessToken = session?.user?.accessToken
 
     if (accessToken) {

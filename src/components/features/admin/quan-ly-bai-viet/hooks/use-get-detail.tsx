@@ -6,6 +6,6 @@ export const useGetDetailBlog = (id: string) => {
   return useQuery({
     queryKey: [BlogAPIQueryKey.GET_BLOG, id],
     queryFn: getDetailBlog(id),
-    enabled: !!id,
+    enabled: !!id && id !== 'create',
   })
 }

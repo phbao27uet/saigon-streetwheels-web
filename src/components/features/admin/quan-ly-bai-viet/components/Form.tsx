@@ -1,11 +1,16 @@
 'use client'
 
-import { SingleImageUploader, TextInput, Textarea } from '@/components/shared'
+import {
+  MyEditor,
+  SingleImageUploader,
+  TextInput,
+  Textarea,
+} from '@/components/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Input, Stack } from '@mantine/core'
 import { useParams } from 'next/navigation'
 import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import {
   type CreateBlogSchema,
   createBlogSchema,
@@ -21,8 +26,6 @@ export const BlogForm = () => {
 
   const params = useParams<{ id: string }>()
   const blogQuery = useGetDetailBlog(params.id)
-
-  console.log('params', params)
 
   const { mutate, isPending } = useCreateOrUpdateBlog(params.id)
 
@@ -64,18 +67,6 @@ export const BlogForm = () => {
 
       <Stack>
         <Input.Label required fw={600}>
-          Nội dung bài viết
-        </Input.Label>
-        <Textarea
-          name="content"
-          placeholder="nhập nội dung"
-          control={formReturn.control}
-          rows={5}
-        />
-      </Stack>
-
-      <Stack>
-        <Input.Label required fw={600}>
           Mô tả bài viết
         </Input.Label>
         <Textarea
@@ -84,6 +75,21 @@ export const BlogForm = () => {
           control={formReturn.control}
         />
       </Stack>
+
+      <Controller
+        name="content"
+        control={formReturn.control}
+        render={({ field: { onChange, value, ref } }) => (
+          <MyEditor
+            innerRef={ref}
+            id="content"
+            onChange={onChange}
+            value={value}
+            error={formReturn.formState.errors.content?.message}
+            label={'Nội dung bài viết'}
+          />
+        )}
+      />
 
       <Button onClick={onSubmit}>
         {params.id !== 'create' ? 'Cập nhật' : 'Tạo mới'}

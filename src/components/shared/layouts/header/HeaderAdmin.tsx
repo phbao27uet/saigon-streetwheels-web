@@ -2,17 +2,13 @@
 
 import { cn } from '@/libs/utils'
 import { tss } from '@libs/utils/tss-style'
-import { Burger, Group, Image } from '@mantine/core'
+import { Group, Image } from '@mantine/core'
 import { MainContainer } from '@shared/layouts'
 import Link from 'next/link'
-import { useState } from 'react'
-import { DrawerHeader } from './components'
+import { Auth } from './components'
 
 export function HeaderAdmin() {
-  const [drawerOpened, setDrawerOpened] = useState(false)
   const { classes, cx } = useStyles()
-
-  const toggleDrawer = () => setDrawerOpened((o) => !o)
 
   return (
     <>
@@ -27,17 +23,11 @@ export function HeaderAdmin() {
               />
             </Link>
 
-            <Burger
-              opened={drawerOpened}
-              onClick={toggleDrawer}
-              className={classes.burger}
-              size="sm"
-            />
+
+            <Auth />
           </Group>
         </MainContainer>
       </header>
-
-      <DrawerHeader drawerOpened={drawerOpened} toggleDrawer={toggleDrawer} />
     </>
   )
 }
