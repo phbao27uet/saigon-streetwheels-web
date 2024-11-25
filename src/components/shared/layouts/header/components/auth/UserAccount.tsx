@@ -1,90 +1,90 @@
-import cx from "clsx";
-import { useState } from "react";
+import { request } from '@/libs/requests'
+import type { IUser } from '@/libs/types/user'
+import { handleError } from '@/libs/utils/messages'
+import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Avatar,
-  UnstyledButton,
+  Button,
   Group,
-  Text,
   Menu,
-  rem,
   Modal,
-  Stack,
   PasswordInput,
-  Button
-} from "@mantine/core";
-import { IconLogout, IconChevronDown, IconUser } from "@tabler/icons-react";
-import classes from "./Style.module.css";
-import { redirect, useRouter } from "next/navigation";
-import { handleSignOut } from "@/components/features/auth/login/authUtils";
-import { IUser } from "@/libs/types/user";
-import { signOut } from "next-auth/react";
-import { useDisclosure } from "@mantine/hooks";
-import { Controller, useForm } from "react-hook-form";
-import { ChangePasswordSchema, ChangePasswordType } from "./types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { handleError } from "@/libs/utils/messages";
-import { request } from "@/libs/requests";
+  Stack,
+  Text,
+  UnstyledButton,
+  rem,
+} from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { IconChevronDown, IconLogout } from '@tabler/icons-react'
+import { useMutation } from '@tanstack/react-query'
+import cx from 'clsx'
+import { signOut } from 'next-auth/react'
+import {} from 'next/navigation'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import classes from './Style.module.css'
+import { ChangePasswordSchema, type ChangePasswordType } from './types'
 
 interface Props {
-  user?: IUser;
+  user?: IUser
 }
 
 export function UserAccount({ user }: Props) {
-  const [userMenuOpened, setUserMenuOpened] = useState(false);
+  const [userMenuOpened, setUserMenuOpened] = useState(false)
 
   const {
     control: controlChangePassword,
     handleSubmit: handleSubmitChangePassword,
     formState: { errors: errorsChangePassword },
-    reset: resetChangePassword
+    reset: resetChangePassword,
   } = useForm<ChangePasswordType>({
     resolver: zodResolver(ChangePasswordSchema),
     defaultValues: {
-      current_password: "",
-      new_password: "",
-      confirm_password: ""
-    }
-  });
+      current_password: '',
+      new_password: '',
+      confirm_password: '',
+    },
+  })
 
   const [
     openedChangePassword,
-    { open: openChangePassword, close: closeChangePassword }
-  ] = useDisclosure(false);
+    { open: openChangePassword, close: closeChangePassword },
+  ] = useDisclosure(false)
 
   const { mutateAsync: changePassword, isPending: isChangePassword } =
     useMutation({
       mutationFn: async (data: ChangePasswordType) => {
-        const res = await request.patch(`/auth/change-password`, {
+        const res = await request.patch('/auth/change-password', {
           new_password: data.new_password,
-          current_password: data.current_password
-        });
-        return res.data;
+          current_password: data.current_password,
+        })
+        return res.data
       },
       onSuccess: () => {
-        toast.success("Cập nhật mật khẩu thành công");
+        toast.success('Cập nhật mật khẩu thành công')
 
-        closeChangePassword();
+        closeChangePassword()
       },
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       onError: (error: any) => {
-        console.log(error);
+        console.log(error)
 
-        handleError(error);
-      }
-    });
+        handleError(error)
+      },
+    })
 
   const onSubmitChangePassword = (data: ChangePasswordType) => {
-    changePassword(data);
-  };
+    changePassword(data)
+  }
 
   return (
     <>
       <Modal
         opened={openedChangePassword}
         onClose={() => {
-          closeChangePassword();
-          resetChangePassword();
+          closeChangePassword()
+          resetChangePassword()
         }}
         title="Đổi mật khẩu"
         centered
@@ -141,7 +141,7 @@ export function UserAccount({ user }: Props) {
       <Menu
         width={260}
         position="bottom-end"
-        transitionProps={{ transition: "pop-top-right" }}
+        transitionProps={{ transition: 'pop-top-right' }}
         onClose={() => setUserMenuOpened(false)}
         onOpen={() => setUserMenuOpened(true)}
         withinPortal
@@ -149,15 +149,15 @@ export function UserAccount({ user }: Props) {
         <Menu.Target>
           <UnstyledButton
             className={cx(classes.user, {
-              [classes.userActive]: userMenuOpened
+              [classes.userActive]: userMenuOpened,
             })}
           >
             <Group gap={7}>
               <Avatar
                 src={
-                  "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png"
+                  'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png'
                 }
-                alt={"avatar"}
+                alt={'avatar'}
                 radius="xl"
                 size={20}
               />
@@ -192,9 +192,9 @@ export function UserAccount({ user }: Props) {
             }
             onClick={async () => {
               await signOut({
-                callbackUrl: "/login"
-              });
-              localStorage.removeItem("isLogin");
+                callbackUrl: '/login',
+              })
+              localStorage.removeItem('isLogin')
             }}
           >
             Đăng xuất
@@ -202,5 +202,5 @@ export function UserAccount({ user }: Props) {
         </Menu.Dropdown>
       </Menu>
     </>
-  );
+  )
 }
