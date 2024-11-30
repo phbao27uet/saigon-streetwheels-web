@@ -22,3 +22,7 @@ export const textSchemaMax1024 = textBaseSchema.max(1024, {
 export const textSchemaInfinite = textBaseSchema.max(10000, {
   message: ERROR_MESSAGE.max10000Characters,
 })
+
+export const urlSchema = z.string().url({
+  message: ERROR_MESSAGE.invalidUrl,
+})

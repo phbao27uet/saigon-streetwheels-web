@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack: (config) => {
-    if (config.name === 'server') config.optimization.concatenateModules = false;
-    return config;
+    if (config.name === 'server') config.optimization.concatenateModules = false
+    return config
   },
   reactStrictMode: true,
   compress: true,
@@ -15,7 +15,10 @@ const nextConfig = {
       {
         hostname: 'yourbestpartner.eu',
       },
+      {
+        hostname: 'firebasestorage.googleapis.com',
+      },
     ],
   },
-};
-export default nextConfig;
+}
+export default nextConfig

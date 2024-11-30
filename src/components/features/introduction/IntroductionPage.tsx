@@ -31,7 +31,7 @@ export const IntroductionPage = () => {
           <div className="w-[200px] h-[200px] md:w-[250px] md:h-[250px] rounded-full bg-white overflow-hidden">
             <Image
               alt="Logo"
-              src="/images/logo.png"
+              src="/images/logo.jpg"
               width={250}
               height={250}
               className="object-cover w-full h-full"

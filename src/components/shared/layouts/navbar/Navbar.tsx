@@ -1,33 +1,26 @@
-'use client';
+'use client'
 
-import { Burger, Transition } from '@mantine/core';
-import { LinksGroup } from './navbar-links-group/NavbarLinksGroup';
-import { useMemo } from 'react';
-import {
-  IconBell,
-  IconBook,
-  IconDiscount,
-  IconStar,
-  IconTools,
-  IconTrophy,
-  IconUsers,
-} from '@tabler/icons-react';
-import { useStyles } from './navbar.style';
-import React from 'react';
+import { Burger, Transition } from '@mantine/core'
+import { IconBook, IconCashRegister, IconMap } from '@tabler/icons-react'
+import { useMemo } from 'react'
+import type React from 'react'
+import { LinksGroup } from './navbar-links-group/NavbarLinksGroup'
+import { useStyles } from './navbar.style'
 
 export interface INavbar {
-  label: string;
-  icon: React.FC<any>;
-  link?: string;
+  label: string
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  icon: React.FC<any>
+  link?: string
   links?: {
-    label: string;
-    link: string;
-  }[];
+    label: string
+    link: string
+  }[]
 }
 
 const adminVietnameseSideBar = [
   {
-    label: 'Cẩm nang',
+    label: 'Bài viết',
     icon: IconBook,
     links: [
       {
@@ -37,90 +30,43 @@ const adminVietnameseSideBar = [
     ],
   },
   {
-    label: 'Cộng đồng',
-    icon: IconUsers,
+    label: 'Tours',
+    icon: IconMap,
     links: [
       {
-        label: 'Quản lý group',
-        link: '/admin/quan-ly-group',
+        label: 'Quản lý tours',
+        link: '/admin/quan-ly-tours',
       },
     ],
   },
   {
-    label: 'Deals',
-    icon: IconDiscount,
+    label: 'Thanh toán',
+    icon: IconCashRegister,
     links: [
       {
-        label: 'Quản lý deals',
-        link: '/admin/quan-ly-deals',
+        label: 'Quản lý thanh toán',
+        link: '/admin/quan-ly-thanh-toan',
       },
     ],
   },
-  {
-    label: 'Tính điểm (Point) & Nhiệm vụ, đổi quà',
-    icon: IconStar,
-    links: [
-      {
-        label: 'Tính điểm',
-        link: '/admin/tinh-diem',
-      },
-      {
-        label: 'Nhiệm vụ',
-        link: '/admin/nhiem-vu',
-      },
-      {
-        label: 'Đổi quà',
-        link: '/admin/doi-qua',
-      },
-    ],
-  },
-  {
-    label: 'Công cụ',
-    link: '/admin/cong-cu',
-    icon: IconTools,
-  },
-  {
-    label: 'Cuộc thi/Sự kiện',
-    icon: IconTrophy,
-    links: [
-      {
-        label: 'Quản lý cuộc thi, sự kiện',
-        link: '/admin/quan-ly-cuoc-thi-su-kien',
-      },
-    ],
-  },
-  {
-    label: 'Thông Báo',
-    icon: IconBell,
-    links: [
-      {
-        label: 'Thông báo theo kịch bản',
-        link: '/admin/thong-bao/kich-ban',
-      },
-      {
-        label: 'Thông báo của hệ thống',
-        link: '/admin/thong-bao/he-thong',
-      },
-    ],
-  },
-];
+]
 
 interface Props {
-  toggle?: () => void;
-  closeNavbar: () => void;
-  opened?: boolean;
+  toggle?: () => void
+  closeNavbar: () => void
+  opened?: boolean
 }
 
 export const Navbar = ({ opened, toggle, closeNavbar }: Props) => {
-  const { classes } = useStyles();
+  const { classes } = useStyles()
 
   const links = useMemo(() => {
-    const sideBar = adminVietnameseSideBar;
+    const sideBar = adminVietnameseSideBar
 
     return sideBar?.map((item) => (
       <LinksGroup {...item} key={item.label} closeNavbar={closeNavbar} />
-    ));
-  }, [closeNavbar]);
+    ))
+  }, [closeNavbar])
 
   return (
     <>
@@ -128,7 +74,12 @@ export const Navbar = ({ opened, toggle, closeNavbar }: Props) => {
         <div className={classes.links_inner}>{links}</div>
       </nav>
 
-      <Transition transition="pop-top-left" duration={200} mounted={!!opened} keepMounted={true}>
+      <Transition
+        transition="pop-top-left"
+        duration={200}
+        mounted={!!opened}
+        keepMounted={true}
+      >
         {(styles) => (
           <nav style={styles} className={classes.navbar_mobile}>
             <Burger
@@ -146,5 +97,5 @@ export const Navbar = ({ opened, toggle, closeNavbar }: Props) => {
         )}
       </Transition>
     </>
-  );
-};
+  )
+}

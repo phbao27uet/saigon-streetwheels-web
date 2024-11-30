@@ -1,1 +1,1 @@
-export * from './TableCustom'
+export * from './ReactTable'

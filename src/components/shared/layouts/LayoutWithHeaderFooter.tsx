@@ -18,7 +18,7 @@ const isActiveHeader = (pathname: string, href: string[]) =>
 export const LayoutWithHeaderFooter = ({ children }: LayoutProps) => {
   const pathname = usePathname()
 
-  const isHideHeaderFooter = isActiveHeader(pathname, ['/'])
+  const isHideHeaderFooter = isActiveHeader(pathname, ['/', '/login'])
 
   return (
     <>
