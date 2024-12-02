@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/libs/utils'
 import type { NumberInputProps } from '@mantine/core'
 import { Button } from '@mantine/core'

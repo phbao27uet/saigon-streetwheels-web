@@ -1,20 +1,10 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import type { DataPagination } from '../types'
-
-interface PaginationParams {
-  pageIndex: number
-  pageSize: number
-}
-
-interface PaginatedResponse<T> {
-  data: T[]
-  total: number
-}
+import type { DataPagination, PaginationState } from '../types'
 
 interface UseQueryWithPaginationProps<T> {
   queryKey: string[]
-  fetchFn: (params: PaginationParams) => Promise<DataPagination<T[]>>
-  params: PaginationParams
+  fetchFn: (params: PaginationState) => Promise<DataPagination<T[]>>
+  params: PaginationState
 }
 
 export const useQueryWithPagination = <T>({

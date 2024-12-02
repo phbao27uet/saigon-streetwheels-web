@@ -6,6 +6,7 @@ import {
   ref,
   uploadBytesResumable,
 } from 'firebase/storage'
+import { request } from '../requests'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -119,4 +120,16 @@ export const uploadMultipleToFirebase = async (
   })
 
   return Promise.all(uploadPromises)
+}
+
+export const uploadApi = async (file: File) => {
+  const formData = new FormData()
+  formData.append('file', file)
+
+  const response = await request.post('/upload/feature-image', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+  return response.data
 }

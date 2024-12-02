@@ -1,4 +1,6 @@
-import { uploadToFirebase } from '@/libs/firebase'
+'use client'
+
+import { uploadApi } from '@/libs/firebase'
 import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from '@/libs/utils'
 import {
   ActionIcon,
@@ -49,6 +51,9 @@ export function ImageUploader<T extends FieldValues>({
       file,
       preview: URL.createObjectURL(file),
     }))
+
+    console.log('newPreviewImages', newPreviewImages)
+
     setPreviewImages((prev) => [...prev, ...newPreviewImages])
   }
 
@@ -71,12 +76,7 @@ export function ImageUploader<T extends FieldValues>({
     setError(null)
     try {
       for (const previewImage of previewImages) {
-        const imageUrl = await uploadToFirebase(
-          previewImage.file,
-          (progress) => {
-            console.log(`Uploading ${previewImage.file.name}: ${progress}%`)
-          },
-        )
+        const imageUrl = await uploadApi(previewImage.file)
         append({ url: imageUrl } as FieldArray<T, ArrayPath<T>>)
       }
       setPreviewImages([])

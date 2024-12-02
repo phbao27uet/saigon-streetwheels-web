@@ -1,6 +1,6 @@
 'use client'
 
-import { uploadToFirebase } from '@/libs/firebase'
+import { uploadApi } from '@/libs/firebase'
 import { Stack, Text } from '@mantine/core'
 import { Editor, type IAllProps } from '@tinymce/tinymce-react'
 import type React from 'react'
@@ -129,18 +129,9 @@ export const MyEditor: React.FC<Props> = ({
               toast.promise(
                 (async () => {
                   try {
-                    const res = await uploadToFirebase(
-                      file,
-                      (progress: number) => {
-                        if (progress === 100) {
-                          toast.success(
-                            `Upload file ${file.name} successfully!`,
-                          )
-                        }
-                      },
-                    )
+                    const res = await uploadApi(file)
 
-                    const src = res?.downloadUrl
+                    const src = res?.url
                     cb(src, { title: file.name })
                   } catch (error) {
                     console.log('error', error)

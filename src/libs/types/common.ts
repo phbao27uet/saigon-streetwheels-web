@@ -18,8 +18,10 @@ export interface IError {
 }
 
 export interface PaginationState {
-  pageIndex: number
-  pageSize: number
+  // pageIndex: number
+  // pageSize: number
+  page: number
+  perPage: number
 }
 
 export interface IMetaPagination {

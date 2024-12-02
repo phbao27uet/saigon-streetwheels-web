@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/libs/utils'
 import { DatePicker, type DatePickerProps } from '@mantine/dates'
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
