@@ -44,3 +44,6 @@ export interface CalendarProps<T extends FieldValues>
 
 export interface NumberInputHandlerProps<T extends FieldValues>
   extends FieldInputProps<T> {}
+
+export interface DateInputProps<T extends FieldValues>
+  extends FieldInputProps<T> {}
