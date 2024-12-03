@@ -1,1 +1,1 @@
-export * from './get-blog'
+export * from './get-list-blogs'

@@ -1,3 +1,5 @@
+'use client'
+
 import {
   TextInput as TextInputMantine,
   type TextInputProps as TextInputPropsMantine,

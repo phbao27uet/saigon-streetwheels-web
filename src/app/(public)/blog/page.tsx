@@ -1,26 +1,17 @@
+import { BlogAPIQueryKey, getListBlogs } from '@/components/features/admin'
 import { ListBlogPage } from '@/components/features/blog/ListBlogPage'
+import { PageWithPrefetchQuery } from '@/components/shared'
 
 const ListBlog = async () => {
-  await getTours()
   return (
     <>
-      <ListBlogPage />
+      <PageWithPrefetchQuery
+        queryFn={getListBlogs}
+        queryKey={[BlogAPIQueryKey.GET_BLOGS]}
+      >
+        <ListBlogPage />
+      </PageWithPrefetchQuery>
     </>
   )
 }
-
-const getTours = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000))
-  return [
-    {
-      id: 1,
-      name: 'Tour 1',
-    },
-    {
-      id: 2,
-      name: 'Tour 2',
-    },
-  ]
-}
-
 export default ListBlog

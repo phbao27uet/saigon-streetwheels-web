@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Textarea as TextareaMantine,
   type TextareaProps as TextareaPropsMantine,

@@ -1,4 +1,6 @@
+import { BlogAPIQueryKey, getDetailBlog } from '@/components/features/admin'
 import { BlogDetailPage } from '@/components/features/blog'
+import { PageWithPrefetchQuery } from '@/components/shared'
 
 const BlogDetail = async ({
   params,
@@ -7,20 +9,14 @@ const BlogDetail = async ({
     id: string
   }
 }) => {
-  const tour = await getTour(params.id)
   return (
-    <div>
-      <BlogDetailPage />
-    </div>
+    <PageWithPrefetchQuery
+      queryFn={getDetailBlog(params.id)}
+      queryKey={[BlogAPIQueryKey.GET_BLOG, params.id]}
+    >
+      <BlogDetailPage params={params} />
+    </PageWithPrefetchQuery>
   )
 }
 
 export default BlogDetail
-
-const getTour = async (id: string) => {
-  await new Promise((resolve) => setTimeout(resolve, 5000))
-  return {
-    id,
-    name: 'Tour 1',
-  }
-}

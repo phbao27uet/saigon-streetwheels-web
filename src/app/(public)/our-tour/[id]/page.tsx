@@ -7,7 +7,7 @@ const TourDetail = async ({
     id: string
   }
 }) => {
-  const tour = await getTour(params.id)
+  await getTour(params.id)
   return (
     <div>
       <TourDetailPage />
@@ -18,7 +18,7 @@ const TourDetail = async ({
 export default TourDetail
 
 const getTour = async (id: string) => {
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+  await new Promise((resolve) => setTimeout(resolve, 500))
   return {
     id,
     name: 'Tour 1',

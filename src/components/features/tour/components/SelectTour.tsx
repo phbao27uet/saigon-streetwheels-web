@@ -1,11 +1,16 @@
+'use client'
+
 import { ButtonCustom, ButtonCustomRed } from '@/components/shared/buttons'
 import { Calendar } from '@/components/shared/inputs'
 import { cn } from '@/libs/utils'
 import { IconClock, IconMapPin } from '@tabler/icons-react'
 import { addDays } from 'date-fns'
+import { useParams } from 'next/navigation'
+import { useRouter } from 'nextjs-toploader/app'
 import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { toast } from 'sonner'
+import { useTourBooking } from '../hooks'
 import type { TourSchema } from '../schemas'
 import { calculatePrice } from '../utils/calculate-price'
 import { StepSelect } from './StepSelect'
@@ -23,8 +28,17 @@ const TIMES = [
 ]
 
 export const SelectTour = () => {
+  const params = useParams<{ id: string }>()
+  const router = useRouter()
+
   const [step, setStep] = useState(0)
-  const { control, watch, setValue } = useFormContext<TourSchema>()
+  const {
+    control,
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useFormContext<TourSchema>()
 
   const totalPrice = calculatePrice(
     watch('adult'),
@@ -32,7 +46,19 @@ export const SelectTour = () => {
     watch('family'),
   )
 
-  console.log(watch())
+  const { saveBooking } = useTourBooking()
+
+  console.log(errors)
+
+  const onSubmit = (data: TourSchema) => {
+    console.log(data)
+    saveBooking({
+      ...data,
+      tourId: params.id,
+    })
+
+    router.push('/payment')
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -174,7 +200,7 @@ export const SelectTour = () => {
                     return
                   }
 
-                  setStep(2)
+                  handleSubmit(onSubmit)()
                 }}
               >
                 CONTINUE

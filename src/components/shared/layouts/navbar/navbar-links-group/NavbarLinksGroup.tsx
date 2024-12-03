@@ -1,20 +1,28 @@
-'use client';
+'use client'
 
-import { Box, Collapse, Group, ThemeIcon, UnstyledButton, rem } from '@mantine/core';
-import { IconChevronRight } from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { useStyles } from './navbar-links-group.style';
-import React from 'react';
-
+import {
+  Box,
+  Collapse,
+  Group,
+  ThemeIcon,
+  UnstyledButton,
+  rem,
+} from '@mantine/core'
+import { IconChevronRight } from '@tabler/icons-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useRouter } from 'nextjs-toploader/app'
+import { useEffect, useState } from 'react'
+import type React from 'react'
+import { useStyles } from './navbar-links-group.style'
 interface LinksGroupProps {
-  label: string;
-  initiallyOpened?: boolean;
-  links?: { label: string; link: string }[];
-  link?: string;
-  icon?: React.FC<any>;
-  closeNavbar: () => void;
+  label: string
+  initiallyOpened?: boolean
+  links?: { label: string; link: string }[]
+  link?: string
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  icon?: React.FC<any>
+  closeNavbar: () => void
 }
 
 export function LinksGroup({
@@ -25,18 +33,18 @@ export function LinksGroup({
   icon: Icon,
   closeNavbar,
 }: LinksGroupProps) {
-  const { classes } = useStyles();
+  const { classes } = useStyles()
 
-  const pathname = usePathname();
-  const [active, setActive] = useState<string>(pathname);
-  const router = useRouter();
+  const pathname = usePathname()
+  const [active, setActive] = useState<string>(pathname)
+  const router = useRouter()
 
   useEffect(() => {
-    setActive(pathname);
-  }, [pathname]);
+    setActive(pathname)
+  }, [pathname])
 
-  const hasLinks = Array.isArray(links);
-  const [opened, setOpened] = useState(initiallyOpened || false);
+  const hasLinks = Array.isArray(links)
+  const [opened, setOpened] = useState(initiallyOpened || false)
   const items = (hasLinks ? links : []).map((link) => (
     <Link
       className={`${classes.link} ${active === link.link ? classes.link_child_active : ''}`}
@@ -47,21 +55,23 @@ export function LinksGroup({
       {/* <Box className={classes.dot} /> */}
       {link.label}
     </Link>
-  ));
+  ))
 
   const onClick = () => {
     if (link) {
-      router.push(link);
-      closeNavbar();
+      router.push(link)
+      closeNavbar()
     }
-  };
+  }
 
   return (
     <>
       <UnstyledButton
         onClick={() => setOpened((o) => !o)}
         className={`${classes.control} ${
-          active === link || links?.some((l) => l.link === active) ? classes.link_active : ''
+          active === link || links?.some((l) => l.link === active)
+            ? classes.link_active
+            : ''
         }`}
       >
         <Group
@@ -88,7 +98,11 @@ export function LinksGroup({
             }}
           >
             {Icon && (
-              <ThemeIcon variant="transparent" className={classes.icon} size={24}>
+              <ThemeIcon
+                variant="transparent"
+                className={classes.icon}
+                size={24}
+              >
                 <Icon style={{ width: rem(16), height: rem(16) }} />
               </ThemeIcon>
             )}
@@ -112,5 +126,5 @@ export function LinksGroup({
       </UnstyledButton>
       {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
     </>
-  );
+  )
 }

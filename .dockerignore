@@ -1,0 +1,27 @@
+# Ignore node_modules
+node_modules
+.pnpm-debug.log
+
+# Ignore build output
+.next
+out
+
+# Ignore local environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+# Ignore logs
+logs
+*.log
+
+# Ignore temporary files
+tmp
+temp
+
+# Ignore IDE/editor specific files
+.vscode
+.idea
+.DS_Store

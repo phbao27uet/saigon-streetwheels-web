@@ -26,17 +26,17 @@ export const SectionWithPagination = <T,>({
 
   renderItem,
 }: SectionProps<T>) => {
-  const [pageIndex, setPageIndex] = useState(0)
-  const [pageSize] = useState(20)
+  const [pageIndex, setPageIndex] = useState(1)
+  const [pageSize] = useState(1)
 
   const { data, isLoading, isFetching } = useQueryWithPagination<T>({
     queryKey,
     fetchFn,
-    params: { pageIndex, pageSize },
+    params: { perPage: pageSize, page: pageIndex },
   })
 
   const handlePageChange = (newPage: number) => {
-    setPageIndex(newPage - 1)
+    setPageIndex(newPage)
   }
 
   return (
@@ -89,7 +89,7 @@ export const SectionWithPagination = <T,>({
                 onClick={() => handlePageChange(page)}
                 className={cn(
                   'w-8 h-8 rounded flex items-center justify-center',
-                  pageIndex + 1 === page
+                  pageIndex === page
                     ? 'bg-red-600 text-white'
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300',
                 )}
@@ -98,10 +98,10 @@ export const SectionWithPagination = <T,>({
               </button>
             ),
           )}
-          {pageIndex + 1 < data.meta.totalPages && (
+          {pageIndex < data.meta.totalPages && (
             <button
               type="button"
-              onClick={() => handlePageChange(pageIndex + 2)}
+              onClick={() => handlePageChange(pageIndex + 1)}
               className="px-3 h-8 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
             >
               Sau

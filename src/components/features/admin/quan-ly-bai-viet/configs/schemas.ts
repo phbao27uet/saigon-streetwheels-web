@@ -5,7 +5,7 @@ export const createBlogSchema = z.object({
   title: textSchema,
   featureImage: textSchema,
   content: textSchemaInfinite,
-  description: textSchema,
+  description: textSchemaInfinite,
 })
 
 export type CreateBlogSchema = z.infer<typeof createBlogSchema>

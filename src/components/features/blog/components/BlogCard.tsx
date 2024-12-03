@@ -1,7 +1,8 @@
+import { format } from 'date-fns'
 import Link from 'next/link'
 
 interface BlogCardProps {
-  thumbnail: string
+  featureImage: string
   title: string
   description: string
   createdAt: string
@@ -9,7 +10,7 @@ interface BlogCardProps {
 }
 
 export const BlogCard = ({
-  thumbnail,
+  featureImage,
   title,
   description,
   createdAt,
@@ -19,7 +20,7 @@ export const BlogCard = ({
     <Link prefetch href={`/blog/${id}`} className="flex gap-4 p-4">
       <div className="w-[400px] h-[200px] flex-shrink-0">
         <img
-          src={thumbnail}
+          src={featureImage}
           alt={title}
           className="w-full h-full object-cover rounded-lg"
         />
@@ -30,7 +31,9 @@ export const BlogCard = ({
           {title}
         </h3>
 
-        <span className="text-xl text-gray-500 font-bold">{createdAt}</span>
+        <span className="text-xl text-gray-500 font-bold">
+          {format(new Date(createdAt), 'yyyy-MM-dd')}
+        </span>
 
         <p className="text-lg text-gray-700 line-clamp-4">{description}</p>
       </div>

@@ -10,7 +10,7 @@ const ListTour = async () => {
 }
 
 const getTours = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000))
+  await new Promise((resolve) => setTimeout(resolve, 500))
   return [
     {
       id: 1,
