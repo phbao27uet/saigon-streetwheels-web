@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { TourAPIQueryKey, type CreateTourSchema } from '../configs'
+import { type CreateTourSchema, TourAPIQueryKey } from '../configs'
 import { createOrUpdateTour } from '../services/'
 
 export const useCreateOrUpdateTour = (id: string) => {
@@ -19,7 +19,7 @@ export const useCreateOrUpdateTour = (id: string) => {
         })
       }
       toast.success('Thành công!')
-      router.push('/admin/quan-ly-tour')
+      router.push('/admin/quan-ly-tours')
     },
     onSettled: () => {
       queryClient.invalidateQueries({

@@ -6,17 +6,20 @@ import {
 import { z } from 'zod'
 
 export const tourTimeSchema = z.object({
+  id: z.number().optional(),
   startTime: timeSchema,
   endTime: timeSchema,
   availableTickets: z.number().min(1, 'Số lượng vé phải lớn hơn 0'),
 })
 
 export const tourDateSchema = z.object({
+  id: z.number().optional(),
   date: z.date(),
   times: z.array(tourTimeSchema).min(1, 'Phải có ít nhất một khung giờ'),
 })
 
 export const ticketTypeSchema = z.object({
+  id: z.number().optional(),
   name: textSchema,
   price: positiveDecimalNumberSchema,
 })
@@ -24,7 +27,9 @@ export const ticketTypeSchema = z.object({
 export const createTourSchema = z.object({
   title: textSchema,
   featureImage: textSchema,
+  images: z.array(textSchema),
   description: textSchema,
+  departureLocation: textSchema,
   availableDates: z.array(tourDateSchema).min(1, 'Phải có ít nhất một ngày'),
   ticketTypes: z.array(ticketTypeSchema).min(1, 'Phải có ít nhất một loại vé'),
 })
@@ -35,6 +40,8 @@ export const defaultValuesTour: CreateTourSchema = {
   title: '',
   description: '',
   featureImage: '',
+  departureLocation: '',
+  images: [],
   availableDates: [
     {
       date: new Date(),

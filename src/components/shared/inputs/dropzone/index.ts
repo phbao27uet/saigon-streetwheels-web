@@ -1,2 +1,2 @@
-export * from './ImageDropZone'
 export * from './SingleImageUpload'
+export * from './MultipleImageUpload'

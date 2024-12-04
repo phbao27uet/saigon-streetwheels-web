@@ -8,13 +8,13 @@ export const columnsTour: MRT_ColumnDef<ITour>[] = [
     enableEditing: false,
   },
   {
-    accessorKey: 'description',
-    header: 'Mô tả',
+    accessorKey: 'departureLocation',
+    header: 'Địa điểm xuất phát',
     enableEditing: false,
   },
   {
-    accessorKey: 'createdAt',
-    header: 'Ngày tạo',
+    accessorKey: 'description',
+    header: 'Mô tả',
     enableEditing: false,
   },
 ]
