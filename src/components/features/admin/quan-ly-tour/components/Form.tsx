@@ -21,11 +21,7 @@ import {
   useFieldArray,
   useForm,
 } from 'react-hook-form'
-import {
-  type CreateTourSchema,
-  createTourSchema,
-  defaultValuesTour,
-} from '../configs'
+import { type CreateTourSchema, createTourSchema } from '../configs'
 import { useCreateOrUpdateTour, useGetDetailTour } from '../hooks'
 import { TicketTypeManager } from './TicketTypes'
 import { TimeFields } from './TimeFields'
@@ -33,8 +29,21 @@ import { TimeFields } from './TimeFields'
 export const TourForm = () => {
   const formReturn = useForm<CreateTourSchema>({
     resolver: zodResolver(createTourSchema),
-    defaultValues: defaultValuesTour,
+    // defaultValues: defaultValuesTour,
   })
+
+  // Quản lý mảng ngày có thể book
+  const {
+    fields: dateFields,
+    append: appendDate,
+    remove: removeDate,
+    update: updateDate,
+  } = useFieldArray({
+    control: formReturn.control,
+    name: 'availableDates',
+  })
+
+  console.log('dateFields', dateFields.length, dateFields)
 
   const params = useParams<{ id: string }>()
   const tourQuery = useGetDetailTour(params.id)
@@ -48,30 +57,40 @@ export const TourForm = () => {
 
   useEffect(() => {
     if (tourQuery.data) {
-      formReturn.reset({
-        title: tourQuery.data.title,
-        description: tourQuery.data.description,
-        featureImage: tourQuery.data.featureImage,
-        images: tourQuery.data.images,
-        departureLocation: tourQuery.data.departureLocation,
-        ticketTypes: tourQuery.data.ticketTypes,
-        availableDates: tourQuery.data.availableDates.map((availableDate) => ({
-          ...availableDate,
-          date: new Date(availableDate.date),
-        })),
-      })
-    }
-  }, [formReturn, tourQuery.data])
+      console.log('Raw tour data:', tourQuery.data)
 
-  // Quản lý mảng ngày có thể book
-  const {
-    fields: dateFields,
-    append: appendDate,
-    remove: removeDate,
-  } = useFieldArray({
-    control: formReturn.control,
-    name: 'availableDates',
-  })
+      try {
+        const transformedAvailableDates = tourQuery.data.availableDates.map(
+          (availableDate) => ({
+            ...availableDate,
+            date: availableDate.date
+              ? new Date(availableDate.date)
+              : new Date(),
+            times: availableDate.times.map((time) => ({
+              ...time,
+              startTime: time.startTime || '',
+              endTime: time.endTime || '',
+              availableTickets: time.availableTickets || 1,
+            })),
+          }),
+        )
+
+        console.log('Transformed Available Dates:', transformedAvailableDates)
+
+        formReturn.reset({
+          ...tourQuery.data,
+        })
+
+        transformedAvailableDates.forEach((dateField, index) => {
+          updateDate(index, {
+            ...dateField,
+          })
+        })
+      } catch (error) {
+        console.error('Error setting form values:', error)
+      }
+    }
+  }, [tourQuery.data, formReturn, updateDate])
 
   return (
     <FormProvider {...formReturn}>
