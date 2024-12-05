@@ -38,7 +38,7 @@ import {
   IconTrash,
 } from '@tabler/icons-react'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'nextjs-toploader/app'
 import { toast } from 'sonner'
 import { useTableContext } from './components/TableContext'
 import { useTable } from './hooks/useTable'

@@ -1,7 +1,7 @@
 'use client'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'nextjs-toploader/app'
 import { toast } from 'sonner'
 import { type CreateTourSchema, TourAPIQueryKey } from '../configs'
 import { createOrUpdateTour } from '../services/'

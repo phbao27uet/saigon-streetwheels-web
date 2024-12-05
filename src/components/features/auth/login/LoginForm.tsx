@@ -10,7 +10,7 @@ import {
   TextInput,
   Title,
 } from '@mantine/core'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'nextjs-toploader/app'
 import { useState } from 'react'
 import { type Control, Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
