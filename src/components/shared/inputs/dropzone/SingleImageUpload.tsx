@@ -52,15 +52,8 @@ export function SingleImageUploader<T extends FieldValues>({
 
   const handleDrop = (files: File[]) => {
     setError(null)
-
-    console.log('handleDrop files', files)
-
     if (files.length > 0) {
       const file = files[0]
-
-      console.log('file', file)
-      console.log('files', files)
-
       setPreviewImage({
         file,
         preview: URL.createObjectURL(file),

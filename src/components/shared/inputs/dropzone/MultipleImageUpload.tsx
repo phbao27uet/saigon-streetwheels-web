@@ -1,30 +1,25 @@
 'use client'
 
-import { uploadApi } from '@/libs/firebase'
+import { uploadMultipleApi } from '@/libs/firebase'
 import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from '@/libs/utils'
 import {
-  ActionIcon,
   Box,
   Button,
   CloseButton,
   Group,
-  Input,
   LoadingOverlay,
-  SimpleGrid,
-  Stack,
   Text,
 } from '@mantine/core'
 import { Dropzone, type FileRejection } from '@mantine/dropzone'
-import { IconMinus } from '@tabler/icons-react'
 import Image from 'next/image'
 import { useState } from 'react'
-import { type Control, useFieldArray } from 'react-hook-form'
-import type { ArrayPath, FieldArray, FieldValues, Path } from 'react-hook-form'
-import { TextInput } from '../TextInput'
+import { useController } from 'react-hook-form'
+import type { Control, Path } from 'react-hook-form'
+import type { FieldValues } from 'react-hook-form'
 
 interface ImageUploaderProps<T extends FieldValues> {
   control: Control<T>
-  name: ArrayPath<T>
+  name: Path<T>
 }
 
 interface PreviewImage {
@@ -32,14 +27,14 @@ interface PreviewImage {
   preview: string
 }
 
-export function ImageUploader<T extends FieldValues>({
+export function MultipleImageUpload<T extends FieldValues>({
   control,
   name,
 }: ImageUploaderProps<T>) {
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name,
-  })
+  const {
+    field,
+    fieldState: { error: errorTextField },
+  } = useController({ name, control })
 
   const [previewImages, setPreviewImages] = useState<PreviewImage[]>([])
   const [error, setError] = useState<string | null>(null)
@@ -47,14 +42,11 @@ export function ImageUploader<T extends FieldValues>({
 
   const handleDrop = (files: File[]) => {
     setError(null)
-    const newPreviewImages = files.map((file) => ({
+    const newPreviews = files.map((file) => ({
       file,
       preview: URL.createObjectURL(file),
     }))
-
-    console.log('newPreviewImages', newPreviewImages)
-
-    setPreviewImages((prev) => [...prev, ...newPreviewImages])
+    setPreviewImages((prev) => [...prev, ...newPreviews])
   }
 
   const handleReject = (fileRejections: FileRejection[]) => {
@@ -72,13 +64,15 @@ export function ImageUploader<T extends FieldValues>({
   }
 
   const handleSave = async () => {
+    if (previewImages.length === 0) return
+
     setIsLoading(true)
     setError(null)
     try {
-      for (const previewImage of previewImages) {
-        const imageUrl = await uploadApi(previewImage.file)
-        append({ url: imageUrl } as FieldArray<T, ArrayPath<T>>)
-      }
+      const files = previewImages.map((image) => image.file)
+      const imageUrls = await uploadMultipleApi(files)
+      const existingUrls = Array.isArray(field.value) ? field.value : []
+      field.onChange([...existingUrls, ...imageUrls.urls])
       setPreviewImages([])
     } catch (error) {
       console.error('Upload failed:', error)
@@ -90,19 +84,19 @@ export function ImageUploader<T extends FieldValues>({
 
   const handleRemovePreview = (index: number) => {
     setPreviewImages((prev) => prev.filter((_, i) => i !== index))
+    if (previewImages.length === 1) {
+      setError(null)
+    }
   }
 
-  const handleCancel = () => {
-    setPreviewImages([])
-    setError(null)
+  const handleRemoveUploaded = (index: number) => {
+    const currentUrls = [...field.value]
+    currentUrls.splice(index, 1)
+    field.onChange(currentUrls)
   }
 
   return (
     <Box>
-      <Input.Label fw={600} mb={8}>
-        Hình ảnh
-      </Input.Label>
-
       <Box style={{ position: 'relative' }}>
         <LoadingOverlay
           visible={isLoading}
@@ -112,7 +106,7 @@ export function ImageUploader<T extends FieldValues>({
           onDrop={handleDrop}
           onReject={handleReject}
           accept={ACCEPTED_IMAGE_TYPES}
-          multiple
+          multiple={true}
           maxSize={MAX_IMAGE_FILE_SIZE}
           mb="xs"
           styles={{
@@ -131,21 +125,20 @@ export function ImageUploader<T extends FieldValues>({
         </Dropzone>
       </Box>
 
-      {error && (
+      {(error || errorTextField?.message) && (
         <Text c="red" size="sm" mb="xs">
-          {error}
+          {error || errorTextField?.message}
         </Text>
       )}
 
       {previewImages.length > 0 && (
-        <>
-          <SimpleGrid cols={3} spacing="md" mb="md">
+        <Box style={{ position: 'relative', marginTop: '1rem' }}>
+          <Group gap="md">
             {previewImages.map((image, index) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               <Box key={index} style={{ position: 'relative' }}>
                 <Image
                   src={image.preview}
-                  alt={`Preview ${index}`}
+                  alt={`Preview ${index + 1}`}
                   width={200}
                   height={200}
                   style={{ objectFit: 'cover' }}
@@ -162,45 +155,45 @@ export function ImageUploader<T extends FieldValues>({
                 />
               </Box>
             ))}
-          </SimpleGrid>
-
-          <Group justify="flex-end" mb="md">
-            <Button
-              onClick={handleCancel}
-              variant="outline"
-              disabled={isLoading}
-            >
-              Hủy
+          </Group>
+          <Group justify="flex-end" mt="md">
+            <Button onClick={() => setPreviewImages([])} variant="outline">
+              Hủy tất cả
             </Button>
             <Button onClick={handleSave} loading={isLoading}>
               {isLoading ? 'Đang tải lên...' : 'Lưu'}
             </Button>
           </Group>
-        </>
+        </Box>
       )}
 
-      <Stack gap={12} mt={12}>
-        {fields.map((field, index) => (
-          <Stack key={field.id} gap={2}>
-            <TextInput
-              readOnly
-              name={`${name}.${index}.url` as Path<T>}
-              control={control}
-              rightSection={
-                fields.length > 1 && (
-                  <ActionIcon
-                    opacity={0.5}
-                    variant="transparent"
-                    onClick={() => remove(index)}
-                  >
-                    <IconMinus size={24} />
-                  </ActionIcon>
-                )
-              }
-            />
-          </Stack>
-        ))}
-      </Stack>
+      <Box mt={12}>
+        {Array.isArray(field.value) && field.value.length > 0 && (
+          <Group gap="md">
+            {field.value.map((url: string, index: number) => (
+              <Box key={index} style={{ position: 'relative' }}>
+                <Image
+                  src={url}
+                  alt={`Uploaded image ${index + 1}`}
+                  width={200}
+                  height={200}
+                  style={{ objectFit: 'cover' }}
+                />
+                <CloseButton
+                  style={{
+                    position: 'absolute',
+                    top: 5,
+                    right: 5,
+                    background: 'white',
+                    borderRadius: '50%',
+                  }}
+                  onClick={() => handleRemoveUploaded(index)}
+                />
+              </Box>
+            ))}
+          </Group>
+        )}
+      </Box>
     </Box>
   )
 }

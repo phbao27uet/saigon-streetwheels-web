@@ -18,6 +18,21 @@ export const baseDateSchema = z
     }
   })
 
+export const timeSchema = z
+  .string({
+    required_error: 'Không được để trống',
+  })
+  .min(1, {
+    message: 'Không được để trống',
+  })
+  .superRefine((time, ctx) => {
+    const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/
+    if (!timeRegex.test(time)) {
+      ctx.addIssue({ code: 'custom', message: 'Thời gian không hợp lệ' })
+      return false
+    }
+  })
+
 export const dateSchema = baseDateSchema.transform((date) =>
   new Date(date).toISOString(),
 )
