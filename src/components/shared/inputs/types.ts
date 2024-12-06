@@ -40,6 +40,7 @@ export interface CalendarProps<T extends FieldValues>
   extends HTMLInputProps<T> {
   availableDates?: Date[]
   soldOutDates?: Date[]
+  callback?: (date: Date) => void
 }
 
 export interface NumberInputHandlerProps<T extends FieldValues>

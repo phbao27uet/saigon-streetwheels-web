@@ -13,13 +13,14 @@ export const Calendar = <T extends FieldValues>({
   availableDates = [],
   soldOutDates = [],
   className,
+  callback,
   ...props
 }: CalendarProps<T> &
   Omit<DatePickerProps, 'value' | 'onChange'> & {
     availableDates?: Date[]
   }) => {
   const {
-    field: { value, ...other },
+    field: { value, onChange, ...other },
     fieldState: { error },
   } = useController({
     name,
@@ -83,6 +84,10 @@ export const Calendar = <T extends FieldValues>({
         nextIcon={<IconChevronRight size={16} />}
         previousIcon={<IconChevronLeft size={16} />}
         className={cn('w-full', className)}
+        onChange={(date) => {
+          callback?.(date as Date)
+          onChange(date)
+        }}
         {...other}
         {...props}
       />

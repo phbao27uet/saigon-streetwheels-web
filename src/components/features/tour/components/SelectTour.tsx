@@ -2,34 +2,28 @@
 
 import { ButtonCustom, ButtonCustomRed } from '@/components/shared/buttons'
 import { Calendar } from '@/components/shared/inputs'
+import type { ITimeSlot, ITour } from '@/libs/types'
 import { cn } from '@/libs/utils'
 import { IconClock, IconMapPin } from '@tabler/icons-react'
-import { addDays } from 'date-fns'
+import { addDays, format } from 'date-fns'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'nextjs-toploader/app'
 import { useState } from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useFieldArray, useFormContext } from 'react-hook-form'
 import { toast } from 'sonner'
 import { useTourBooking } from '../hooks'
 import type { TourSchema } from '../schemas'
-import { calculatePrice } from '../utils/calculate-price'
 import { StepSelect } from './StepSelect'
 import { TicketCounter } from './TicketCounter'
 
-const TIMES = [
-  '10:00 - 10:30 AM',
-  '11:00 - 11:30 AM',
-  '12:00 - 12:30 PM',
-  '01:00 - 01:30 PM',
-  '02:00 - 02:30 PM',
-  '03:00 - 03:30 PM',
-  '04:00 - 04:30 PM',
-  '05:00 - 05:30 PM',
-]
+interface SelectTourProps {
+  data: ITour
+}
 
-export const SelectTour = () => {
+export const SelectTour = ({ data }: SelectTourProps) => {
   const params = useParams<{ id: string }>()
   const router = useRouter()
+  const [availableTimes, setAvailableTimes] = useState<ITimeSlot[]>([])
 
   const [step, setStep] = useState(0)
   const {
@@ -40,11 +34,16 @@ export const SelectTour = () => {
     formState: { errors },
   } = useFormContext<TourSchema>()
 
-  const totalPrice = calculatePrice(
-    watch('adult'),
-    watch('children'),
-    watch('family'),
-  )
+  const { fields } = useFieldArray({
+    control,
+    name: 'ticketTypes',
+  })
+
+  const watchTickets = watch('ticketTypes')
+
+  const totalPrice = watchTickets.reduce((total, ticket) => {
+    return total + ticket.price * ticket.quantity
+  }, 0)
 
   const { saveBooking } = useTourBooking()
 
@@ -71,46 +70,29 @@ export const SelectTour = () => {
               name="date"
               control={control}
               minDate={new Date()}
-              availableDates={[
-                new Date(),
-                addDays(new Date(), 1),
-                addDays(new Date(), 2),
-                addDays(new Date(), 3),
-                addDays(new Date(), 4),
-                addDays(new Date(), 5),
-                addDays(new Date(), 6),
-                addDays(new Date(), 7),
-                addDays(new Date(), 8),
-                addDays(new Date(), 9),
-                addDays(new Date(), 10),
-                addDays(new Date(), 11),
-                addDays(new Date(), 12),
-                addDays(new Date(), 13),
-                addDays(new Date(), 14),
-                addDays(new Date(), 15),
-                addDays(new Date(), 16),
-                addDays(new Date(), 17),
-                addDays(new Date(), 18),
-                addDays(new Date(), 19),
-                addDays(new Date(), 20),
-              ]}
+              availableDates={data.availableDates.map(
+                (availableDate) => new Date(availableDate.date),
+              )}
               soldOutDates={[addDays(new Date(), 3)]}
+              callback={(date) => {
+                const selectedDate = data.availableDates.find(
+                  (d) =>
+                    new Date(d.date).toDateString() === date.toDateString(),
+                )
+                setAvailableTimes(selectedDate ? selectedDate.times : [])
+              }}
             />
 
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl md:text-3xl font-bold text-[#0070BB]">
-                TOUR FROM SAIGON TO MY THO
+                {data.title}
               </h1>
-              <p className="text-base md:text-xl">
-                Tour from Saigon to My Tho is a 1-day tour that takes you to the
-                beautiful My Tho, where you can enjoy the peaceful countryside
-                and the charming floating market.
-              </p>
+              <p className="text-base md:text-xl">{data.description}</p>
               <div className="flex gap-1">
                 <IconMapPin />
                 <p className="text-base md:text-xl">Depart:</p>
                 <p className="text-base md:text-xl text-[#2D4271] font-bold">
-                  Ho Chi Minh City
+                  {data.departureLocation}
                 </p>
               </div>
 
@@ -118,22 +100,19 @@ export const SelectTour = () => {
                 <IconClock />
                 <p className="text-base md:text-xl">Start time:</p>
                 <p className="text-base md:text-xl text-[#2D4271] font-bold">
-                  14/07/2024
+                  {format(data.availableDates[0].date, 'dd/MM/yyyy')}
                 </p>
               </div>
 
               <div className="flex gap-1 flex-col">
-                <TicketCounter name="ADULT" price={30} inputName="adult" />
-                <TicketCounter
-                  name="Children 7-15 year"
-                  price={30}
-                  inputName="children"
-                />
-                <TicketCounter
-                  name="Family Ticket 2+2"
-                  price={30}
-                  inputName="family"
-                />
+                {fields.map((field, index) => (
+                  <TicketCounter
+                    key={field.id}
+                    name={field.name}
+                    price={field.price}
+                    inputName={`ticketTypes.${index}.quantity`}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -167,17 +146,17 @@ export const SelectTour = () => {
       {step === 1 && (
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-4 gap-4">
-            {TIMES.map((item) => (
+            {availableTimes.map((item) => (
               // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
               <div
-                key={item}
+                key={item.id}
                 className={cn(
                   'border border-black px-4 flex justify-center items-center h-20 cursor-pointer hover:bg-black hover:text-white',
-                  watch('time') === item && 'bg-black text-white',
+                  watch('timeId') === item.id && 'bg-black text-white',
                 )}
-                onClick={() => setValue('time', item)}
+                onClick={() => setValue('timeId', item.id)}
               >
-                {item}
+                {item.startTime} - {item.endTime}
               </div>
             ))}
           </div>
@@ -195,7 +174,7 @@ export const SelectTour = () => {
 
               <ButtonCustomRed
                 onClick={() => {
-                  if (!watch('time')) {
+                  if (!watch('timeId')) {
                     toast.error('Please select the time')
                     return
                   }

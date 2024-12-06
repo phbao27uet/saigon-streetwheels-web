@@ -1,4 +1,6 @@
+import { TourAPIQueryKey, getDetailTour } from '@/components/features/admin'
 import { TourDetailPage } from '@/components/features/tour'
+import { PageWithPrefetchQuery } from '@/components/shared'
 
 const TourDetail = async ({
   params,
@@ -7,20 +9,14 @@ const TourDetail = async ({
     id: string
   }
 }) => {
-  await getTour(params.id)
   return (
-    <div>
-      <TourDetailPage />
-    </div>
+    <PageWithPrefetchQuery
+      queryFn={getDetailTour(params.id)}
+      queryKey={[TourAPIQueryKey.GET_TOUR, params.id]}
+    >
+      <TourDetailPage id={params.id} />
+    </PageWithPrefetchQuery>
   )
 }
 
 export default TourDetail
-
-const getTour = async (id: string) => {
-  await new Promise((resolve) => setTimeout(resolve, 500))
-  return {
-    id,
-    name: 'Tour 1',
-  }
-}
