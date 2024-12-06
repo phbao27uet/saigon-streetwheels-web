@@ -27,7 +27,7 @@ export const SectionWithPagination = <T,>({
   renderItem,
 }: SectionProps<T>) => {
   const [pageIndex, setPageIndex] = useState(1)
-  const [pageSize] = useState(1)
+  const [pageSize] = useState(6)
 
   const { data, isLoading, isFetching } = useQueryWithPagination<T>({
     queryKey,

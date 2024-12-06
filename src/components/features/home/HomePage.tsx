@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import {
   AboutUs,
   AlbumTour,
@@ -15,7 +16,10 @@ export const HomePage = () => {
       <OurTour />
       <AlbumTour />
       <Feedback />
-      <TourismNews />
+
+      <Suspense fallback={<div>Loading...</div>}>
+        <TourismNews />
+      </Suspense>
     </div>
   )
 }

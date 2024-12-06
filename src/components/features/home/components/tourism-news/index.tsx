@@ -4,52 +4,12 @@ import { Section } from '@/components/shared/layouts'
 import { Swiper } from '@/components/shared/slides'
 import { SwiperSlide } from 'swiper/react'
 import type { PaginationOptions } from 'swiper/types'
+import { useGetBlog } from '../../hooks'
 import { LatestNewsCard } from './components'
 
-const DATA = [
-  {
-    image: '/images/home/tn-1.png',
-    date: 'June 12, 2024',
-    title: 'he led 3 groups of guests to Saigon',
-  },
-  {
-    image: '/images/home/tn-2.png',
-    date: 'May 12, 2021',
-    title: 'Category 3 Animal By-Products: What You Need to Know',
-  },
-  {
-    image: '/images/home/tn-3.png',
-    date: 'May 12, 2021',
-    title: 'Paradoxes of Animal By-Products Transport',
-  },
-  {
-    image: '/images/home/tn-2.png',
-    date: 'May 12, 2021',
-    title: 'Category 3 Animal By-Products: What You Need to Know',
-  },
-  {
-    image: '/images/home/tn-1.png',
-    date: 'May 12, 2021',
-    title: 'Category 3 Animal By-Products: What You Need to Know',
-  },
-  {
-    image: '/images/home/tn-2.png',
-    date: 'July 3, 2024',
-    title: 'Exploring Hidden Gems in Saigon',
-  },
-  {
-    image: '/images/home/tn-3.png',
-    date: 'August 15, 2024',
-    title: 'Top 10 Street Foods You Must Try in Vietnam',
-  },
-  {
-    image: '/images/home/tn-1.png',
-    date: 'September 22, 2024',
-    title: 'Eco-Tourism: Sustainable Travel in Vietnam',
-  },
-]
-
 export const TourismNews = () => {
+  const { data: blogs } = useGetBlog()
+
   const pagination: PaginationOptions = {
     clickable: true,
   }
@@ -88,9 +48,14 @@ export const TourismNews = () => {
             },
           }}
         >
-          {DATA?.map((data) => (
-            <SwiperSlide key={data.title} className="h-full ">
-              <LatestNewsCard {...data} />
+          {blogs.data?.map((blog) => (
+            <SwiperSlide key={blog.id} className="h-full ">
+              <LatestNewsCard
+                id={blog.id}
+                image={blog.featureImage}
+                date={blog.createdAt}
+                title={blog.title}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
