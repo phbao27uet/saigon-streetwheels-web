@@ -1,66 +1,73 @@
 'use client'
 
+import { ButtonCustomGreen } from '@/components/shared'
 import { Section } from '@/components/shared/layouts'
 import { Grid } from '@mantine/core'
 import { useRouter } from 'nextjs-toploader/app'
-import { useEffect } from 'react'
+import { Suspense } from 'react'
 import { useTourBooking } from '../../tour/hooks'
 import { CustomerInformation } from './CustomerInformation'
 import { YourBasket } from './YourBasket'
 
 export const BookingConfirmation = () => {
-  const { booking, clearBooking, isExpired } = useTourBooking()
+  const { booking, isExpired, clearBooking } = useTourBooking()
   const router = useRouter()
 
-  useEffect(() => {
-    // Redirect nếu không có booking hoặc đã hết hạn
-    if (!booking || isExpired) {
-      alert('No booking found')
-      // router.replace('/our-tour')
-    }
-  }, [booking, isExpired])
-
-  const handleConfirm = async () => {
-    if (!booking) return
-
-    try {
-      // API call để lưu booking
-      await fetch('/api/bookings', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(booking),
-      })
-
-      clearBooking()
-      router.push('/booking-success')
-    } catch (error) {
-      console.error('Booking failed:', error)
-      // Xử lý lỗi
-    }
+  if (isExpired) {
+    return (
+      <div className="mt-6 flex items-center flex-col min-h-svh">
+        <p className="text-xl">Tour expired, please try again.</p>
+        <ButtonCustomGreen
+          className="mt-4"
+          onClick={() => {
+            clearBooking()
+            router.push('/our-tour')
+          }}
+        >
+          Go back to choose tour
+        </ButtonCustomGreen>
+      </div>
+    )
   }
 
-  if (!booking) return null
+  if (!booking) {
+    return (
+      <div className="mt-6 flex items-center flex-col min-h-svh">
+        <p className="text-xl">
+          No booking found. Please go back to choose tour.
+        </p>
+        <ButtonCustomGreen
+          className="mt-4"
+          onClick={() => router.push('/our-tour')}
+        >
+          Go back to choose tour
+        </ButtonCustomGreen>
+      </div>
+    )
+  }
 
   return (
     <Section title="">
-      <Grid className="">
+      <Grid gutter="xl">
         <Grid.Col
           span={{
             xs: 12,
-            md: 6,
+            md: 3,
           }}
         >
-          <YourBasket />
+          <Suspense fallback={<div>Loading...</div>}>
+            <YourBasket />
+          </Suspense>
         </Grid.Col>
         <Grid.Col
           span={{
             xs: 12,
-            md: 6,
+            md: 9,
           }}
         >
-          <CustomerInformation />
+          <Suspense fallback={<div>Loading...</div>}>
+            <CustomerInformation />
+          </Suspense>
         </Grid.Col>
       </Grid>
     </Section>

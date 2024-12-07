@@ -1,5 +1,5 @@
 import { TourAPIQueryKey, getListTours } from '@/components/features/admin'
-import { ListTourPage } from '@/components/features/tour'
+import { ListTourPage, TourLoading } from '@/components/features/tour'
 import { getQueryClient } from '@/libs/query'
 import { Suspense } from 'react'
 
@@ -12,7 +12,7 @@ const ListTour = async () => {
   })
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<TourLoading />}>
       <ListTourPage />
     </Suspense>
   )

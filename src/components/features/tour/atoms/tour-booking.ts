@@ -4,7 +4,7 @@ import { atomWithStorage } from 'jotai/utils'
 import type { TourSchema } from '../schemas'
 
 export interface TourBooking extends TourSchema {
-  tourId: string
+  tourId: number
   timestamp: number
 }
 
@@ -19,5 +19,5 @@ export const isBookingExpiredAtom = atom((get) => {
   const booking = get(tourBookingAtom)
   if (!booking) return true
 
-  return Date.now() - booking.timestamp > EXPIRY_TIME
+  return new Date().getTime() - booking.timestamp > EXPIRY_TIME
 })

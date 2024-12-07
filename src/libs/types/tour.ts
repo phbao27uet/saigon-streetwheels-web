@@ -18,7 +18,7 @@ export interface ITimeSlot {
 export interface IAvailableDate {
   id: number
   tourId: number
-  date: string
+  date: Date
   times: ITimeSlot[]
 }
 
@@ -33,4 +33,12 @@ export interface ITour {
   updatedAt: string
   ticketTypes: ITicketType[]
   availableDates: IAvailableDate[]
+}
+
+export interface ITimeSlot {
+  id: number
+  availableDateId: number
+  startTime: string
+  endTime: string
+  availableTickets: number
 }

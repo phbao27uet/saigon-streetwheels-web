@@ -47,13 +47,10 @@ export const SelectTour = ({ data }: SelectTourProps) => {
 
   const { saveBooking } = useTourBooking()
 
-  console.log(errors)
-
   const onSubmit = (data: TourSchema) => {
-    console.log(data)
     saveBooking({
       ...data,
-      tourId: params.id,
+      tourId: Number(params.id),
     })
 
     router.push('/payment')
@@ -77,7 +74,7 @@ export const SelectTour = ({ data }: SelectTourProps) => {
               callback={(date) => {
                 const selectedDate = data.availableDates.find(
                   (d) =>
-                    new Date(d.date).toDateString() === date.toDateString(),
+                    new Date(d.date).toDateString() === date?.toDateString(),
                 )
                 setAvailableTimes(selectedDate ? selectedDate.times : [])
               }}
@@ -146,19 +143,40 @@ export const SelectTour = ({ data }: SelectTourProps) => {
       {step === 1 && (
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-4 gap-4">
-            {availableTimes.map((item) => (
-              // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-              <div
-                key={item.id}
-                className={cn(
-                  'border border-black px-4 flex justify-center items-center h-20 cursor-pointer hover:bg-black hover:text-white',
-                  watch('timeId') === item.id && 'bg-black text-white',
-                )}
-                onClick={() => setValue('timeId', item.id)}
-              >
-                {item.startTime} - {item.endTime}
-              </div>
-            ))}
+            {availableTimes.map((item) => {
+              const currentTime = new Date()
+              const hourMinute = format(currentTime, 'HH:mm')
+
+              const isDisabled =
+                item.availableTickets <= 0 || hourMinute > item.endTime
+
+              return (
+                // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+                <div
+                  key={item.id}
+                  className={cn(
+                    'border border-black px-4 flex justify-center items-center h-20 cursor-pointer hover:bg-black hover:text-white',
+                    watch('timeId') === item.id && 'bg-black text-white',
+                    isDisabled && 'opacity-50 cursor-not-allowed',
+                  )}
+                  onClick={() => {
+                    if (isDisabled) {
+                      if (item.availableTickets <= 0) {
+                        toast.error('This time is sold out')
+                      } else {
+                        toast.error('This time is not available')
+                      }
+
+                      return
+                    }
+
+                    setValue('timeId', item.id)
+                  }}
+                >
+                  {item.startTime} - {item.endTime}
+                </div>
+              )
+            })}
           </div>
 
           <div className="flex gap-2 items-center justify-between">

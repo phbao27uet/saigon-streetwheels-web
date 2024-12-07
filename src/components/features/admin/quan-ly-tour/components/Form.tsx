@@ -43,22 +43,17 @@ export const TourForm = () => {
     name: 'availableDates',
   })
 
-  console.log('dateFields', dateFields.length, dateFields)
-
   const params = useParams<{ id: string }>()
   const tourQuery = useGetDetailTour(params.id)
 
   const { mutate, isPending } = useCreateOrUpdateTour(params.id)
 
   const onSubmit = formReturn.handleSubmit((data) => {
-    console.log(data)
     mutate(data)
   })
 
   useEffect(() => {
     if (tourQuery.data) {
-      console.log('Raw tour data:', tourQuery.data)
-
       try {
         const transformedAvailableDates = tourQuery.data.availableDates.map(
           (availableDate) => ({
@@ -74,8 +69,6 @@ export const TourForm = () => {
             })),
           }),
         )
-
-        console.log('Transformed Available Dates:', transformedAvailableDates)
 
         formReturn.reset({
           ...tourQuery.data,

@@ -17,7 +17,7 @@ export const HomePage = () => {
       <AlbumTour />
       <Feedback />
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<> </>}>
         <TourismNews />
       </Suspense>
     </div>
