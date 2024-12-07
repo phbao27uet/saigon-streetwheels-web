@@ -147,8 +147,16 @@ export const SelectTour = ({ data }: SelectTourProps) => {
               const currentTime = new Date()
               const hourMinute = format(currentTime, 'HH:mm')
 
+              const availableDate = data.availableDates.find(
+                (d) => d.id === item.availableDateId,
+              )
+
               const isDisabled =
-                item.availableTickets <= 0 || hourMinute > item.endTime
+                item.availableTickets <= 0 ||
+                (hourMinute > item.endTime &&
+                  availableDate?.date &&
+                  format(availableDate?.date, 'yyyy-MM-dd') ===
+                    format(currentTime, 'yyyy-MM-dd'))
 
               return (
                 // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>

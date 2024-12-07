@@ -11,7 +11,7 @@ export const columnsBooking: MRT_ColumnDef<IBooking>[] = [
     enableEditing: false,
   },
   {
-    accessorKey: 'bookerPhone',
+    accessorKey: 'bookerPhoneNumber',
     header: 'Số điện thoại',
     enableEditing: false,
   },
