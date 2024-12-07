@@ -1,20 +1,20 @@
 import { ReactTable } from '@/components/shared/tables'
 import { TableContextProvider } from '@/components/shared/tables/components/TableContext'
 import { disableOptions } from '@/components/shared/tables/hooks/useTable'
-import { TourAPIQueryKey, columnsTour } from '../configs'
+import { BookingAPIQueryKey, columnsBooking } from '../configs'
 
-export const ListTourAdmin = () => {
+export const ListBookingAdmin = () => {
   return (
     <div>
       <TableContextProvider>
         <ReactTable
-          endpointAPI={'/tours/admin'}
-          endpointResourceAPI={'/tours'}
-          name={TourAPIQueryKey.GET_TOURS}
-          columns={columnsTour}
+          endpointAPI={'/bookings'}
+          endpointResourceAPI={'/bookings'}
+          name={BookingAPIQueryKey.GET_BOOKINGS}
+          columns={columnsBooking}
           data={[]}
-          seeDetail
-          hasCreate
+          seeDetail={false}
+          hasCreate={false}
           enableRowSelection={false}
           {...disableOptions}
         />

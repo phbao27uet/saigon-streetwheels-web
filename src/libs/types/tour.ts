@@ -41,4 +41,6 @@ export interface ITimeSlot {
   startTime: string
   endTime: string
   availableTickets: number
+
+  availableDate: IAvailableDate
 }
