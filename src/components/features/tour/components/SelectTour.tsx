@@ -45,6 +45,10 @@ export const SelectTour = ({ data }: SelectTourProps) => {
     return total + ticket.price * ticket.quantity
   }, 0)
 
+  const totalQuantity = watchTickets.reduce((total, ticket) => {
+    return total + ticket.quantity
+  }, 0)
+
   const { saveBooking } = useTourBooking()
 
   const onSubmit = (data: TourSchema) => {
@@ -109,12 +113,14 @@ export const SelectTour = ({ data }: SelectTourProps) => {
 
               <div className="flex gap-1 flex-col">
                 {fields.map((field, index) => (
-                  <TicketCounter
-                    key={field.id}
-                    name={field.name}
-                    price={field.price}
-                    inputName={`ticketTypes.${index}.quantity`}
-                  />
+                  <>
+                    <TicketCounter
+                      key={field.id}
+                      name={field.name}
+                      price={field.price}
+                      inputName={`ticketTypes.${index}.quantity`}
+                    />
+                  </>
                 ))}
               </div>
             </div>
@@ -162,19 +168,25 @@ export const SelectTour = ({ data }: SelectTourProps) => {
                 (hourMinute > item.endTime &&
                   availableDate?.date &&
                   format(availableDate?.date, 'yyyy-MM-dd') ===
-                    format(currentTime, 'yyyy-MM-dd'))
+                    format(currentTime, 'yyyy-MM-dd')) ||
+                item.availableTickets < totalQuantity
 
               return (
                 // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
                 <div
                   key={item.id}
                   className={cn(
-                    'border border-black px-4 flex justify-center items-center h-20 cursor-pointer hover:bg-black hover:text-white',
+                    'border border-black px-4 flex flex-col justify-center items-center h-20 cursor-pointer hover:bg-black hover:text-white',
                     watch('timeId') === item.id && 'bg-black text-white',
                     isDisabled && 'opacity-50 cursor-not-allowed',
                   )}
                   onClick={() => {
                     if (isDisabled) {
+                      if (item.availableTickets < totalQuantity) {
+                        toast.error('Not enough tickets available')
+                        return
+                      }
+
                       if (item.availableTickets <= 0) {
                         toast.error('This time is sold out')
                       } else {
@@ -187,14 +199,27 @@ export const SelectTour = ({ data }: SelectTourProps) => {
                     setValue('timeId', item.id)
                   }}
                 >
-                  {item.startTime} - {item.endTime}
+                  <p>
+                    {item.startTime} - {item.endTime}
+                  </p>
+                  {/* {isDisabled && (
+                    <p className="text-sm text-red-500">
+                      {item.availableTickets} tickets available
+                    </p>
+                  )} */}
                 </div>
               )
             })}
           </div>
 
           <div className="flex gap-2 items-center justify-between">
-            <ButtonCustom variant="outline" onClick={() => setStep(0)}>
+            <ButtonCustom
+              variant="outline"
+              onClick={() => {
+                setStep(0)
+                setValue('timeId', 0)
+              }}
+            >
               BACK
             </ButtonCustom>
 
