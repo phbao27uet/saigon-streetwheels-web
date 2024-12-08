@@ -55,6 +55,9 @@ export const columnsBooking: MRT_ColumnDef<IBooking>[] = [
     accessorKey: 'totalPrice',
     header: 'Tổng tiền',
     enableEditing: false,
+    Cell: ({ row }) => {
+      return <div>{row.original.totalPrice.toFixed(2)} USD</div>
+    },
   },
   {
     accessorKey: 'time.availableDate.date',
