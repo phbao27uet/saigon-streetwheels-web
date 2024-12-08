@@ -10,6 +10,8 @@ export interface IBlog {
   updatedAt: string
 }
 
+export type BookingStatus = 'PENDING' | 'PAID' | 'CANCELED'
+
 export interface IBooking {
   id: number
   totalPrice: number
@@ -28,6 +30,7 @@ export interface IBooking {
   timeId: number
   createdAt: string
   updatedAt: string
+  status: BookingStatus
 
   bookingDetails: IBookingDetail[]
   time: ITimeSlot

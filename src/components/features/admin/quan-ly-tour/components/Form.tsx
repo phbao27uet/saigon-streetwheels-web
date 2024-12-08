@@ -52,6 +52,7 @@ export const TourForm = () => {
     mutate(data)
   })
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (tourQuery.data) {
       try {
@@ -83,7 +84,7 @@ export const TourForm = () => {
         console.error('Error setting form values:', error)
       }
     }
-  }, [tourQuery.data, formReturn, updateDate])
+  }, [tourQuery.data])
 
   return (
     <FormProvider {...formReturn}>

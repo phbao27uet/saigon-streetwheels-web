@@ -1,8 +1,15 @@
 'use client'
 
-import type { IBooking } from '@/libs/types'
+import type { BookingStatus, IBooking } from '@/libs/types'
+import { cn } from '@/libs/utils'
 import { format } from 'date-fns'
 import type { MRT_ColumnDef } from 'mantine-react-table'
+
+export const bookingStatus: Record<BookingStatus, string> = {
+  PENDING: 'Chờ thanh toán',
+  PAID: 'Đã thanh toán',
+  CANCELED: 'Đã hủy',
+}
 
 export const columnsBooking: MRT_ColumnDef<IBooking>[] = [
   {
@@ -26,13 +33,20 @@ export const columnsBooking: MRT_ColumnDef<IBooking>[] = [
     enableEditing: false,
   },
   {
-    accessorKey: 'paidStatus',
+    accessorKey: 'status',
     header: 'Trạng thái thanh toán',
     enableEditing: false,
     Cell: ({ row }) => {
       return (
-        <div>
-          {row.original.paidStatus ? 'Đã thanh toán' : 'Chưa thanh toán'}
+        <div
+          className={cn(
+            'text-center px-2 py-1 rounded-md',
+            row.original.status === 'PENDING' && 'text-orange-500 bg-orange-50',
+            row.original.status === 'PAID' && 'text-green-500 bg-green-50',
+            row.original.status === 'CANCELED' && 'text-red-500 bg-red-50',
+          )}
+        >
+          {bookingStatus[row.original.status]}
         </div>
       )
     },

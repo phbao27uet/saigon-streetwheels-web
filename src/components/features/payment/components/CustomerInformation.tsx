@@ -5,6 +5,7 @@ import { request } from '@/libs/requests'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Checkbox, TextInput } from '@mantine/core'
 import { IconLock, IconUser } from '@tabler/icons-react'
+import { useRouter } from 'nextjs-toploader/app'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -19,6 +20,7 @@ export const CustomerInformation = () => {
 
   const [checked, setChecked] = useState(false)
   const [checkedNewsletter, setCheckedNewsletter] = useState(false)
+  const router = useRouter()
 
   const {
     register,
@@ -176,8 +178,15 @@ export const CustomerInformation = () => {
                 )
               }
             }}
-            onCancel={() => {
-              console.log('PayPal button cancelled')
+            onCancel={async (data) => {
+              try {
+                await request.put(`/bookings/${data?.orderID}/cancel`)
+                toast.success('Đã hủy đơn đặt tour')
+                router.push('/our-tour')
+              } catch (error) {
+                console.error(error)
+                toast.error('Không thể hủy đơn đặt tour')
+              }
             }}
             onClick={async (data) => {
               await handleSubmitForm()

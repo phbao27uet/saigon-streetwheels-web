@@ -14,7 +14,7 @@ const Footer = () => {
                 <Image
                   src="/images/logo.jpg"
                   alt="logo"
-                  className="h-full w-full"
+                  className="h-full w-full rounded-full"
                 />
               </div>
             </Link>

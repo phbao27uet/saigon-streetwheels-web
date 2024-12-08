@@ -20,7 +20,6 @@ import {
   QueryClientProvider,
   ToastProvider,
 } from '@/providers'
-import SessionProvider from '@/providers/sessionProvider'
 import { DatesProvider } from '@mantine/dates'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -55,37 +54,37 @@ export default function RootLayout({
         <PayPalProvider>
           <JotaiProvider>
             <QueryClientProvider>
-              <SessionProvider>
-                <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
-                  <MantineProvider defaultColorScheme="light" theme={theme}>
-                    <DatesProvider
-                      settings={{
-                        locale: 'ru',
-                        firstDayOfWeek: 0,
-                        weekendDays: [0],
-                        timezone: 'UTC',
-                      }}
-                    >
-                      <ModalProvider>
-                        <NextTopLoader
-                          showSpinner={false}
-                          color="#C80D13"
-                          initialPosition={0.08}
-                          crawlSpeed={200}
-                          height={3}
-                          crawl={true}
-                          zIndex={1600}
-                          template={
-                            '<div class="bar" role="bar"><div class="peg"></div></div>'
-                          }
-                        />
-                        <ToastProvider />
-                        <Provider>{children}</Provider>
-                      </ModalProvider>
-                    </DatesProvider>
-                  </MantineProvider>
-                </NextAppDirEmotionCacheProvider>
-              </SessionProvider>
+              {/* <SessionProvider> */}
+              <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
+                <MantineProvider defaultColorScheme="light" theme={theme}>
+                  <DatesProvider
+                    settings={{
+                      locale: 'ru',
+                      firstDayOfWeek: 0,
+                      weekendDays: [0],
+                      timezone: 'UTC',
+                    }}
+                  >
+                    <ModalProvider>
+                      <NextTopLoader
+                        showSpinner={false}
+                        color="#C80D13"
+                        initialPosition={0.08}
+                        crawlSpeed={200}
+                        height={3}
+                        crawl={true}
+                        zIndex={1600}
+                        template={
+                          '<div class="bar" role="bar"><div class="peg"></div></div>'
+                        }
+                      />
+                      <ToastProvider />
+                      <Provider>{children}</Provider>
+                    </ModalProvider>
+                  </DatesProvider>
+                </MantineProvider>
+              </NextAppDirEmotionCacheProvider>
+              {/* </SessionProvider> */}
             </QueryClientProvider>
           </JotaiProvider>
         </PayPalProvider>

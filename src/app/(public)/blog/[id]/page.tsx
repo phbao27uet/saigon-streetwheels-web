@@ -1,6 +1,6 @@
-import { BlogAPIQueryKey, getDetailBlog } from '@/components/features/admin'
+import { BlogAPIQueryKey, getListBlogs } from '@/components/features/admin'
 import { BlogDetailPage } from '@/components/features/blog'
-import { PageWithPrefetchQuery } from '@/components/shared'
+import { getQueryClient } from '@/libs/query'
 
 const BlogDetail = async ({
   params,
@@ -9,14 +9,14 @@ const BlogDetail = async ({
     id: string
   }
 }) => {
-  return (
-    <PageWithPrefetchQuery
-      queryFn={getDetailBlog(params.id)}
-      queryKey={[BlogAPIQueryKey.GET_BLOG, params.id]}
-    >
-      <BlogDetailPage params={params} />
-    </PageWithPrefetchQuery>
-  )
+  const queryClient = getQueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: [BlogAPIQueryKey.GET_BLOG, params.id],
+    queryFn: getListBlogs,
+  })
+
+  return <BlogDetailPage params={params} />
 }
 
 export default BlogDetail

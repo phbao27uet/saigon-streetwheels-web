@@ -34,7 +34,7 @@ export const IntroductionPage = () => {
               src="/images/logo.jpg"
               width={250}
               height={250}
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full rounded-full"
               priority
             />
           </div>
