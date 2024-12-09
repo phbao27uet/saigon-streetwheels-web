@@ -8,7 +8,7 @@ import { Group, Select, type SelectProps } from '@mantine/core'
 import { IconCheck, IconClock, IconMapPin } from '@tabler/icons-react'
 import { format } from 'date-fns'
 import { useRouter } from 'nextjs-toploader/app'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { toast } from 'sonner'
 import { useTourBooking } from '../hooks'
@@ -19,6 +19,7 @@ import { TicketCounter } from './TicketCounter'
 interface SelectTourListProps {
   data: ITour[]
   onClose: () => void
+  opened: boolean
 }
 
 const iconProps = {
@@ -28,7 +29,11 @@ const iconProps = {
   size: 18,
 }
 
-export const SelectTourList = ({ data, onClose }: SelectTourListProps) => {
+export const SelectTourList = ({
+  data,
+  onClose,
+  opened,
+}: SelectTourListProps) => {
   const router = useRouter()
   const [availableTimes, setAvailableTimes] = useState<ITimeSlot[]>([])
   const [selectedTour, setSelectedTour] = useState<ITour | null>(null)
@@ -98,6 +103,14 @@ export const SelectTourList = ({ data, onClose }: SelectTourListProps) => {
       </Group>
     )
   }
+
+  useEffect(() => {
+    if (opened === false) {
+      reset()
+      remove()
+      setSelectedTour(null)
+    }
+  }, [opened, reset, remove])
 
   return (
     <div className="flex flex-col gap-4">
@@ -244,56 +257,58 @@ export const SelectTourList = ({ data, onClose }: SelectTourListProps) => {
       {step === 1 && (
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-4 gap-4">
-            {availableTimes.map((item) => {
-              const currentTime = new Date()
-              const hourMinute = format(currentTime, 'HH:mm')
+            {availableTimes
+              ?.sort((a, b) => a?.startTime.localeCompare(b?.startTime))
+              .map((item) => {
+                const currentTime = new Date()
+                const hourMinute = format(currentTime, 'HH:mm')
 
-              const availableDate = selectedTour?.availableDates.find(
-                (d) => d.id === item.availableDateId,
-              )
+                const availableDate = selectedTour?.availableDates.find(
+                  (d) => d.id === item.availableDateId,
+                )
 
-              const isDisabled =
-                item.availableTickets <= 0 ||
-                (hourMinute > item.endTime &&
-                  availableDate?.date &&
-                  format(availableDate?.date, 'yyyy-MM-dd') ===
-                    format(currentTime, 'yyyy-MM-dd')) ||
-                item.availableTickets < totalQuantity
+                const isDisabled =
+                  item.availableTickets <= 0 ||
+                  (hourMinute > item.endTime &&
+                    availableDate?.date &&
+                    format(availableDate?.date, 'yyyy-MM-dd') ===
+                      format(currentTime, 'yyyy-MM-dd')) ||
+                  item.availableTickets < totalQuantity
 
-              return (
-                // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-                <div
-                  key={item.id}
-                  className={cn(
-                    'border border-black px-4 flex flex-col justify-center items-center h-20 cursor-pointer hover:bg-black hover:text-white',
-                    watch('timeId') === item.id && 'bg-black text-white',
-                    isDisabled && 'opacity-50 cursor-not-allowed',
-                  )}
-                  onClick={() => {
-                    if (isDisabled) {
-                      if (item.availableTickets < totalQuantity) {
-                        toast.error('Not enough tickets available')
+                return (
+                  // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+                  <div
+                    key={item.id}
+                    className={cn(
+                      'border border-black px-4 flex flex-col justify-center items-center h-20 cursor-pointer hover:bg-black hover:text-white',
+                      watch('timeId') === item.id && 'bg-black text-white',
+                      isDisabled && 'opacity-50 cursor-not-allowed',
+                    )}
+                    onClick={() => {
+                      if (isDisabled) {
+                        if (item.availableTickets < totalQuantity) {
+                          toast.error('Not enough tickets available')
+                          return
+                        }
+
+                        if (item.availableTickets <= 0) {
+                          toast.error('This time is sold out')
+                        } else {
+                          toast.error('This time is not available')
+                        }
+
                         return
                       }
 
-                      if (item.availableTickets <= 0) {
-                        toast.error('This time is sold out')
-                      } else {
-                        toast.error('This time is not available')
-                      }
-
-                      return
-                    }
-
-                    setValue('timeId', item.id)
-                  }}
-                >
-                  <p>
-                    {item.startTime} - {item.endTime}
-                  </p>
-                </div>
-              )
-            })}
+                      setValue('timeId', item.id)
+                    }}
+                  >
+                    <p>
+                      {item.startTime} - {item.endTime}
+                    </p>
+                  </div>
+                )
+              })}
           </div>
 
           <div className="flex gap-2 items-center justify-between">

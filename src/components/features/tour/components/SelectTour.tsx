@@ -156,56 +156,58 @@ export const SelectTour = ({ data }: SelectTourProps) => {
       {step === 1 && (
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-4 gap-4">
-            {availableTimes.map((item) => {
-              const currentTime = new Date()
-              const hourMinute = format(currentTime, 'HH:mm')
+            {availableTimes
+              ?.sort((a, b) => a?.startTime.localeCompare(b?.startTime))
+              .map((item) => {
+                const currentTime = new Date()
+                const hourMinute = format(currentTime, 'HH:mm')
 
-              const availableDate = data.availableDates.find(
-                (d) => d.id === item.availableDateId,
-              )
+                const availableDate = data.availableDates.find(
+                  (d) => d.id === item.availableDateId,
+                )
 
-              const isDisabled =
-                item.availableTickets <= 0 ||
-                (hourMinute > item.endTime &&
-                  availableDate?.date &&
-                  format(availableDate?.date, 'yyyy-MM-dd') ===
-                    format(currentTime, 'yyyy-MM-dd')) ||
-                item.availableTickets < totalQuantity
+                const isDisabled =
+                  item.availableTickets <= 0 ||
+                  (hourMinute > item.endTime &&
+                    availableDate?.date &&
+                    format(availableDate?.date, 'yyyy-MM-dd') ===
+                      format(currentTime, 'yyyy-MM-dd')) ||
+                  item.availableTickets < totalQuantity
 
-              return (
-                // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-                <div
-                  key={item.id}
-                  className={cn(
-                    'border border-black px-4 flex flex-col justify-center items-center h-20 cursor-pointer hover:bg-black hover:text-white',
-                    watch('timeId') === item.id && 'bg-black text-white',
-                    isDisabled && 'opacity-50 cursor-not-allowed',
-                  )}
-                  onClick={() => {
-                    if (isDisabled) {
-                      if (item.availableTickets < totalQuantity) {
-                        toast.error('Not enough tickets available')
+                return (
+                  // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+                  <div
+                    key={item.id}
+                    className={cn(
+                      'border border-black px-4 flex flex-col justify-center items-center h-20 cursor-pointer hover:bg-black hover:text-white',
+                      watch('timeId') === item.id && 'bg-black text-white',
+                      isDisabled && 'opacity-50 cursor-not-allowed',
+                    )}
+                    onClick={() => {
+                      if (isDisabled) {
+                        if (item.availableTickets < totalQuantity) {
+                          toast.error('Not enough tickets available')
+                          return
+                        }
+
+                        if (item.availableTickets <= 0) {
+                          toast.error('This time is sold out')
+                        } else {
+                          toast.error('This time is not available')
+                        }
+
                         return
                       }
 
-                      if (item.availableTickets <= 0) {
-                        toast.error('This time is sold out')
-                      } else {
-                        toast.error('This time is not available')
-                      }
-
-                      return
-                    }
-
-                    setValue('timeId', item.id)
-                  }}
-                >
-                  <p>
-                    {item.startTime} - {item.endTime}
-                  </p>
-                </div>
-              )
-            })}
+                      setValue('timeId', item.id)
+                    }}
+                  >
+                    <p>
+                      {item.startTime} - {item.endTime}
+                    </p>
+                  </div>
+                )
+              })}
           </div>
 
           <div className="flex gap-2 items-center justify-between">
