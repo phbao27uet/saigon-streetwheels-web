@@ -30,7 +30,7 @@ export const BuyTicketModal = ({ opened, onClose }: BuyTicketModalProps) => {
         size="1000px"
         centered
       >
-        <SelectTourList data={tours} onClose={onClose} />
+        <SelectTourList data={tours} onClose={onClose} opened={opened} />
       </Modal>
     </FormProvider>
   )
