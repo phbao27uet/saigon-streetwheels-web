@@ -9,12 +9,12 @@ const Footer = () => {
         <div id="footer" />
         <Container size="lg" className="py-8">
           <div className="flex flex-col items-center gap-8">
-            <Link href="/">
+            <Link href="/home">
               <div className="w-full h-full max-w-[150px] max-h-[150px]">
                 <Image
                   src="/images/logo.jpg"
                   alt="logo"
-                  className="h-full w-full rounded-full"
+                  className="h-full w-full rounded-[100px]"
                 />
               </div>
             </Link>

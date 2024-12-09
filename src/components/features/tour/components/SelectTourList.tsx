@@ -8,7 +8,7 @@ import { Group, Select, type SelectProps } from '@mantine/core'
 import { IconCheck, IconClock, IconMapPin } from '@tabler/icons-react'
 import { format } from 'date-fns'
 import { useRouter } from 'nextjs-toploader/app'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { toast } from 'sonner'
 import { useTourBooking } from '../hooks'
@@ -34,13 +34,8 @@ export const SelectTourList = ({ data, onClose }: SelectTourListProps) => {
   const [selectedTour, setSelectedTour] = useState<ITour | null>(null)
 
   const [step, setStep] = useState(0)
-  const {
-    control,
-    watch,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useFormContext<TourSchema>()
+  const { control, watch, setValue, handleSubmit, reset } =
+    useFormContext<TourSchema>()
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -117,9 +112,9 @@ export const SelectTourList = ({ data, onClose }: SelectTourListProps) => {
               minDate={new Date()}
               availableDates={
                 selectedTour
-                  ? selectedTour.availableDates.map(
-                      (availableDate) => new Date(availableDate.date),
-                    )
+                  ? selectedTour.availableDates
+                      .map((availableDate) => new Date(availableDate.date))
+                      ?.filter((d) => d >= new Date())
                   : []
               }
               soldOutDates={soldOutDates.map(
@@ -145,18 +140,24 @@ export const SelectTourList = ({ data, onClose }: SelectTourListProps) => {
                 renderOption={renderSelectOption}
                 maxDropdownHeight={200}
                 onChange={(value) => {
+                  // Đổi tour --> reset form
+                  reset()
+
+                  // Nếu không chọn tour thì reset form
                   if (!value) {
                     remove()
                     setSelectedTour(null)
                     return
                   }
 
+                  // Nếu chọn tour thì set tour và reset form
                   const tour = data.find((t) => t.id.toString() === value)
                   if (!tour) return
                   setSelectedTour(tour)
 
                   remove()
 
+                  // Thêm các loại vé vào form
                   for (const ticketType of tour.ticketTypes) {
                     append({
                       name: ticketType.name,
@@ -200,23 +201,24 @@ export const SelectTourList = ({ data, onClose }: SelectTourListProps) => {
 
               <div className="flex gap-1 flex-col">
                 {fields.map((field, index) => (
-                  <>
+                  <React.Fragment key={field.id}>
                     <TicketCounter
-                      key={field.id}
                       name={field.name}
                       price={field.price}
                       inputName={`ticketTypes.${index}.quantity`}
                     />
-                  </>
+                  </React.Fragment>
                 ))}
               </div>
             </div>
           </div>
-          <div className="flex gap-2 items-center justify-end mt-4">
-            <p className="text-xl font-bold">TOTAL PRICE:</p>
-            <p className="text-xl font-bold text-[#C80D13]">
-              {totalPrice?.toFixed(2)} USD
-            </p>
+          <div className="flex flex-col md:flex-row gap-2 items-center justify-end mt-4">
+            <div className="flex gap-2 items-center">
+              <p className="text-xl font-bold">TOTAL PRICE:</p>
+              <p className="text-xl font-bold text-[#C80D13]">
+                {totalPrice?.toFixed(2)} USD
+              </p>
+            </div>
 
             <ButtonCustomRed
               onClick={() => {
@@ -305,11 +307,13 @@ export const SelectTourList = ({ data, onClose }: SelectTourListProps) => {
               BACK
             </ButtonCustom>
 
-            <div className="flex gap-2 items-center">
-              <p className="text-xl font-bold">TOTAL PRICE:</p>
-              <p className="text-xl font-bold text-[#C80D13]">
-                {totalPrice?.toFixed(2)} USD
-              </p>
+            <div className="flex flex-col md:flex-row gap-2 items-center">
+              <div className="flex gap-2 items-center">
+                <p className="text-xl font-bold">TOTAL PRICE:</p>
+                <p className="text-xl font-bold text-[#C80D13]">
+                  {totalPrice?.toFixed(2)} USD
+                </p>
+              </div>
 
               <ButtonCustomRed
                 onClick={() => {

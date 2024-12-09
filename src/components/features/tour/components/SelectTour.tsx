@@ -75,9 +75,9 @@ export const SelectTour = ({ data }: SelectTourProps) => {
               name="date"
               control={control}
               minDate={new Date()}
-              availableDates={data.availableDates.map(
-                (availableDate) => new Date(availableDate.date),
-              )}
+              availableDates={data.availableDates
+                .map((availableDate) => new Date(availableDate.date))
+                ?.filter((d) => d >= new Date())}
               soldOutDates={soldOutDates.map(
                 (availableDate) => new Date(availableDate.date),
               )}
@@ -107,7 +107,7 @@ export const SelectTour = ({ data }: SelectTourProps) => {
                 <IconClock />
                 <p className="text-base md:text-xl">Start time:</p>
                 <p className="text-base md:text-xl text-[#2D4271] font-bold">
-                  {format(data.availableDates[0].date, 'dd/MM/yyyy')}
+                  {watch('date') ? format(watch('date'), 'dd/MM/yyyy') : ''}
                 </p>
               </div>
 
@@ -124,11 +124,13 @@ export const SelectTour = ({ data }: SelectTourProps) => {
               </div>
             </div>
           </div>
-          <div className="flex gap-2 items-center justify-end mt-4">
-            <p className="text-xl font-bold">TOTAL PRICE:</p>
-            <p className="text-xl font-bold text-[#C80D13]">
-              {totalPrice.toFixed(2)} USD
-            </p>
+          <div className="flex flex-col md:flex-row gap-2 items-center justify-end mt-4">
+            <div className="flex gap-2 items-center">
+              <p className="text-xl font-bold">TOTAL PRICE:</p>
+              <p className="text-xl font-bold text-[#C80D13]">
+                {totalPrice.toFixed(2)} USD
+              </p>
+            </div>
 
             <ButtonCustomRed
               onClick={() => {
@@ -201,11 +203,6 @@ export const SelectTour = ({ data }: SelectTourProps) => {
                   <p>
                     {item.startTime} - {item.endTime}
                   </p>
-                  {/* {isDisabled && (
-                    <p className="text-sm text-red-500">
-                      {item.availableTickets} tickets available
-                    </p>
-                  )} */}
                 </div>
               )
             })}
@@ -222,11 +219,13 @@ export const SelectTour = ({ data }: SelectTourProps) => {
               BACK
             </ButtonCustom>
 
-            <div className="flex gap-2 items-center">
-              <p className="text-xl font-bold">TOTAL PRICE:</p>
-              <p className="text-xl font-bold text-[#C80D13]">
-                {totalPrice.toFixed(2)} USD
-              </p>
+            <div className="flex flex-col md:flex-row gap-2 items-center">
+              <div className="flex gap-2 items-center">
+                <p className="text-xl font-bold">TOTAL PRICE:</p>
+                <p className="text-xl font-bold text-[#C80D13]">
+                  {totalPrice.toFixed(2)} USD
+                </p>
+              </div>
 
               <ButtonCustomRed
                 onClick={() => {

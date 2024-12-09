@@ -17,23 +17,23 @@ SwiperCore.use([Autoplay, Navigation])
 const DATA = [
   {
     image: '/images/introduction/i-1.jpeg',
-    title: 'Category 3 Animal By-Products: What You Need to Know',
+    title: '1',
   },
   {
     image: '/images/introduction/i-2.png',
-    title: 'Exploring Hidden Gems in Saigon',
+    title: '2',
   },
   {
     image: '/images/introduction/i-3.png',
-    title: 'Top 10 Street Foods You Must Try in Vietnam',
+    title: '3',
   },
   {
     image: '/images/introduction/i-4.png',
-    title: 'Eco-Tourism: Sustainable Travel in Vietnam',
+    title: '4',
   },
   {
     image: '/images/introduction/i-5.png',
-    title: 'Eco-Tourism: Sustainable Travel in Vietnam',
+    title: '5',
   },
 ]
 

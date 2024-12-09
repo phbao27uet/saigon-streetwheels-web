@@ -24,7 +24,7 @@ export const BuyTicketModal = ({ opened, onClose }: BuyTicketModalProps) => {
   return (
     <FormProvider {...methods}>
       <Modal
-        opened={true}
+        opened={opened}
         onClose={onClose}
         withCloseButton={false}
         size="1000px"
