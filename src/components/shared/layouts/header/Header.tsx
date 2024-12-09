@@ -1,8 +1,10 @@
 'use client'
 
+import { BuyTicketModal } from '@/components/features/tour'
 import { cn } from '@/libs/utils'
 import { tss } from '@libs/utils/tss-style'
 import { Burger, Flex, Group, Image } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 import { MainContainer } from '@shared/layouts'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -28,8 +30,14 @@ export function Header() {
   const [drawerOpened, setDrawerOpened] = useState(false)
   const { classes, cx } = useStyles({
     headerScrolled: scrolled,
-    hasBackgroundHeader: isActiveHeader(pathname, ['/our-tour', '/blog', '/payment']),
+    hasBackgroundHeader: isActiveHeader(pathname, [
+      '/our-tour',
+      '/blog',
+      '/payment',
+    ]),
   })
+
+  const [opened, { open, close }] = useDisclosure(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,7 +77,7 @@ export function Header() {
                 </Link>
               ))}
 
-              <ButtonCustom className="w-fit" size="lg">
+              <ButtonCustom className="w-fit" size="lg" onClick={open}>
                 Buy Tickets
               </ButtonCustom>
             </Flex>
@@ -83,6 +91,8 @@ export function Header() {
           </Group>
         </MainContainer>
       </header>
+
+      <BuyTicketModal opened={opened} onClose={close} />
 
       <DrawerHeader drawerOpened={drawerOpened} toggleDrawer={toggleDrawer} />
     </>

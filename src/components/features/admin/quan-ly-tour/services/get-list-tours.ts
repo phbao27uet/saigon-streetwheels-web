@@ -1,10 +1,18 @@
 import { request } from '@/libs/requests'
 
-export const getListTours = async () => {
+interface getListToursArgs {
+  page?: number
+  perPage?: number
+}
+
+export const getListTours = async ({
+  page = 1,
+  perPage = 20,
+}: getListToursArgs) => {
   const res = await request('tours', {
     params: {
-      page: 1,
-      perPage: 20,  
+      page,
+      perPage,
     },
   })
 

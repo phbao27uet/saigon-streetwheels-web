@@ -4,9 +4,9 @@ import { ButtonCustom, ButtonCustomRed } from '@/components/shared/buttons'
 import { Calendar } from '@/components/shared/inputs'
 import type { ITimeSlot, ITour } from '@/libs/types'
 import { cn } from '@/libs/utils'
-import { IconClock, IconMapPin } from '@tabler/icons-react'
+import { Group, Select, type SelectProps } from '@mantine/core'
+import { IconCheck, IconClock, IconMapPin } from '@tabler/icons-react'
 import { format } from 'date-fns'
-import { useParams } from 'next/navigation'
 import { useRouter } from 'nextjs-toploader/app'
 import React, { useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
@@ -16,53 +16,88 @@ import type { TourSchema } from '../schemas'
 import { StepSelect } from './StepSelect'
 import { TicketCounter } from './TicketCounter'
 
-interface SelectTourProps {
-  data: ITour
+interface SelectTourListProps {
+  data: ITour[]
+  onClose: () => void
 }
 
-export const SelectTour = ({ data }: SelectTourProps) => {
-  const params = useParams<{ id: string }>()
+const iconProps = {
+  stroke: 1.5,
+  color: 'currentColor',
+  opacity: 0.6,
+  size: 18,
+}
+
+export const SelectTourList = ({ data, onClose }: SelectTourListProps) => {
   const router = useRouter()
   const [availableTimes, setAvailableTimes] = useState<ITimeSlot[]>([])
+  const [selectedTour, setSelectedTour] = useState<ITour | null>(null)
 
   const [step, setStep] = useState(0)
-  const {
-    control,
-    watch,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useFormContext<TourSchema>()
+  const { control, watch, setValue, handleSubmit, reset } =
+    useFormContext<TourSchema>()
 
-  const { fields } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: 'ticketTypes',
   })
 
   const watchTickets = watch('ticketTypes')
 
-  const totalPrice = watchTickets.reduce((total, ticket) => {
+  const totalPrice = watchTickets?.reduce((total, ticket) => {
     return total + ticket.price * ticket.quantity
   }, 0)
 
-  const totalQuantity = watchTickets.reduce((total, ticket) => {
+  const totalQuantity = watchTickets?.reduce((total, ticket) => {
     return total + ticket.quantity
   }, 0)
 
   const { saveBooking } = useTourBooking()
 
   const onSubmit = (data: TourSchema) => {
+    if (!selectedTour) {
+      toast.error('Please select the tour')
+      return
+    }
+
     saveBooking({
       ...data,
-      tourId: Number(params.id),
+      tourId: selectedTour?.id,
     })
 
     router.push('/payment')
+    onClose()
   }
 
-  const soldOutDates = data.availableDates.filter((availableDate) =>
-    availableDate.times.every((time) => time.availableTickets === 0),
-  )
+  const soldOutDates = selectedTour
+    ? selectedTour.availableDates.filter((availableDate) =>
+        availableDate.times.every((time) => time.availableTickets === 0),
+      )
+    : []
+
+  const renderSelectOption: SelectProps['renderOption'] = ({
+    option,
+    checked,
+  }) => {
+    const tour = data.find((t) => t.id.toString() === option.value)
+
+    if (!tour) return null
+
+    return (
+      <Group flex="1" gap="xs">
+        {checked && (
+          <IconCheck style={{ marginInlineStart: 'auto' }} {...iconProps} />
+        )}
+
+        <div className="flex items-center justify-between gap-1 flex-1">
+          <p>{tour.title}</p>
+          <p className="text-sm text-[#F81818]">
+            {tour.ticketTypes[0].price} USD
+          </p>
+        </div>
+      </Group>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -75,14 +110,18 @@ export const SelectTour = ({ data }: SelectTourProps) => {
               name="date"
               control={control}
               minDate={new Date()}
-              availableDates={data.availableDates
-                .map((availableDate) => new Date(availableDate.date))
-                ?.filter((d) => d >= new Date())}
+              availableDates={
+                selectedTour
+                  ? selectedTour.availableDates
+                      .map((availableDate) => new Date(availableDate.date))
+                      ?.filter((d) => d >= new Date())
+                  : []
+              }
               soldOutDates={soldOutDates.map(
                 (availableDate) => new Date(availableDate.date),
               )}
               callback={(date) => {
-                const selectedDate = data.availableDates.find(
+                const selectedDate = selectedTour?.availableDates.find(
                   (d) =>
                     new Date(d.date).toDateString() === date?.toDateString(),
                 )
@@ -91,25 +130,74 @@ export const SelectTour = ({ data }: SelectTourProps) => {
             />
 
             <div className="flex flex-col gap-2 flex-1">
-              <h1 className="text-2xl md:text-3xl font-bold text-[#0070BB]">
-                {data.title}
-              </h1>
-              <p className="text-base md:text-xl">{data.description}</p>
-              <div className="flex gap-1">
-                <IconMapPin />
-                <p className="text-base md:text-xl">Depart:</p>
-                <p className="text-base md:text-xl text-[#2D4271] font-bold">
-                  {data.departureLocation}
-                </p>
-              </div>
+              <Select
+                className="w-full"
+                placeholder="Choose the tour you want?"
+                data={data?.map((tour) => ({
+                  value: tour?.id?.toString(),
+                  label: tour?.title,
+                }))}
+                renderOption={renderSelectOption}
+                maxDropdownHeight={200}
+                onChange={(value) => {
+                  // Đổi tour --> reset form
+                  reset()
 
-              <div className="flex gap-1">
-                <IconClock />
-                <p className="text-base md:text-xl">Start time:</p>
-                <p className="text-base md:text-xl text-[#2D4271] font-bold">
-                  {watch('date') ? format(watch('date'), 'dd/MM/yyyy') : ''}
-                </p>
-              </div>
+                  // Nếu không chọn tour thì reset form
+                  if (!value) {
+                    remove()
+                    setSelectedTour(null)
+                    return
+                  }
+
+                  // Nếu chọn tour thì set tour và reset form
+                  const tour = data.find((t) => t.id.toString() === value)
+                  if (!tour) return
+                  setSelectedTour(tour)
+
+                  remove()
+
+                  // Thêm các loại vé vào form
+                  for (const ticketType of tour.ticketTypes) {
+                    append({
+                      name: ticketType.name,
+                      id: ticketType.id,
+                      price: ticketType.price,
+                      quantity: 0,
+                    })
+                  }
+                }}
+              />
+
+              {selectedTour?.title && (
+                <h1 className="text-2xl md:text-3xl font-bold text-[#0070BB]">
+                  {selectedTour.title}
+                </h1>
+              )}
+
+              <p className="text-base md:text-xl">
+                {selectedTour?.description}
+              </p>
+
+              {selectedTour?.departureLocation && (
+                <div className="flex gap-1">
+                  <IconMapPin />
+                  <p className="text-base md:text-xl">Depart:</p>
+                  <p className="text-base md:text-xl text-[#2D4271] font-bold">
+                    {selectedTour?.departureLocation}
+                  </p>
+                </div>
+              )}
+
+              {selectedTour && (
+                <div className="flex gap-1">
+                  <IconClock />
+                  <p className="text-base md:text-xl">Start time:</p>
+                  <p className="text-base md:text-xl text-[#2D4271] font-bold">
+                    {watch('date') ? format(watch('date'), 'dd/MM/yyyy') : ''}
+                  </p>
+                </div>
+              )}
 
               <div className="flex gap-1 flex-col">
                 {fields.map((field, index) => (
@@ -128,7 +216,7 @@ export const SelectTour = ({ data }: SelectTourProps) => {
             <div className="flex gap-2 items-center">
               <p className="text-xl font-bold">TOTAL PRICE:</p>
               <p className="text-xl font-bold text-[#C80D13]">
-                {totalPrice.toFixed(2)} USD
+                {totalPrice?.toFixed(2)} USD
               </p>
             </div>
 
@@ -160,7 +248,7 @@ export const SelectTour = ({ data }: SelectTourProps) => {
               const currentTime = new Date()
               const hourMinute = format(currentTime, 'HH:mm')
 
-              const availableDate = data.availableDates.find(
+              const availableDate = selectedTour?.availableDates.find(
                 (d) => d.id === item.availableDateId,
               )
 
@@ -223,7 +311,7 @@ export const SelectTour = ({ data }: SelectTourProps) => {
               <div className="flex gap-2 items-center">
                 <p className="text-xl font-bold">TOTAL PRICE:</p>
                 <p className="text-xl font-bold text-[#C80D13]">
-                  {totalPrice.toFixed(2)} USD
+                  {totalPrice?.toFixed(2)} USD
                 </p>
               </div>
 

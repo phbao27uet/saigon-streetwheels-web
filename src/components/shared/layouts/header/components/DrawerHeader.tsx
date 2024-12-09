@@ -88,6 +88,7 @@ const useStyles = tss.create(() => ({
 
   drawerLogo: {
     width: 150,
+    borderRadius: 100,
   },
 
   drawerTagline: {

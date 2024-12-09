@@ -181,11 +181,11 @@ export const CustomerInformation = () => {
             onCancel={async (data) => {
               try {
                 await request.put(`/bookings/${data?.orderID}/cancel`)
-                toast.success('Đã hủy đơn đặt tour')
+                toast.success('Booking cancelled successfully')
                 router.push('/our-tour')
               } catch (error) {
                 console.error(error)
-                toast.error('Không thể hủy đơn đặt tour')
+                toast.error('Cannot cancel booking')
               }
             }}
             onClick={async (data) => {

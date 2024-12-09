@@ -1,23 +1,24 @@
-"use client";
+'use client'
 
-import React, { useEffect, useState } from "react";
+import type React from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const Provider = ({ children }: Props) => {
-  const [hydrated, setHydrated] = useState(false);
+  const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
-    setHydrated(true);
-  }, []);
+    setHydrated(true)
+  }, [])
 
   if (!hydrated) {
-    return null;
+    return null
   }
 
-  return <>{children}</>;
-};
+  return <>{children}</>
+}
 
-export default Provider;
+export default Provider
