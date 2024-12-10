@@ -1,43 +1,40 @@
-# Sử dụng hình ảnh Node.js cơ bản
-FROM node:20-alpine3.16 AS base
+# Use Node.js Alpine as the base image
+FROM node:alpine AS base
 
-# Bước cài đặt dependencies chỉ khi cần thiết
-FROM base AS deps
+# Install dependencies
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
-RUN \
-  if [ -f package-lock.json ]; then npm ci --legacy-peer-deps; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+# Install pnpm
+RUN corepack enable pnpm
 
-# Bước build mã nguồn chỉ khi cần thiết
+# Install dependencies
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
+# Build the application
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN pnpm run build
 
-RUN npm run build
-  
-FROM base AS runner
+# Production image
+FROM node:alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
+ENV PORT 3309
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+# Copy necessary files
 COPY --from=builder /app/public ./public
-
-# Tối ưu hóa kích thước ảnh bằng output file tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
 EXPOSE 3309
-ENV PORT 3309
-ENV HOSTNAME "0.0.0.0"
 
 CMD ["node", "server.js"]

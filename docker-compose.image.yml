@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  web:
+    image: baophamuete64/saigon-streetwheels-web-web:latest
+    container_name: web
+    restart: unless-stopped
+    ports:
+      - '3309:3309'
+    environment:
+      AUTH_SECRET: zzWS0fMhw0Zg77jFcG6YlXbAp57rTPpIGMIxg7yf7NM=
+      AUTH_TRUST_HOST: 'true'
+      NEXT_PUBLIC_API_URL: http://14.225.217.37:3000
+      NEXTAUTH_URL: http://14.225.217.37:3309
+      NEXT_PUBLIC_TINY_API_KEY: jepnu4xpgsqpzpfrkkjnat2q24xuevx39nch144hng3ym08y
+      NEXT_PUBLIC_RETURN_URL: http://14.225.217.37:3309/bookings/success
+      NEXT_PUBLIC_CANCEL_URL: http://14.225.217.37:3309/bookings/cancel
+      NEXT_PUBLIC_PAYPAL_CLIENT_ID: AUKfAEz3sT6GYriZwVbpWjyg1E_QX7w3Yvd-B_BZewNdDsRhFAmjJHFyTKMqpMS4xjiBI-VdgeDbShfj
+
