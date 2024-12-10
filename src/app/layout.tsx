@@ -48,10 +48,6 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/images/logo-removebg.png" />
         <link rel="preload" as="image" href="/svgs/motorbike.svg" />
         <link rel="preload" as="image" href="/images/home/hero-1.jpg" />
-        <meta
-          http-equiv="Content-Security-Policy"
-          content="upgrade-insecure-requests"
-        />
       </head>
       <body className={inter.className}>
         <WebVitals />
