@@ -91,7 +91,7 @@ export const BlogForm = () => {
         )}
       />
 
-      <Button onClick={onSubmit}>
+      <Button onClick={onSubmit} variant='filled'>
         {params.id !== 'create' ? 'Cập nhật' : 'Tạo mới'}
       </Button>
     </Stack>

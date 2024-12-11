@@ -159,7 +159,7 @@ export function SingleImageUploader<T extends FieldValues>({
             <Button onClick={handleRemovePreview} variant="outline">
               Hủy
             </Button>
-            <Button onClick={handleSave} loading={isLoading}>
+            <Button variant='filled' onClick={handleSave} loading={isLoading}>
               {isLoading ? 'Đang tải lên...' : 'Lưu'}
             </Button>
           </Group>

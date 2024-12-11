@@ -92,7 +92,7 @@ export const TimeFields = ({ dateIndex, selectedDate }: TimeFieldsProps) => {
                 ?.availableTickets?.message
             }
           />
-          <Button color="red" onClick={() => removeTime(timeIndex)}>
+          <Button variant='filled' color="red" onClick={() => removeTime(timeIndex)}>
             Xóa khung giờ
           </Button>
         </Group>

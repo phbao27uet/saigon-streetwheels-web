@@ -10,4 +10,4 @@ services:
     ports:
       - '3309:3309'
     env_file:
-      - .env
+      - .env.prod
