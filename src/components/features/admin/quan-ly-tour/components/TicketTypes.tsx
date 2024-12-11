@@ -21,7 +21,7 @@ export const TicketTypeManager = () => {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-medium">Loại vé</h3>
-        <Button type="button" onClick={() => append({ name: '', price: 0 })}>
+        <Button variant='filled' type="button" onClick={() => append({ name: '', price: 0 })}>
           Thêm loại vé
         </Button>
       </div>

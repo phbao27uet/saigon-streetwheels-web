@@ -143,6 +143,7 @@ export const LoginForm: React.FC = () => {
           mt="xl"
           loading={loading}
           disabled={loading}
+          variant='filled'
         >
           Login
         </Button>

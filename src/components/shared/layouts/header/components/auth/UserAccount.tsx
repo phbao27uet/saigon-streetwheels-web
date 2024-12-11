@@ -130,6 +130,7 @@ export function UserAccount({ user }: Props) {
           />
 
           <Button
+            variant="filled"
             loading={isChangePassword}
             onClick={handleSubmitChangePassword(onSubmitChangePassword)}
           >

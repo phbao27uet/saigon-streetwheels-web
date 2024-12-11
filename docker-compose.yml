@@ -1,13 +1,13 @@
 version: '3.8'
 
 services:
-  landing-page:
+  web:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: landing-page
+    container_name: web
     restart: unless-stopped
     ports:
       - '3309:3309'
     env_file:
-      - .env
+      - .env.prod
