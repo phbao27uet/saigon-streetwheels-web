@@ -8,8 +8,10 @@ import {
 } from '@mantine/core';
 import { themeToVars } from '@mantine/vanilla-extract';
 
+export const primaryColor = '#1d7d8c';
+
 export const themeOverride = createTheme({
-  // primaryColor: "", // Change primary color
+  // primaryColor: primaryColor,
   other: {
     maxApplicationWidth: 1600,
   },

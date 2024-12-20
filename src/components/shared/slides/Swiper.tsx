@@ -94,9 +94,11 @@ const Swiper: React.FC<SwiperProps> = ({
               opacity: 1,
               transition: 'opacity 0.2s ease-in-out',
               cursor: isBeginning ? 'not-allowed !important' : 'pointer',
+              backgroundColor: "#c13331",
+              borderRadius: "50%"
             }}
           >
-            <IconArrowLeft size={32} className="text-primary" />
+            <IconArrowLeft size={32} className="text-white" />
           </Button>
           <Button
             variant="transparent"
@@ -113,9 +115,11 @@ const Swiper: React.FC<SwiperProps> = ({
               opacity: 1,
               transition: 'opacity 0.2s ease-in-out',
               cursor: isEnd ? 'not-allowed !important' : 'pointer',
+              backgroundColor: "#c13331",
+              borderRadius: "50%"
             }}
           >
-            <IconArrowRight size={32} className="text-primary" />
+            <IconArrowRight size={32} className="text-white" />
           </Button>
         </Box>
       )}

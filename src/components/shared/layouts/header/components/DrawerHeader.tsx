@@ -41,15 +41,15 @@ export const DrawerHeader = ({ drawerOpened, toggleDrawer }: Props) => {
           className="absolute right-5 top-5 cursor-pointer"
         />
 
-        <Link href={'/home'}>
+        <Link href={'/home'} className="max-w-[150px]">
           <Image
-            src="/svgs/logo.svg"
+            src="/images/logo.jpg"
             alt="logo"
-            className={classes.drawerLogo}
+            className="h-full w-full max-w-[150px] rounded-[20px]"
           />
         </Link>
 
-        <Divider color="#414c6e" className="my-8" />
+        <Divider color="#fff" className="my-8" />
 
         <Text className={classes.drawerMenuTitle}>OUR MENU</Text>
 
@@ -73,7 +73,7 @@ export const DrawerHeader = ({ drawerOpened, toggleDrawer }: Props) => {
 const useStyles = tss.create(() => ({
   drawer: {
     '& .mantine-Drawer-content': {
-      backgroundColor: '#414c6e',
+      backgroundColor: '#1d7d8c',
       borderLeftWidth: '10px',
       borderRadius: '50px 0 0 50px',
       boxShadow: '2px 8px 23px 3px rgba(0,0,0,0.2)',
@@ -88,7 +88,7 @@ const useStyles = tss.create(() => ({
 
   drawerLogo: {
     width: 150,
-    borderRadius: 100,
+    borderRadius: 20,
   },
 
   drawerTagline: {
