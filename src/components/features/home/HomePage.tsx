@@ -3,6 +3,7 @@ import {
   AboutUs,
   Feedback,
   HereSection,
+  OurMoment,
   OurTour,
   OutstandingTour,
   TourismNews,
@@ -16,6 +17,7 @@ export const HomePage = () => {
       <OutstandingTour />
       <OurTour />
       {/* <AlbumTour /> */}
+      <OurMoment />
       <Feedback />
 
       {/* biome-ignore lint/complexity/noUselessFragments: <explanation> */}

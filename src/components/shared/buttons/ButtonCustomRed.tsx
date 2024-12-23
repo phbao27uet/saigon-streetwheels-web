@@ -109,7 +109,7 @@ const useStyles = tss
         transition: 'all 0.3s ease',
         textTransform: 'uppercase',
         position: 'relative',
-        borderRadius: '20px',
+        borderRadius: '5px',
 
         '&:hover': {
           transform: 'translateY(-8px)',

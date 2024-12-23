@@ -33,6 +33,7 @@ const Swiper: React.FC<SwiperProps> = ({
   const swiperRef = useRef<SwiperCore>()
   const [isBeginning, setIsBeginning] = useState(true)
   const [isEnd, setIsEnd] = useState(false)
+  const [canNavigate, setCanNavigate] = useState(false)
 
   return (
     <div className={twMerge('relative', className)}>
@@ -68,16 +69,28 @@ const Swiper: React.FC<SwiperProps> = ({
             }
           }
         }}
+        onAfterInit={(swiper) => {
+          // Check if navigation is possible after initialization
+          setCanNavigate(
+            swiper.slides.length > Number(swiper.params.slidesPerView),
+          )
+        }}
         onSlideChange={(swiper) => {
           setIsBeginning(swiper.isBeginning)
           setIsEnd(swiper.isEnd)
+        }}
+        onBreakpoint={(swiper) => {
+          // Update navigation possibility when breakpoint changes
+          setCanNavigate(
+            swiper.slides.length > Number(swiper.params.slidesPerView),
+          )
         }}
         {...props}
       >
         {children}
       </ReactSwiper>
 
-      {!hideNavigation && (
+      {!hideNavigation && canNavigate && (
         <Box>
           <Button
             variant="transparent"
@@ -90,13 +103,13 @@ const Swiper: React.FC<SwiperProps> = ({
               top: '50%',
               transform: 'translateY(-50%)',
               zIndex: 49,
-
-              opacity: 1,
+              opacity: isBeginning ? 0.5 : 1,
               transition: 'opacity 0.2s ease-in-out',
               cursor: isBeginning ? 'not-allowed !important' : 'pointer',
-              backgroundColor: "#c13331",
-              borderRadius: "50%"
+              backgroundColor: '#c13331',
+              borderRadius: '50%',
             }}
+            disabled={isBeginning}
           >
             <IconArrowLeft size={32} className="text-white" />
           </Button>
@@ -111,13 +124,13 @@ const Swiper: React.FC<SwiperProps> = ({
               top: '50%',
               transform: 'translateY(-50%)',
               zIndex: 49,
-
-              opacity: 1,
+              opacity: isEnd ? 0.5 : 1,
               transition: 'opacity 0.2s ease-in-out',
               cursor: isEnd ? 'not-allowed !important' : 'pointer',
-              backgroundColor: "#c13331",
-              borderRadius: "50%"
+              backgroundColor: '#c13331',
+              borderRadius: '50%',
             }}
+            disabled={isEnd}
           >
             <IconArrowRight size={32} className="text-white" />
           </Button>
