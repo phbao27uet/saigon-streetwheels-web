@@ -5,23 +5,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Button,
   Card,
-  Group,
   Input,
   Stack,
   Text,
   TextInput,
   Textarea,
 } from '@mantine/core'
-import { DatePickerInput } from '@mantine/dates'
 import { useParams } from 'next/navigation'
 import { useEffect } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import {
-  Controller,
-  FormProvider,
-  useFieldArray,
-  useForm,
-} from 'react-hook-form'
-import { type CreateTourSchema, createTourSchema } from '../configs'
+  type CreateTourSchema,
+  createTourSchema,
+  defaultValuesTour,
+} from '../configs'
 import { useCreateOrUpdateTour, useGetDetailTour } from '../hooks'
 import { TicketTypeManager } from './TicketTypes'
 import { TimeFields } from './TimeFields'
@@ -29,18 +26,7 @@ import { TimeFields } from './TimeFields'
 export const TourForm = () => {
   const formReturn = useForm<CreateTourSchema>({
     resolver: zodResolver(createTourSchema),
-    // defaultValues: defaultValuesTour,
-  })
-
-  // Quản lý mảng ngày có thể book
-  const {
-    fields: dateFields,
-    append: appendDate,
-    remove: removeDate,
-    update: updateDate,
-  } = useFieldArray({
-    control: formReturn.control,
-    name: 'availableDates',
+    defaultValues: defaultValuesTour,
   })
 
   const params = useParams<{ id: string }>()
@@ -56,30 +42,15 @@ export const TourForm = () => {
   useEffect(() => {
     if (tourQuery.data) {
       try {
-        const transformedAvailableDates = tourQuery.data.availableDates.map(
-          (availableDate) => ({
-            ...availableDate,
-            date: availableDate.date
-              ? new Date(availableDate.date)
-              : new Date(),
-            times: availableDate.times.map((time) => ({
-              ...time,
-              startTime: time.startTime || '',
-              endTime: time.endTime || '',
-              availableTickets: time.availableTickets || 1,
-            })),
-          }),
-        )
-
         formReturn.reset({
           ...tourQuery.data,
         })
 
-        transformedAvailableDates.forEach((dateField, index) => {
-          updateDate(index, {
-            ...dateField,
-          })
-        })
+        // transformedAvailableDates.forEach((dateField, index) => {
+        //   updateDate(index, {
+        //     ...dateField,
+        //   })
+        // })
       } catch (error) {
         console.error('Error setting form values:', error)
       }
@@ -148,62 +119,12 @@ export const TourForm = () => {
               <Text size="xl" fw={700} c="blue">
                 3. Lịch trình tour
               </Text>
-              {dateFields.map((dateField, dateIndex) => (
-                <Card key={dateField.id} withBorder>
-                  <Stack>
-                    <Group justify="space-between">
-                      <Controller
-                        name={`availableDates.${dateIndex}.date`}
-                        control={formReturn.control}
-                        render={({ field }) => (
-                          <DatePickerInput
-                            label="Ngày"
-                            placeholder="Chọn ngày"
-                            value={new Date(field.value)}
-                            onChange={(value) => field.onChange(value)}
-                            minDate={new Date()}
-                            error={
-                              formReturn.formState.errors.availableDates?.[
-                                dateIndex
-                              ]?.date?.message
-                            }
-                          />
-                        )}
-                      />
-                      <Button
-                        color="red"
-                        variant="subtle"
-                        onClick={() => removeDate(dateIndex)}
-                      >
-                        Xóa ngày
-                      </Button>
-                    </Group>
-                    <TimeFields
-                      dateIndex={dateIndex}
-                      selectedDate={formReturn.getValues(
-                        `availableDates.${dateIndex}.date`,
-                      )}
-                    />
-                  </Stack>
-                </Card>
-              ))}
-
-              <Button
-                variant="outline"
-                onClick={() =>
-                  appendDate({
-                    date: new Date(),
-                    times: [],
-                  })
-                }
-              >
-                Thêm ngày mới
-              </Button>
+              <TimeFields />
             </Stack>
           </Card>
 
           <Button
-            variant='filled'
+            variant="filled"
             type="submit"
             loading={formReturn.formState.isSubmitting || isPending}
           >

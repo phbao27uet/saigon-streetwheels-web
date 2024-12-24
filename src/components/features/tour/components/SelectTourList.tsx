@@ -2,7 +2,7 @@
 
 import { ButtonCustom, ButtonCustomRed } from '@/components/shared/buttons'
 import { Calendar } from '@/components/shared/inputs'
-import type { ITimeSlot, ITour } from '@/libs/types'
+import type { ITour } from '@/libs/types'
 import { cn } from '@/libs/utils'
 import { Group, Select, type SelectProps } from '@mantine/core'
 import { IconCheck, IconClock, IconMapPin } from '@tabler/icons-react'
@@ -35,7 +35,6 @@ export const SelectTourList = ({
   opened,
 }: SelectTourListProps) => {
   const router = useRouter()
-  const [availableTimes, setAvailableTimes] = useState<ITimeSlot[]>([])
   const [selectedTour, setSelectedTour] = useState<ITour | null>(null)
 
   const [step, setStep] = useState(0)
@@ -74,12 +73,6 @@ export const SelectTourList = ({
     onClose()
   }
 
-  const soldOutDates = selectedTour
-    ? selectedTour.availableDates.filter((availableDate) =>
-        availableDate.times.every((time) => time.availableTickets === 0),
-      )
-    : []
-
   const renderSelectOption: SelectProps['renderOption'] = ({
     option,
     checked,
@@ -112,6 +105,8 @@ export const SelectTourList = ({
     }
   }, [opened, reset, remove])
 
+  console.log('selectedTour', selectedTour)
+
   return (
     <div className="flex flex-col gap-4">
       <StepSelect step={step} />
@@ -119,29 +114,7 @@ export const SelectTourList = ({
       {step === 0 && (
         <>
           <div className="flex md:flex-row flex-col gap-10">
-            <Calendar
-              name="date"
-              control={control}
-              minDate={new Date()}
-              availableDates={
-                selectedTour
-                  ? selectedTour.availableDates
-                      .map((availableDate) => new Date(availableDate.date))
-                      ?.filter((d) => d >= new Date())
-                  : []
-              }
-              soldOutDates={soldOutDates.map(
-                (availableDate) => new Date(availableDate.date),
-              )}
-              callback={(date) => {
-                const selectedDate = selectedTour?.availableDates.find(
-                  (d) =>
-                    new Date(d.date).toDateString() === date?.toDateString(),
-                )
-                setAvailableTimes(selectedDate ? selectedDate.times : [])
-              }}
-            />
-
+            <Calendar name="date" control={control} minDate={new Date()} />
             <div className="flex flex-col gap-2 flex-1">
               <Select
                 className="w-full"
@@ -150,6 +123,7 @@ export const SelectTourList = ({
                   value: tour?.id?.toString(),
                   label: tour?.title,
                 }))}
+                value={selectedTour?.id?.toString()}
                 renderOption={renderSelectOption}
                 maxDropdownHeight={200}
                 onChange={(value) => {
@@ -257,23 +231,16 @@ export const SelectTourList = ({
       {step === 1 && (
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-4 gap-4">
-            {availableTimes
+            {selectedTour?.times
               ?.sort((a, b) => a?.startTime.localeCompare(b?.startTime))
               .map((item) => {
                 const currentTime = new Date()
                 const hourMinute = format(currentTime, 'HH:mm')
 
-                const availableDate = selectedTour?.availableDates.find(
-                  (d) => d.id === item.availableDateId,
-                )
-
                 const isDisabled =
-                  item.availableTickets <= 0 ||
-                  (hourMinute > item.endTime &&
-                    availableDate?.date &&
-                    format(availableDate?.date, 'yyyy-MM-dd') ===
-                      format(currentTime, 'yyyy-MM-dd')) ||
-                  item.availableTickets < totalQuantity
+                  hourMinute > item.endTime &&
+                  format(watch('date'), 'dd/MM/yyyy') ===
+                    format(currentTime, 'dd/MM/yyyy')
 
                 return (
                   // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
@@ -286,17 +253,7 @@ export const SelectTourList = ({
                     )}
                     onClick={() => {
                       if (isDisabled) {
-                        if (item.availableTickets < totalQuantity) {
-                          toast.error('Not enough tickets available')
-                          return
-                        }
-
-                        if (item.availableTickets <= 0) {
-                          toast.error('This time is sold out')
-                        } else {
-                          toast.error('This time is not available')
-                        }
-
+                        toast.error('This time is not available')
                         return
                       }
 

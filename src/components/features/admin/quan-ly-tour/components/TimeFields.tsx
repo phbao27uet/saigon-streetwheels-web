@@ -1,4 +1,4 @@
-import { ActionIcon, Group, Stack, TextInput, rem } from '@mantine/core'
+import { ActionIcon, Group, Stack, rem } from '@mantine/core'
 import { Button } from '@mantine/core'
 import { TimeInput } from '@mantine/dates'
 import { mergeRefs } from '@mantine/hooks'
@@ -7,12 +7,7 @@ import { useRef } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import type { CreateTourSchema } from '../configs'
 
-interface TimeFieldsProps {
-  dateIndex: number
-  selectedDate: Date
-}
-
-export const TimeFields = ({ dateIndex, selectedDate }: TimeFieldsProps) => {
+export const TimeFields = () => {
   const { control, register, formState, getValues } =
     useFormContext<CreateTourSchema>()
 
@@ -22,7 +17,7 @@ export const TimeFields = ({ dateIndex, selectedDate }: TimeFieldsProps) => {
     remove: removeTime,
   } = useFieldArray({
     control,
-    name: `availableDates.${dateIndex}.times`,
+    name: 'times',
   })
 
   const startTimeRefs = useRef<(HTMLInputElement | null)[]>([])
@@ -41,58 +36,38 @@ export const TimeFields = ({ dateIndex, selectedDate }: TimeFieldsProps) => {
           <TimeInput
             label="Giờ bắt đầu"
             placeholder="HH:mm"
-            {...register(
-              `availableDates.${dateIndex}.times.${timeIndex}.startTime`,
-              { shouldUnregister: true },
-            )}
+            {...register(`times.${timeIndex}.startTime`, {
+              shouldUnregister: true,
+            })}
             ref={mergeRefs(
               (el) => {
                 startTimeRefs.current[timeIndex] = el
               },
-              register(
-                `availableDates.${dateIndex}.times.${timeIndex}.startTime`,
-              ).ref,
+              register(`times.${timeIndex}.startTime`).ref,
             )}
             rightSection={timePickerControl(startTimeRefs.current[timeIndex])}
-            error={
-              formState.errors.availableDates?.[dateIndex]?.times?.[timeIndex]
-                ?.startTime?.message
-            }
+            error={formState.errors.times?.[timeIndex]?.startTime?.message}
           />
           <TimeInput
             label="Giờ kết thúc"
             placeholder="HH:mm"
-            {...register(
-              `availableDates.${dateIndex}.times.${timeIndex}.endTime`,
-              { shouldUnregister: true },
-            )}
+            {...register(`times.${timeIndex}.endTime`, {
+              shouldUnregister: true,
+            })}
             ref={mergeRefs(
               (el) => {
                 endTimeRefs.current[timeIndex] = el
               },
-              register(`availableDates.${dateIndex}.times.${timeIndex}.endTime`)
-                .ref,
+              register(`times.${timeIndex}.endTime`).ref,
             )}
             rightSection={timePickerControl(endTimeRefs.current[timeIndex])}
-            error={
-              formState.errors.availableDates?.[dateIndex]?.times?.[timeIndex]
-                ?.endTime?.message
-            }
+            error={formState.errors.times?.[timeIndex]?.endTime?.message}
           />
-          <TextInput
-            type="number"
-            label="Số lượng vé"
-            placeholder="Nhập số lượng vé"
-            {...register(
-              `availableDates.${dateIndex}.times.${timeIndex}.availableTickets`,
-              { valueAsNumber: true },
-            )}
-            error={
-              formState.errors.availableDates?.[dateIndex]?.times?.[timeIndex]
-                ?.availableTickets?.message
-            }
-          />
-          <Button variant='filled' color="red" onClick={() => removeTime(timeIndex)}>
+          <Button
+            variant="filled"
+            color="red"
+            onClick={() => removeTime(timeIndex)}
+          >
             Xóa khung giờ
           </Button>
         </Group>
@@ -102,7 +77,6 @@ export const TimeFields = ({ dateIndex, selectedDate }: TimeFieldsProps) => {
           appendTime({
             startTime: '',
             endTime: '',
-            availableTickets: 0,
           })
         }}
         variant="outline"

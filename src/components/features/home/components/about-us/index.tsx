@@ -1,4 +1,4 @@
-import { ButtonCustom } from '@/components/shared/buttons'
+import { ButtonCustom } from '@/components/shared'
 import { Section } from '@/components/shared/layouts'
 import { Image } from '@mantine/core'
 
@@ -44,15 +44,51 @@ export const AboutUs = () => {
               saigon urban tour
             </h1>
             <p className="text-justify text-wrap text-lg mt-5">
-            m has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also  text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also m has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also  text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also m has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also  text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also m has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also  text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also  
+              Welcome to Vietnam! We are Saigon Urban Tour (SUT)—a team of three
+              founders, all born and raised in the vibrant city of Saigon. After
+              years of working as tour guides and operators for various
+              companies, we decided to create something new—a fresh, innovative
+              way to showcase the city we love and call home. With a deep
+              understanding of Saigon’s cuisine and streets, we at SUT are
+              dedicated to providing you, our guests, with a journey that is
+              safe, enriching, and full of joy. Founded in January 2025 by three
+              young Saigonese, SUT is the result of years of studying, working,
+              and interning in the tourism industry. Our mission is to deliver
+              authentic cultural experiences to international travelers,
+              connecting them with the heart of Vietnam and the soul of Saigon.
+              Our team of passionate guides is equipped with excellent
+              communication skills in foreign languages and expert motorbike
+              handling, refined through years of navigating the bustling streets
+              of major cities. We are committed to ensuring your safety and
+              delight as we guide you through the vibrant streets and hidden
+              gems of Saigon. Our Vision We aspire to become a leading motorbike
+              tour provider, embodying the friendly and welcoming spirit of
+              Saigon while promoting safe, sustainable, and authentic travel
+              experiences. The Story Behind Saigon Urban Tour The name Saigon
+              Urban Tour reflects our deep connection to the heart and soul of
+              this city. "Urban" encapsulates the dynamic energy of Saigon,
+              where modernity and tradition intertwine seamlessly. Our tours
+              highlight the charm of daily life—whether it’s the aroma of fresh
+              street food wafting through an alley, the hum of motorbikes
+              weaving through the streets, or the genuine smiles of locals
+              greeting one another. At SUT, we believe in the power of
+              connection. Our tours aren’t just about the landmarks; they’re
+              about the people, stories, and experiences that make Saigon truly
+              special. Whether it’s sharing a bowl of steaming noodles at a
+              roadside stall, hearing the laughter of children playing in a
+              small alley, or exchanging smiles with locals, we aim to bring you
+              closer to the heart of Saigon’s culture and community. Join us at
+              Saigon Urban Tour, where every journey is a story waiting to be
+              shared. Together, let’s uncover the charm and beauty of this
+              incredible city!
             </p>
-            {/* <ButtonCustom
+            <ButtonCustom
               variant="transparent"
               className="w-fit mt-5"
               size="lg"
             >
               Learn More
-            </ButtonCustom> */}
+            </ButtonCustom>
           </div>
         </div>
 

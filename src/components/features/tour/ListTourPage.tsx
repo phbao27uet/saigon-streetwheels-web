@@ -46,42 +46,18 @@ export const ListTourPage = () => {
         }}
       >
         {displayedTours.map((tour) => (
-          <SwiperSlide key={tour.id} className="h-full ">
+          <SwiperSlide key={tour.id} className="h-full bg-[#f5f2f1]">
             <TourCard
               key={tour.title}
               id={tour.id}
               title={tour.title}
-              departureDate={format(
-                tour.availableDates[0].date,
-                'MMMM dd, yyyy',
-              )}
+              departureDate={format(tour.createdAt, 'MMMM dd, yyyy')}
               price={tour.ticketTypes[0].price}
               image={tour.featureImage}
             />
           </SwiperSlide>
         ))}
       </Swiper>
-
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-        {displayedTours.map((tour) => (
-          <TourCard
-            key={tour.title}
-            id={tour.id}
-            title={tour.title}
-            departureDate={format(tour.availableDates[0].date, 'MMMM dd, yyyy')}
-            price={tour.ticketTypes[0].price}
-            image={tour.featureImage}
-          />
-        ))}
-      </div> */}
-
-      {/* {hasNextPage && (
-        <div className="text-center mt-6">
-          <ButtonCustomGreen onClick={() => fetchNextPage()}>
-            Load More Tours
-          </ButtonCustomGreen>
-        </div>
-      )} */}
     </Section>
   )
 }

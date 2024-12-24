@@ -56,10 +56,7 @@ export const OurTour = () => {
               key={tour.title}
               id={tour.id}
               title={tour.title}
-              departureDate={format(
-                tour.availableDates[0].date,
-                'MMMM dd, yyyy',
-              )}
+              departureDate={format(tour.createdAt, 'MMMM dd, yyyy')}
               price={tour.ticketTypes[0].price}
               image={tour.featureImage}
             />

@@ -4,10 +4,10 @@ import { Section } from '@/components/shared/layouts'
 const data = {
   images: [
     '/images/home/om-1.jpeg',
-    '/images/home/om-2.jpeg',
-    '/images/home/om-3.jpeg',
-    '/images/home/om-4.jpeg',
-    '/images/home/om-5.jpeg',
+    '/images/home/om-2.png',
+    '/images/home/om-3.png',
+    '/images/home/om-4.png',
+    '/images/home/om-5.png',
   ],
 }
 

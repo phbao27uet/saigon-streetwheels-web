@@ -21,7 +21,11 @@ export const TicketTypeManager = () => {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-medium">Loại vé</h3>
-        <Button variant='filled' type="button" onClick={() => append({ name: '', price: 0 })}>
+        <Button
+          variant="filled"
+          type="button"
+          onClick={() => append({ name: '', price: 0 })}
+        >
           Thêm loại vé
         </Button>
       </div>
@@ -68,51 +72,3 @@ export const TicketTypeManager = () => {
     </div>
   )
 }
-
-// {
-//     "title": "TEST",
-//     "featureImage": "TEST",
-//     "description": "TEST",
-//     "availableDates": [
-//         {
-//             "date": "2024-12-03T11:00:43.325Z",
-//             "times": [
-//                 {
-//                     "startTime": "10:00",
-//                     "endTime": "10:30",
-//                     "availableTickets": 10
-//                 },
-//                 {
-//                     "startTime": "10:30",
-//                     "endTime": "11:00",
-//                     "availableTickets": 99
-//                 }
-//             ]
-//         },
-//         {
-//             "date": "2024-12-04T00:00:00.000Z",
-//             "times": [
-//                 {
-//                     "startTime": "08:00",
-//                     "endTime": "09:00",
-//                     "availableTickets": 10
-//                 },
-//                 {
-//                     "startTime": "10:00",
-//                     "endTime": "11:00",
-//                     "availableTickets": 20
-//                 }
-//             ]
-//         }
-//     ],
-//     "ticketTypes": [
-//         {
-//             "name": "ADULT",
-//             "price": 30
-//         },
-//         {
-//             "name": "Children 7-15 year",
-//             "price": 35.5
-//         }
-//     ]
-// }

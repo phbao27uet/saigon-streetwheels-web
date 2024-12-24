@@ -60,13 +60,11 @@ export const columnsBooking: MRT_ColumnDef<IBooking>[] = [
     },
   },
   {
-    accessorKey: 'time.availableDate.date',
-    header: 'Ngày đi',
+    accessorKey: 'time.createdAt',
+    header: 'Ngày đặt',
     enableEditing: false,
     Cell: ({ row }) => {
-      return (
-        <div>{format(row.original.time.availableDate.date, 'dd/MM/yyyy')}</div>
-      )
+      return <div>{format(row.original.createdAt, 'dd/MM/yyyy')}</div>
     },
   },
   {
