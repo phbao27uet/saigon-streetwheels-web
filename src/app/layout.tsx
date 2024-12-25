@@ -31,7 +31,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: '...',
+  title: '1..',
   description: '...',
 }
 

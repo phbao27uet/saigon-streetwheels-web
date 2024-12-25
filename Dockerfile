@@ -15,6 +15,26 @@ RUN pnpm install --frozen-lockfile
 # Build the application
 FROM base AS builder
 WORKDIR /app
+
+# Add build time environment variables
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
+ARG NEXTAUTH_URL
+ENV NEXTAUTH_URL=${NEXTAUTH_URL}
+
+ARG NEXT_PUBLIC_TINY_API_KEY
+ENV NEXT_PUBLIC_TINY_API_KEY=${NEXT_PUBLIC_TINY_API_KEY}
+
+ARG NEXT_PUBLIC_RETURN_URL
+ENV NEXT_PUBLIC_RETURN_URL=${NEXT_PUBLIC_RETURN_URL}
+
+ARG NEXT_PUBLIC_CANCEL_URL
+ENV NEXT_PUBLIC_CANCEL_URL=${NEXT_PUBLIC_CANCEL_URL}
+
+ARG NEXT_PUBLIC_PAYPAL_CLIENT_ID
+ENV NEXT_PUBLIC_PAYPAL_CLIENT_ID=${NEXT_PUBLIC_PAYPAL_CLIENT_ID}
+
 COPY . .
 RUN pnpm run build
 
@@ -22,8 +42,17 @@ RUN pnpm run build
 FROM node:alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-ENV PORT 3309
+ENV NODE_ENV=production
+ENV PORT=3309
+
+# Add runtime environment variables
+# Ko cần add NEXT_PUBLIC_ do nó đã được add trong build time
+
+ARG AUTH_SECRET
+ENV AUTH_SECRET=${AUTH_SECRET}
+
+ARG AUTH_TRUST_HOST
+ENV AUTH_TRUST_HOST=${AUTH_TRUST_HOST}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
