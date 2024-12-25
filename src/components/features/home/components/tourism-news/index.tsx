@@ -17,7 +17,7 @@ export const TourismNews = () => {
   return (
     <div className="bg-white">
       <div id="tourism-news" className="relative -top-[8rem]" />
-      <Section title="TOURISM NEWS" titleClassName="text-[#C80D13]">
+      <Section title="Travel Guide" titleClassName="text-[#C80D13]">
         <Swiper
           style={{
             width: '100%',
@@ -30,10 +30,6 @@ export const TourismNews = () => {
             delay: 5000,
           }}
           breakpoints={{
-            1280: {
-              slidesPerView: 4,
-              spaceBetween: 40,
-            },
             1024: {
               slidesPerView: 3,
               spaceBetween: 40,
@@ -53,7 +49,7 @@ export const TourismNews = () => {
               <LatestNewsCard
                 id={blog.id}
                 image={blog.featureImage}
-                date={blog.createdAt}
+                description={blog.description}
                 title={blog.title}
               />
             </SwiperSlide>

@@ -8,7 +8,7 @@ import { format } from 'date-fns'
 import { SwiperSlide } from 'swiper/react'
 import type { PaginationOptions } from 'swiper/types'
 
-export const OurTour = () => {
+export const OutstandingTour = () => {
   const { data: tours } = useGetInfiniteTours()
 
   const displayedTours = tours ? tours.pages.flatMap((page) => page.data) : []
@@ -18,8 +18,8 @@ export const OurTour = () => {
   }
 
   return (
-    <Section title="Our Tours" className="w-full">
-      <div id="our-tour" className="relative -top-[12rem]" />
+    <Section title="Outstanding Tours" className="w-full">
+      <div id="outstanding-tour" className="relative -top-[12rem]" />
       <Swiper
         style={{
           width: '100%',

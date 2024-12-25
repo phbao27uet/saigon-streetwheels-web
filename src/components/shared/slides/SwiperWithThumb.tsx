@@ -9,13 +9,21 @@ import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 
+import { cn } from '@/libs/utils'
 import { Image } from '@mantine/core'
 import { Navigation, Thumbs } from 'swiper/modules'
+import type { ClassNameValue } from 'tailwind-merge'
 
 interface Props {
   images: string[]
+  classNameWrapper?: ClassNameValue
+  classNameImage?: ClassNameValue
 }
-export const SwiperWithThumb = ({ images }: Props) => {
+export const SwiperWithThumb = ({
+  images,
+  classNameWrapper,
+  classNameImage,
+}: Props) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null)
 
   return (
@@ -32,10 +40,18 @@ export const SwiperWithThumb = ({ images }: Props) => {
       >
         {images.map((item, index) => (
           <SwiperSlide key={`main-${item}`}>
-            <div className="relative w-full pt-[100%] rounded-lg overflow-hidden">
+            <div
+              className={cn(
+                'relative w-full pt-[100%] rounded-lg overflow-hidden',
+                classNameWrapper,
+              )}
+            >
               <Image
                 src={item}
-                className="absolute top-0 left-0 w-full h-full object-cover"
+                className={cn(
+                  'absolute top-0 left-0 w-full h-full object-cover',
+                  classNameImage,
+                )}
                 alt={`Product image ${index + 1}`}
               />
             </div>

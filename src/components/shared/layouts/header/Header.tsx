@@ -1,6 +1,7 @@
 'use client'
 
 import { BuyTicketModal } from '@/components/features/tour'
+import { primaryColor } from '@/libs/theme'
 import { cn } from '@/libs/utils'
 import { tss } from '@libs/utils/tss-style'
 import { Burger, Flex, Group, Image } from '@mantine/core'
@@ -14,7 +15,6 @@ import { DrawerHeader } from './components'
 
 export const HEADER = [
   { title: 'ABOUT US', href: '/home#about-us' },
-  { title: 'TRAVEL TRIP', href: '/home#' },
   { title: 'OUR TOUR', href: '/our-tour' },
   { title: 'CONTACT US', href: '#footer' },
   { title: 'BLOG', href: '/home#tourism-news' },
@@ -107,11 +107,11 @@ const useStyles = tss
       zIndex: 1000,
       transition: 'background-color 0.3s ease',
       height: 150,
-      backgroundColor: hasBackgroundHeader ? '#000' : 'transparent',
+      backgroundColor: hasBackgroundHeader ? primaryColor : 'transparent',
     },
 
     headerScrolled: {
-      backgroundColor: '#000',
+      backgroundColor: primaryColor,
     },
 
     headerContent: {
@@ -166,10 +166,14 @@ const useStyles = tss
     },
 
     logo: {
-      height: headerScrolled ? 30 : 40,
+      padding: '8px 16px',
+      height: headerScrolled ? 70 : 80,
+      backgroundColor:
+        headerScrolled || hasBackgroundHeader ? '#fff' : 'transparent',
       transition: 'height 0.3s ease',
       objectFit: 'contain',
       width: 'auto',
+      borderRadius: 12,
     },
 
     burger: {

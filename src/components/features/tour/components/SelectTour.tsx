@@ -2,7 +2,7 @@
 
 import { ButtonCustom, ButtonCustomRed } from '@/components/shared/buttons'
 import { Calendar } from '@/components/shared/inputs'
-import type { ITimeSlot, ITour } from '@/libs/types'
+import type { ITour } from '@/libs/types'
 import { cn } from '@/libs/utils'
 import { IconClock, IconMapPin } from '@tabler/icons-react'
 import { format } from 'date-fns'
@@ -23,7 +23,6 @@ interface SelectTourProps {
 export const SelectTour = ({ data }: SelectTourProps) => {
   const params = useParams<{ id: string }>()
   const router = useRouter()
-  const [availableTimes, setAvailableTimes] = useState<ITimeSlot[]>([])
 
   const [step, setStep] = useState(0)
   const {
@@ -60,10 +59,6 @@ export const SelectTour = ({ data }: SelectTourProps) => {
     router.push('/payment')
   }
 
-  const soldOutDates = data.availableDates.filter((availableDate) =>
-    availableDate.times.every((time) => time.availableTickets === 0),
-  )
-
   return (
     <div className="flex flex-col gap-4">
       <StepSelect step={step} />
@@ -71,24 +66,7 @@ export const SelectTour = ({ data }: SelectTourProps) => {
       {step === 0 && (
         <>
           <div className="flex md:flex-row flex-col gap-10">
-            <Calendar
-              name="date"
-              control={control}
-              minDate={new Date()}
-              availableDates={data.availableDates
-                .map((availableDate) => new Date(availableDate.date))
-                ?.filter((d) => d >= new Date())}
-              soldOutDates={soldOutDates.map(
-                (availableDate) => new Date(availableDate.date),
-              )}
-              callback={(date) => {
-                const selectedDate = data.availableDates.find(
-                  (d) =>
-                    new Date(d.date).toDateString() === date?.toDateString(),
-                )
-                setAvailableTimes(selectedDate ? selectedDate.times : [])
-              }}
-            />
+            <Calendar name="date" control={control} minDate={new Date()} />
 
             <div className="flex flex-col gap-2 flex-1">
               <h1 className="text-2xl md:text-3xl font-bold text-[#0070BB]">
@@ -156,23 +134,16 @@ export const SelectTour = ({ data }: SelectTourProps) => {
       {step === 1 && (
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-4 gap-4">
-            {availableTimes
+            {data.times
               ?.sort((a, b) => a?.startTime.localeCompare(b?.startTime))
               .map((item) => {
                 const currentTime = new Date()
                 const hourMinute = format(currentTime, 'HH:mm')
 
-                const availableDate = data.availableDates.find(
-                  (d) => d.id === item.availableDateId,
-                )
-
                 const isDisabled =
-                  item.availableTickets <= 0 ||
-                  (hourMinute > item.endTime &&
-                    availableDate?.date &&
-                    format(availableDate?.date, 'yyyy-MM-dd') ===
-                      format(currentTime, 'yyyy-MM-dd')) ||
-                  item.availableTickets < totalQuantity
+                  hourMinute > item.endTime &&
+                  format(watch('date'), 'dd/MM/yyyy') ===
+                    format(currentTime, 'dd/MM/yyyy')
 
                 return (
                   // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
@@ -185,17 +156,7 @@ export const SelectTour = ({ data }: SelectTourProps) => {
                     )}
                     onClick={() => {
                       if (isDisabled) {
-                        if (item.availableTickets < totalQuantity) {
-                          toast.error('Not enough tickets available')
-                          return
-                        }
-
-                        if (item.availableTickets <= 0) {
-                          toast.error('This time is sold out')
-                        } else {
-                          toast.error('This time is not available')
-                        }
-
+                        toast.error('This time is not available')
                         return
                       }
 

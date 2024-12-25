@@ -26,7 +26,7 @@ export const Section = ({
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className={cn(
-            'text-3xl font-bold text-white text-center uppercase',
+            'text-3xl font-bold text-[#C13332] text-center uppercase',
             titleClassName,
           )}
         >

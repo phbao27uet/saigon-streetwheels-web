@@ -9,13 +9,6 @@ export const tourTimeSchema = z.object({
   id: z.number().optional(),
   startTime: timeSchema,
   endTime: timeSchema,
-  availableTickets: z.number().min(1, 'Số lượng vé phải lớn hơn 0'),
-})
-
-export const tourDateSchema = z.object({
-  id: z.number().optional(),
-  date: z.date(),
-  times: z.array(tourTimeSchema).min(1, 'Phải có ít nhất một khung giờ'),
 })
 
 export const ticketTypeSchema = z.object({
@@ -30,11 +23,13 @@ export const createTourSchema = z.object({
   images: z.array(textSchema),
   description: textSchema,
   departureLocation: textSchema,
-  availableDates: z.array(tourDateSchema).min(1, 'Phải có ít nhất một ngày'),
+  times: z.array(tourTimeSchema).min(1, 'Phải có ít nhất một khung giờ'),
   ticketTypes: z.array(ticketTypeSchema).min(1, 'Phải có ít nhất một loại vé'),
 })
 
 export type CreateTourSchema = z.infer<typeof createTourSchema>
+
+// 8-12, 13-17h,17:30-21:30,
 
 export const defaultValuesTour: CreateTourSchema = {
   title: '',
@@ -42,16 +37,54 @@ export const defaultValuesTour: CreateTourSchema = {
   featureImage: '',
   departureLocation: '',
   images: [],
-  availableDates: [
+  times: [
     {
-      date: new Date(),
-      times: [
-        {
-          startTime: '',
-          endTime: '',
-          availableTickets: 1,
-        },
-      ],
+      startTime: '08:00',
+      endTime: '09:00',
+    },
+    {
+      startTime: '09:00',
+      endTime: '10:00',
+    },
+    {
+      startTime: '10:00',
+      endTime: '11:00',
+    },
+    {
+      startTime: '11:00',
+      endTime: '12:00',
+    },
+    {
+      startTime: '13:00',
+      endTime: '14:00',
+    },
+    {
+      startTime: '14:00',
+      endTime: '15:00',
+    },
+    {
+      startTime: '15:00',
+      endTime: '16:00',
+    },
+    {
+      startTime: '16:00',
+      endTime: '17:00',
+    },
+    {
+      startTime: '17:30',
+      endTime: '18:30',
+    },
+    {
+      startTime: '18:30',
+      endTime: '19:30',
+    },
+    {
+      startTime: '19:30',
+      endTime: '20:30',
+    },
+    {
+      startTime: '20:30',
+      endTime: '21:30',
     },
   ],
   ticketTypes: [
@@ -61,41 +94,3 @@ export const defaultValuesTour: CreateTourSchema = {
     },
   ],
 }
-
-// {
-//   "title": "TEST",
-//   "featureImage": "TEST",
-//   "description": "TEST",
-//   "availableDates": [
-//       {
-//           "date": "2024-12-03T09:49:16.023Z",
-//           "times": [
-//               {
-//                   "startTime": "09:30",
-//                   "endTime": "10:00",
-//                   "availableTickets": 10
-//               },
-//               {
-//                   "startTime": "10:00",
-//                   "endTime": "11:00",
-//                   "availableTickets": 10
-//               }
-//           ]
-//       },
-//       {
-//           "date": "2024-12-04T00:00:00.000Z",
-//           "times": [
-//               {
-//                   "startTime": "09:30",
-//                   "endTime": "10:00",
-//                   "availableTickets": 20
-//               },
-//               {
-//                   "startTime": "10:00",
-//                   "endTime": "11:11",
-//                   "availableTickets": 30
-//               }
-//           ]
-//       }
-//   ]
-// }

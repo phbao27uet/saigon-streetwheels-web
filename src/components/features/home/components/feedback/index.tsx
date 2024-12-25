@@ -32,7 +32,7 @@ const feedbacks: IFeedback[] = [
   },
   {
     name: 'Ms.Xs',
-    image: '/images/home/fb-2.jpeg',
+    image: '/images/home/fb-4.jpeg',
     feedback:
       'I had a great experience with the tour. The guide was very friendly and the food was delicious. I would definitely recommend this tour to anyone who wants to explore Vietnam.',
     stars: 4,
@@ -48,7 +48,7 @@ export const Feedback = () => {
             <div
               // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               key={index}
-              className="w-full h-fit flex flex-col gap-2 items-center text-white relative"
+              className="w-full h-fit flex flex-col gap-2 items-center relative"
             >
               <div className="w-full max-w-[300px] h-[250px]">
                 <Image
@@ -58,23 +58,24 @@ export const Feedback = () => {
                 />
               </div>
 
-              <div className="flex flex-col gap-2 items-center border-r-[3px] pb-1 border-l-[3px] border-white">
-                <p className="text-2xl font-bold px-4">{fb.name}</p>
-                <p className="text-lg px-4">{fb.feedback}</p>
-
+              <div className="flex flex-col gap-2 items-start justify-start">
+                <p className="text-2xl font-bold text-[#C13332]">{fb.name}</p>
                 <div className="flex items-center">
                   {Array.from({ length: fb.stars }).map((_, index) => (
                     // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                    <span key={index} className="text-xl text-yellow-500">
+                    <span key={index} className="text-xl text-[#EBF218]">
                       ★
                     </span>
                   ))}
                 </div>
+                <p className="text-lg">{fb.feedback}</p>
 
-                <Image
+                
+
+                {/* <Image
                   src="/svgs/fb-bottom.svg"
                   className="absolute bottom-0 translate-y-[95%]"
-                />
+                /> */}
               </div>
             </div>
           ))}
