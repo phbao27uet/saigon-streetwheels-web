@@ -18,7 +18,7 @@ export const OurTour = () => {
   }
 
   return (
-    <Section title="Our Tours">
+    <Section title="Our Tours" className="w-full">
       <div id="our-tour" className="relative -top-[12rem]" />
       <Swiper
         style={{
@@ -26,7 +26,6 @@ export const OurTour = () => {
           height: '100%',
         }}
         pagination={pagination}
-        className="p-3 md:p-10"
         loop={true}
         autoplay={{
           delay: 5000,

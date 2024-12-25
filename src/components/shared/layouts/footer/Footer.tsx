@@ -89,7 +89,7 @@ const Footer = () => {
                 PageMaker including versions of Lorem Ipsum.
               </p>
               <p className="text-white uppercase mt-4 text-xl font-bold text-center">
-                đối tác thanh toán
+                Payment Partner
               </p>
               <Image src="/svgs/thanh-toan.svg" alt="thanh-toan" />
             </div>

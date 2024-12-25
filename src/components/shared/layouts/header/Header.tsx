@@ -168,7 +168,8 @@ const useStyles = tss
     logo: {
       padding: '8px 16px',
       height: headerScrolled ? 70 : 80,
-      backgroundColor: headerScrolled ? '#fff' : 'transparent',
+      backgroundColor:
+        headerScrolled || hasBackgroundHeader ? '#fff' : 'transparent',
       transition: 'height 0.3s ease',
       objectFit: 'contain',
       width: 'auto',
