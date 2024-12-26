@@ -31,8 +31,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: '1..',
-  description: '...',
+  title: 'Saigon Urban Tours',
+  description: 'Saigon Urban Tours - Book your tour now!',
 }
 
 export default function RootLayout({

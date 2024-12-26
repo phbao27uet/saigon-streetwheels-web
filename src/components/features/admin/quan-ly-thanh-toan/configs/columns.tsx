@@ -13,6 +13,11 @@ export const bookingStatus: Record<BookingStatus, string> = {
 
 export const columnsBooking: MRT_ColumnDef<IBooking>[] = [
   {
+    accessorKey: 'id',
+    header: 'Mã Code',
+    enableEditing: false,
+  },
+  {
     accessorKey: 'bookerName',
     header: 'Tên người đặt',
     enableEditing: false,

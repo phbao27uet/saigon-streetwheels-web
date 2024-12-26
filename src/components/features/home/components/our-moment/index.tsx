@@ -13,7 +13,7 @@ const data = {
 
 export const OurMoment = () => {
   return (
-    <Section title="Our Moment">
+    <Section title="Our Moment" className="w-full">
       <SwiperWithThumb images={data.images} classNameWrapper="pt-[50%]" />
     </Section>
   )

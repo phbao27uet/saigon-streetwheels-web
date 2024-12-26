@@ -25,4 +25,7 @@ export interface ITour {
   updatedAt: string
   ticketTypes: ITicketType[]
   times: ITimeSlot[]
+
+  isOutstanding: boolean
+  isAvailable: boolean
 }

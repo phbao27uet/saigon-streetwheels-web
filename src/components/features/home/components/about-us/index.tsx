@@ -27,11 +27,11 @@ export const AboutUs = () => {
   const [showMore, setShowMore] = useState(false)
 
   return (
-    <div className="min-h-[70vh] md:min-h-screen relative bg-[#f6f6f6] py-8">
+    <div className="min-h-[70vh] md:min-h-screen relative bg-[#f5f2f1] py-8">
       <div id="about-us" className="relative -top-[8rem]" />
       <Section title="ABOUT US" className="pb-28">
         <div className="relative flex-responsive gap-8">
-          <div className="basis-1/2 w-fit">
+          <div className="basis-1/2 w-fit self-center">
             <Image
               className="md:w-full sm:w-[500px] w-[300px]"
               src={'/images/home/au-main.jpeg'}

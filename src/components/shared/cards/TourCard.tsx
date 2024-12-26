@@ -22,8 +22,12 @@ export const TourCard = ({
       href={`/our-tour/${id}`}
       className="flex flex-col h-full bg-transparent"
     >
-      <div className="w-full h-[300px] rounded-lg overflow-hidden">
-        <Image className="w-full h-full object-cover" src={image} alt={title} />
+      <div className="w-full h-[300px] rounded-lg overflow-hidden bg-transparent">
+        <Image
+          className="w-full h-full object-cover rounded-lg overflow-hidden"
+          src={image}
+          alt={title}
+        />
       </div>
       <div className="flex flex-col py-2 flex-grow gap-1 bg-[#f5f2f1] items-start">
         <p className="font-bold text-2xl">{title}</p>

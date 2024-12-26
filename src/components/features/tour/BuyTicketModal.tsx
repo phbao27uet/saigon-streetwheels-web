@@ -12,7 +12,9 @@ interface BuyTicketModalProps {
 }
 
 export const BuyTicketModal = ({ opened, onClose }: BuyTicketModalProps) => {
-  const { data } = useGetInfiniteTours(100)
+  const { data } = useGetInfiniteTours({
+    perPage: 100,
+  })
 
   const tours = data.pages.flatMap((page) => page.data)
 

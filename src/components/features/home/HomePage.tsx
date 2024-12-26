@@ -11,7 +11,7 @@ import {
 
 export const HomePage = () => {
   return (
-    <div className="flex flex-col bg-[#f6f6f6]">
+    <div className="flex flex-col bg-[#f5f2f1]">
       <HereSection />
       <AboutUs />
       <OutstandingTour />

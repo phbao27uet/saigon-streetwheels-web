@@ -9,7 +9,9 @@ import { SwiperSlide } from 'swiper/react'
 import type { PaginationOptions } from 'swiper/types'
 
 export const OurTour = () => {
-  const { data: tours } = useGetInfiniteTours()
+  const { data: tours } = useGetInfiniteTours({
+    isOutstanding: false,
+  })
 
   const displayedTours = tours ? tours.pages.flatMap((page) => page.data) : []
 
