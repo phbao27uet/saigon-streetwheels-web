@@ -7,13 +7,14 @@ import {
   Card,
   Input,
   Stack,
+  Switch,
   Text,
   TextInput,
   Textarea,
 } from '@mantine/core'
 import { useParams } from 'next/navigation'
 import { useEffect } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
+import { Controller, FormProvider, useForm } from 'react-hook-form'
 import {
   type CreateTourSchema,
   createTourSchema,
@@ -102,6 +103,20 @@ export const TourForm = () => {
                 {...formReturn.register('description')}
                 error={formReturn.formState.errors.description?.message}
               />
+
+              <Controller
+                control={formReturn.control}
+                name="isOutstanding"
+                render={({ field }) => (
+                  <Switch
+                    label="Nổi bật"
+                    checked={!!field.value}
+                    onChange={field.onChange}
+                  />
+                )}
+              />
+
+              <p>123: {formReturn.watch('isOutstanding') ? 'true' : 'false'}</p>
             </Stack>
           </Card>
 

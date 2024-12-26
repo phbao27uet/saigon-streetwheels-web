@@ -9,7 +9,7 @@ import { SwiperSlide } from 'swiper/react'
 import type { PaginationOptions } from 'swiper/types'
 
 export const ListTourPage = () => {
-  const { data: tours } = useGetInfiniteTours()
+  const { data: tours } = useGetInfiniteTours({})
 
   const displayedTours = tours ? tours.pages.flatMap((page) => page.data) : []
 
@@ -18,7 +18,7 @@ export const ListTourPage = () => {
   }
 
   return (
-    <Section title="OUR TOUR - SAIGON URBAN TOUR">
+    <Section title="OUR TOUR - SAIGON URBAN TOUR" className="bg-[#f5f2f1]">
       <Swiper
         style={{
           width: '100%',

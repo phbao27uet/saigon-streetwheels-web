@@ -25,6 +25,7 @@ export const createTourSchema = z.object({
   departureLocation: textSchema,
   times: z.array(tourTimeSchema).min(1, 'Phải có ít nhất một khung giờ'),
   ticketTypes: z.array(ticketTypeSchema).min(1, 'Phải có ít nhất một loại vé'),
+  isOutstanding: z.boolean().optional(),
 })
 
 export type CreateTourSchema = z.infer<typeof createTourSchema>

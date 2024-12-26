@@ -316,7 +316,7 @@ export const ReactTable = <T extends Record<string, any>>({
               setRowSelection({})
             }}
             leftSection={<IconReload />}
-            variant='filled'
+            variant="filled"
           >
             Làm mới
           </Button>
@@ -349,7 +349,7 @@ export const ReactTable = <T extends Record<string, any>>({
             onClick={() => {
               modal ? openModal() : router.push('./create')
             }}
-            variant='filled'
+            variant="filled"
           >
             Tạo mới
           </Button>
