@@ -22,7 +22,7 @@ export const BlogCard = ({
         <img
           src={featureImage}
           alt={title}
-          className="w-full h-full object-cover rounded-lg"
+          className="w-full h-full object-cover rounded-lg overflow-hidden"
         />
       </div>
 

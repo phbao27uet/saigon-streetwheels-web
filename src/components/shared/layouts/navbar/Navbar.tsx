@@ -1,7 +1,13 @@
 'use client'
 
 import { Burger, Transition } from '@mantine/core'
-import { IconBook, IconCashRegister, IconMap } from '@tabler/icons-react'
+import {
+  IconBook,
+  IconCashRegister,
+  IconMap,
+  IconPhoto,
+  IconStar,
+} from '@tabler/icons-react'
 import { useMemo } from 'react'
 import type React from 'react'
 import { LinksGroup } from './navbar-links-group/NavbarLinksGroup'
@@ -46,6 +52,26 @@ const adminVietnameseSideBar = [
       {
         label: 'Quản lý thanh toán',
         link: '/admin/quan-ly-thanh-toan',
+      },
+    ],
+  },
+  {
+    label: 'Album',
+    icon: IconPhoto,
+    links: [
+      {
+        label: 'Quản lý album',
+        link: '/admin/quan-ly-album',
+      },
+    ],
+  },
+  {
+    label: 'Đánh giá',
+    icon: IconStar,
+    links: [
+      {
+        label: 'Quản lý đánh giá',
+        link: '/admin/quan-ly-danh-gia',
       },
     ],
   },
