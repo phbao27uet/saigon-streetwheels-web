@@ -28,7 +28,7 @@ export const IntroductionPage = () => {
       >
         <div className="w-full md:w-1/3 flex flex-col items-center md:items-start z-10">
           <Link href="/home">
-            <div className="w-full h-full max-w-[150px] max-h-[150px]">
+            <div className="w-full h-full max-w-[200px] max-h-[200px]">
               <Image
                 src="/images/logo.jpg"
                 alt="logo"

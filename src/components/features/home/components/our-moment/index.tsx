@@ -1,20 +1,28 @@
+'use client'
+
+import { AlbumAPIQueryKey, getListAlbum } from '@/components/features/admin'
 import { SwiperWithThumb } from '@/components/shared'
 import { Section } from '@/components/shared/layouts'
-
-const data = {
-  images: [
-    '/images/home/om-1.jpeg',
-    '/images/home/om-2.png',
-    '/images/home/om-3.png',
-    '/images/home/om-4.png',
-    '/images/home/om-5.png',
-  ],
-}
+import type { IAlbum } from '@/libs/types'
+import type { DataPagination } from '@/libs/types'
+import { useQuery } from '@tanstack/react-query'
 
 export const OurMoment = () => {
+  const { data: albums, isLoading } = useQuery<DataPagination<IAlbum[]>>({
+    queryKey: [AlbumAPIQueryKey.GET_ALBUMS],
+    queryFn: getListAlbum,
+  })
+
+  if (isLoading) return null
+
   return (
     <Section title="Our Moment" className="w-full">
-      <SwiperWithThumb images={data.images} classNameWrapper="pt-[50%]" />
+      <div className="p-3 md:p-10">
+        <SwiperWithThumb
+          images={albums?.data.map((al) => al.image) || []}
+          classNameWrapper="pd-[100%] md:pt-[50%]"
+        />
+      </div>
     </Section>
   )
 }

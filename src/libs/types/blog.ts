@@ -47,3 +47,20 @@ export interface IBookingDetail {
 
   ticketType: ITicketType
 }
+
+export interface IAlbum {
+  id: number
+  image: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface IFeedback {
+  id: number
+  name: string
+  star: number
+  content: string
+  image: string
+  createdAt: string
+  updatedAt: string
+}

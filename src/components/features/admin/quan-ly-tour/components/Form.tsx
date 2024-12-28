@@ -115,8 +115,6 @@ export const TourForm = () => {
                   />
                 )}
               />
-
-              <p>123: {formReturn.watch('isOutstanding') ? 'true' : 'false'}</p>
             </Stack>
           </Card>
 
