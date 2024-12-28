@@ -18,6 +18,8 @@ const initialOptions: ReactPayPalScriptOptions = {
 }
 
 const PayPalProvider = ({ children }: Props) => {
+  console.log('initialOptions', initialOptions)
+
   return (
     <PayPalScriptProvider options={initialOptions}>
       {children}
