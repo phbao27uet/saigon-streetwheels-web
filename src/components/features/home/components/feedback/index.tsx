@@ -21,7 +21,7 @@ export const Feedback = () => {
     <div id="feedback">
       <Section title="FEEDBACK FROM CUSTOMER" className="pb-28">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-[150px] lg:gap-y-[100px] gap-6 p-4">
-          {fbs?.data.map((fb, index) => (
+          {fbs?.data?.slice(0, 4)?.map((fb, index) => (
             <div
               // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               key={index}
