@@ -58,7 +58,7 @@ export interface IAlbum {
 export interface IFeedback {
   id: number
   name: string
-  start: number
+  star: number
   content: string
   image: string
   createdAt: string

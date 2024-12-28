@@ -1,5 +1,7 @@
 .paper {
-  min-height: calc(100vh - var(--app-shell-header-height) - var(--mantine-spacing-sm));
+  min-height: calc(
+    100vh - var(--app-shell-header-height) - var(--mantine-spacing-sm)
+  );
   /* overflow: hidden; */
   background-color: transparent;
 }

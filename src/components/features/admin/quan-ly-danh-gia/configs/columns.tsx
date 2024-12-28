@@ -1,6 +1,7 @@
 'use client'
 
 import type { IFeedback } from '@/libs/types'
+import { Text } from '@mantine/core'
 import { format } from 'date-fns'
 import type { MRT_ColumnDef } from 'mantine-react-table'
 import Image from 'next/image'
@@ -25,6 +26,19 @@ export const feedbackColumns: MRT_ColumnDef<IFeedback>[] = [
     accessorKey: 'name',
     header: 'Tên',
     enableEditing: false,
+  },
+  {
+    accessorKey: 'star',
+    header: 'Số sao',
+    enableEditing: false,
+  },
+  {
+    accessorKey: 'content',
+    header: 'Nội dung',
+    enableEditing: false,
+    Cell: ({ row }) => {
+      return <Text lineClamp={3}>{row.original.content}</Text>
+    },
   },
   {
     accessorKey: 'createdAt',

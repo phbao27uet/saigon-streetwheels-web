@@ -43,7 +43,7 @@ export const TourDetailPage = ({ id }: { id: string }) => {
         className="grid lg:grid-cols-2 grid-cols-1 md:gap-8 gap-4 py-8 md:py-16"
       >
         <div className="w-full max-w-[600px] mx-auto lg:max-w-none">
-          <SwiperWithThumb images={data.images} />
+          <SwiperWithThumb images={data.images} hideNavigation />
         </div>
         <div className="flex flex-col gap-5">
           <h1 className="text-2xl md:text-3xl font-bold">{data.title}</h1>

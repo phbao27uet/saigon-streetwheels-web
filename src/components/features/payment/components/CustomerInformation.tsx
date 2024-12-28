@@ -2,8 +2,9 @@
 
 import { PayPalButton } from '@/components/shared/buttons/ButtonPayPal'
 import { request } from '@/libs/requests'
+import { countries } from '@/libs/utils/constants/countries'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Checkbox, TextInput } from '@mantine/core'
+import { Checkbox, Select, TextInput } from '@mantine/core'
 import { IconLock, IconUser } from '@tabler/icons-react'
 import { useRouter } from 'nextjs-toploader/app'
 import { useState } from 'react'
@@ -17,19 +18,21 @@ import {
 
 export const CustomerInformation = () => {
   const { clearBooking, booking } = useTourBooking()
-
   const [checked, setChecked] = useState(false)
   const [checkedNewsletter, setCheckedNewsletter] = useState(false)
+  const [selectedCountry, setSelectedCountry] =
+    useState<(typeof countries)[0]>()
   const router = useRouter()
 
   const {
     register,
     watch,
     formState: { errors },
+    setValue,
     handleSubmit,
   } = useForm<CustomerInformationSchema>({
     resolver: zodResolver(customerInformationSchema),
-    mode: 'onChange', // Kích hoạt validation ngay khi giá trị thay đổi
+    mode: 'onChange',
   })
 
   if (!booking) return <div>No booking</div>
@@ -41,6 +44,16 @@ export const CustomerInformation = () => {
   const handleSubmitForm = handleSubmit((data) => {
     return data
   })
+
+  const handleCountryChange = (value: string | null) => {
+    if (!value) return
+    const country = countries.find((c) => c.value === value)
+    setSelectedCountry(country)
+
+    if (country) {
+      setValue('countryCode', country?.phoneCode)
+    }
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -70,6 +83,18 @@ export const CustomerInformation = () => {
               />
             </div>
             <div>
+              <Select
+                size="xl"
+                color="red"
+                placeholder="Select your country"
+                value={selectedCountry?.value}
+                onChange={handleCountryChange}
+                data={countries}
+                searchable
+                clearable
+              />
+            </div>
+            <div>
               <TextInput
                 type="tel"
                 size="xl"
@@ -77,6 +102,7 @@ export const CustomerInformation = () => {
                 {...register('bookerPhoneNumber')}
                 placeholder="Phone Number"
                 error={errors.bookerPhoneNumber?.message}
+                leftSection={<span>{selectedCountry?.phoneCode}</span>}
               />
             </div>
             <div>
@@ -87,6 +113,7 @@ export const CustomerInformation = () => {
                 {...register('bookerPhoneNumber2')}
                 placeholder="2nd Phone Number"
                 error={errors.bookerPhoneNumber2?.message}
+                leftSection={<span>{selectedCountry?.phoneCode}</span>}
               />
             </div>
             <div>
@@ -128,7 +155,14 @@ export const CustomerInformation = () => {
           </div>
 
           <PayPalButton
-            disabled={!checked}
+            disabled={
+              !checked ||
+              !watch().bookerEmail ||
+              !!errors.bookerEmail?.message ||
+              !watch().bookerPhoneNumber ||
+              !!errors.bookerPhoneNumber?.message ||
+              !watch().countryCode
+            }
             cbApprove={() => {
               clearBooking()
             }}
@@ -136,11 +170,19 @@ export const CustomerInformation = () => {
               try {
                 await handleSubmitForm()
 
+                if (!watch().bookerEmail) {
+                  return toast.error('Email is required')
+                }
+
                 const dataForm = {
                   tourId: booking?.tourId,
                   bookerName: watch().bookerName || '',
-                  bookerPhoneNumber: watch().bookerPhoneNumber || '',
-                  bookerPhoneNumber2: watch().bookerPhoneNumber2 || '',
+                  bookerPhoneNumber: watch().bookerPhoneNumber
+                    ? `${watch().countryCode}${watch().bookerPhoneNumber}`
+                    : '',
+                  bookerPhoneNumber2: watch().bookerPhoneNumber2
+                    ? `${watch().countryCode}${watch().bookerPhoneNumber2}`
+                    : '',
                   bookerAddress: watch().bookerAddress || '',
                   bookerEmail: watch().bookerEmail || '',
                   bookerNote: watch().bookerNote || '',
@@ -159,7 +201,6 @@ export const CustomerInformation = () => {
                 })
 
                 const orderData = await res.data
-                console.log('orderData', orderData)
 
                 if (orderData?.booking?.paypalOrderId) {
                   return orderData.booking.paypalOrderId

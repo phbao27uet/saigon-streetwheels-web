@@ -7,6 +7,7 @@ export const customerInformationSchema = z.object({
   bookerAddress: z.string().min(1, 'Address to pick up is required'),
   bookerEmail: z.string().email('Invalid email address'),
   bookerNote: z.string().optional(),
+  countryCode: z.string().min(1, 'Country is required'),
 })
 
 export type CustomerInformationSchema = z.infer<
