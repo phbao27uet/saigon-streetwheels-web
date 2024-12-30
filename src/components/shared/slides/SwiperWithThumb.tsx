@@ -126,6 +126,7 @@ export const SwiperWithThumb = ({
           <>
             <Button
               onClick={handlePrevClick}
+              className="hidden lg:block"
               style={{
                 position: 'absolute',
                 width: 48,
@@ -143,6 +144,7 @@ export const SwiperWithThumb = ({
             </Button>
             <Button
               onClick={handleNextClick}
+              className="hidden lg:block"
               style={{
                 position: 'absolute',
                 width: 48,
