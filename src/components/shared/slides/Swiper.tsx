@@ -91,7 +91,7 @@ const Swiper: React.FC<SwiperProps> = ({
       </ReactSwiper>
 
       {!hideNavigation && canNavigate && (
-        <Box>
+        <Box className="hidden md:block">
           <Button
             variant="transparent"
             onClick={() => swiperRef.current?.slidePrev()}
