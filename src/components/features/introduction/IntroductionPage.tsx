@@ -42,10 +42,7 @@ export const IntroductionPage = () => {
               SAIGON URBAN TOUR
             </h1>
             <p className="text-white text-sm md:text-base">
-               a type specimen book. It has survived not only five centuries,
-              but also the leap electronic tktop publishing software like Aldus
-              PageMaker including versions of Lorem Ipsum but also the leap
-              electronic tktop publishing software like Aldus Page.
+            Welcome to Vietnam! We are Saigon Urban Tour (SUT)—a team of three founders, all born and raised in the vibrant city of Saigon. After years of working as tour guides and operators for various companies, we decided to create something new—a fresh, innovative way to showcase the city we love and call home. With a deep understanding of Saigon’s cuisine and streets, we at SUT are dedicated to providing you, our guests, with a journey that is safe, enriching, and full of joy.
             </p>
 
             <Link
