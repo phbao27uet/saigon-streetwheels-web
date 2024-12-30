@@ -3,7 +3,10 @@
 import { tss } from '@/libs/utils/tss-style'
 import { Box, Divider, Drawer, Text } from '@mantine/core'
 
+import { BuyTicketModal } from '@/components/features/tour'
+import { ButtonCustom } from '@/components/shared/buttons'
 import { Flex, Image } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 import { IconX } from '@tabler/icons-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -17,6 +20,7 @@ interface Props {
 export const DrawerHeader = ({ drawerOpened, toggleDrawer }: Props) => {
   const { classes } = useStyles()
   const pathname = usePathname()
+  const [opened, { open, close }] = useDisclosure(false)
 
   return (
     <Drawer
@@ -64,7 +68,13 @@ export const DrawerHeader = ({ drawerOpened, toggleDrawer }: Props) => {
               {item.title}
             </Link>
           ))}
+
+          <ButtonCustom className="w-fit" size="sm" onClick={open}>
+            Buy Tickets
+          </ButtonCustom>
         </Flex>
+
+        <BuyTicketModal opened={opened} onClose={close} />
       </Box>
     </Drawer>
   )

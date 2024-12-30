@@ -15,11 +15,10 @@ const initialOptions: ReactPayPalScriptOptions = {
   enableFunding: 'paylater,venmo',
   dataSdkIntegrationSource: 'integrationbuilder_sc',
   currency: 'USD',
+  locale: 'en_US',
 }
 
 const PayPalProvider = ({ children }: Props) => {
-  console.log('initialOptions', initialOptions)
-
   return (
     <PayPalScriptProvider options={initialOptions}>
       {children}
