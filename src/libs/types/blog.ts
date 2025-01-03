@@ -36,6 +36,16 @@ export interface IBooking {
   time: ITimeSlot
 }
 
+export interface IBookingKH {
+  bookerEmail: string
+  _count: {
+    tourId: number
+  }
+  _sum: {
+    totalPrice: number
+  }
+}
+
 export interface IBookingDetail {
   id: number
   quantity: number

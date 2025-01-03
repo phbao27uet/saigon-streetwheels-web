@@ -53,6 +53,10 @@ const adminVietnameseSideBar = [
         label: 'Quản lý thanh toán',
         link: '/admin/quan-ly-thanh-toan',
       },
+      {
+        label: 'Thống kê theo khách hàng',
+        link: '/admin/thong-ke-theo-khach-hang',
+      },
     ],
   },
   {
