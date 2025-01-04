@@ -1,6 +1,6 @@
 'use client'
 
-import type { BookingStatus, IBooking } from '@/libs/types'
+import type { BookingStatus, IBooking, IBookingKH } from '@/libs/types'
 import { cn } from '@/libs/utils'
 import { format } from 'date-fns'
 import type { MRT_ColumnDef } from 'mantine-react-table'
@@ -90,6 +90,27 @@ export const columnsBooking: MRT_ColumnDef<IBooking>[] = [
     enableEditing: false,
     Cell: ({ row }) => {
       return <div>{format(row.original.createdAt, 'dd/MM/yyyy HH:mm')}</div>
+    },
+  },
+]
+
+export const columnsBookingKH: MRT_ColumnDef<IBookingKH>[] = [
+  {
+    accessorKey: 'bookerEmail',
+    header: 'Email',
+    enableEditing: false,
+  },
+  {
+    accessorKey: '_count.tourId',
+    header: 'Số lượng tour',
+    enableEditing: false,
+  },
+  {
+    accessorKey: '_sum.totalPrice',
+    header: 'Tổng tiền',
+    enableEditing: false,
+    Cell: ({ row }) => {
+      return <div>{row.original._sum.totalPrice.toFixed(2)} USD</div>
     },
   },
 ]

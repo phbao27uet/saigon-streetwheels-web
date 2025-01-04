@@ -189,10 +189,10 @@ export const ReactTable = <T extends Record<string, any>>({
     getRowId: (row) => String(row.id),
     mantineToolbarAlertBannerProps: isLoadingItemsError
       ? {
-          color: 'red',
-          children: 'Không có dữ liệu!',
-          style: { textAlign: 'center' },
-        }
+        color: 'red',
+        children: 'Không có dữ liệu!',
+        style: { textAlign: 'center' },
+      }
       : undefined,
     mantineTableContainerProps: {
       style: {
@@ -207,47 +207,48 @@ export const ReactTable = <T extends Record<string, any>>({
     pageCount: fetchedData?.meta?.totalPages || 0,
     rowCount: fetchedData?.meta?.total || 0,
 
-    renderRowActions: ({ row }) => {
-      if (
-        (isCheckMine && row.original?.mine === false) ||
-        row.original?.isDisableAction
-      ) {
-        return null
-      }
+    renderRowActions:
+      ({ row }) => {
+        if (
+          (isCheckMine && row.original?.mine === false) ||
+          row.original?.isDisableAction
+        ) {
+          return null
+        }
 
-      return (
-        <Flex gap="md">
-          {seeDetail && (
-            <Tooltip label="Xem">
-              <ActionIcon onClick={() => router.push(`${row.original.id}`)}>
-                <IconEye />
-              </ActionIcon>
-            </Tooltip>
-          )}
+        return (
+          <Flex gap="md">
+            {seeDetail && (
+              <Tooltip label="Xem">
+                <ActionIcon onClick={() => router.push(`${row.original.id}`)}>
+                  <IconEye />
+                </ActionIcon>
+              </Tooltip>
+            )}
 
-          {hasEdit ? (
-            <Tooltip label="Sửa">
-              <ActionIcon onClick={() => table.setEditingRow(row)}>
-                <IconEdit />
-              </ActionIcon>
-            </Tooltip>
-          ) : null}
+            {hasEdit ? (
+              <Tooltip label="Sửa">
+                <ActionIcon onClick={() => table.setEditingRow(row)}>
+                  <IconEdit />
+                </ActionIcon>
+              </Tooltip>
+            ) : null}
 
-          {hasDelete ? (
-            <Tooltip label="Xóa">
-              <ActionIcon
-                color="red"
-                onClick={() => openDeleteConfirmModal(row)}
-              >
-                <IconTrash />
-              </ActionIcon>
-            </Tooltip>
-          ) : null}
+            {hasDelete ? (
+              <Tooltip label="Xóa">
+                <ActionIcon
+                  color="red"
+                  onClick={() => openDeleteConfirmModal(row)}
+                >
+                  <IconTrash />
+                </ActionIcon>
+              </Tooltip>
+            ) : null}
 
-          {customRenderRowActions ? customRenderRowActions(row) : null}
-        </Flex>
-      )
-    },
+            {customRenderRowActions ? customRenderRowActions(row) : null}
+          </Flex>
+        )
+      },
     // initialState: {
     //   showGlobalFilter: true,
     // },
