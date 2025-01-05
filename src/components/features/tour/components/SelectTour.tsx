@@ -18,9 +18,10 @@ import { TicketCounter } from './TicketCounter'
 
 interface SelectTourProps {
   data: ITour
+  onClose: () => void
 }
 
-export const SelectTour = ({ data }: SelectTourProps) => {
+export const SelectTour = ({ data, onClose }: SelectTourProps) => {
   const params = useParams<{ id: string }>()
   const router = useRouter()
 
@@ -61,7 +62,17 @@ export const SelectTour = ({ data }: SelectTourProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <StepSelect step={step} />
+      <div className="flex justify-between">
+        <StepSelect step={step} />
+
+        <button
+          type="button"
+          className="w-6 h-6 rounded-full text-white bg-[#C13332]"
+          onClick={onClose}
+        >
+          X
+        </button>
+      </div>
 
       {step === 0 && (
         <>

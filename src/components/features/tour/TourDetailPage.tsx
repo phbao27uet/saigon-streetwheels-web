@@ -35,7 +35,7 @@ export const TourDetailPage = ({ id }: { id: string }) => {
         size="1000px"
         centered
       >
-        <SelectTour data={data} />
+        <SelectTour data={data} onClose={close} />
       </Modal>
 
       <Container
