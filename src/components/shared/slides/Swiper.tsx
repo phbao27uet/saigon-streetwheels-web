@@ -19,6 +19,7 @@ export interface SwiperProps extends React.ComponentProps<typeof ReactSwiper> {
   hideNavigation?: boolean
   isOverflowHidden?: boolean
   defaultActiveSlide?: number
+  isCheckButton?: boolean
 }
 
 const Swiper: React.FC<SwiperProps> = ({
@@ -28,6 +29,7 @@ const Swiper: React.FC<SwiperProps> = ({
   isOverflowHidden,
   className,
   modules,
+  isCheckButton = false,
   ...props
 }) => {
   const swiperRef = useRef<SwiperCore>()
@@ -103,13 +105,16 @@ const Swiper: React.FC<SwiperProps> = ({
               top: '50%',
               transform: 'translateY(-50%)',
               zIndex: 49,
-              opacity: isBeginning ? 0.5 : 1,
+              opacity: isBeginning && isCheckButton ? 0.5 : 1,
               transition: 'opacity 0.2s ease-in-out',
-              cursor: isBeginning ? 'not-allowed !important' : 'pointer',
+              cursor:
+                isBeginning && isCheckButton
+                  ? 'not-allowed !important'
+                  : 'pointer',
               backgroundColor: '#c13331',
               borderRadius: '50%',
             }}
-            disabled={isBeginning}
+            disabled={isBeginning && isCheckButton}
           >
             <IconArrowLeft size={32} className="text-white" />
           </Button>
@@ -124,13 +129,14 @@ const Swiper: React.FC<SwiperProps> = ({
               top: '50%',
               transform: 'translateY(-50%)',
               zIndex: 49,
-              opacity: isEnd ? 0.5 : 1,
+              opacity: isEnd && isCheckButton ? 0.5 : 1,
               transition: 'opacity 0.2s ease-in-out',
-              cursor: isEnd ? 'not-allowed !important' : 'pointer',
+              cursor:
+                isEnd && isCheckButton ? 'not-allowed !important' : 'pointer',
               backgroundColor: '#c13331',
               borderRadius: '50%',
             }}
-            disabled={isEnd}
+            disabled={isEnd && isCheckButton}
           >
             <IconArrowRight size={32} className="text-white" />
           </Button>
