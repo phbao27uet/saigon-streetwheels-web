@@ -2,88 +2,11 @@
 
 import { Section } from '@/components/shared/layouts'
 import { cn } from '@/libs/utils'
+import { Box } from '@mantine/core'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { getDetailBlog } from '../admin'
 import { BlogAPIQueryKey } from '../admin'
-
-// const innerHtmlStyle: MantineStyleProp = {
-//   textAlign: 'justify',
-//   fontSize: '20px',
-
-//   '& .imageWrapper': {
-//     background: '#ffffff',
-//     position: 'relative',
-
-//     marginTop: '20px',
-//     marginBottom: '20px',
-//     maxWidth: '700px',
-//     width: '100%',
-//     // maxHeight: "675px",
-//     height: 'auto',
-//     marginLeft: 'auto',
-//     marginRight: 'auto',
-
-//     '& .logo': {
-//       position: 'absolute',
-//       top: '10px',
-//       left: '10px',
-//       width: '50px',
-//       height: '50px',
-//     },
-//   },
-
-//   '& ul': {
-//     listStyleType: 'disc',
-//     listStylePosition: 'inside',
-
-//     display: 'block',
-//     marginBlockStart: '0.5em',
-//     marginBlockEnd: '0.5em',
-//     marginInlineStart: '0px',
-//     marginInlineEnd: '0px',
-//     paddingInlineStart: '40px',
-//     margin: 0,
-//     marginBottom: '8px',
-//   },
-//   '& ol': {
-//     listStyleType: 'decimal',
-//     listStylePosition: 'inside',
-
-//     display: 'block',
-//     marginBlockStart: '1em',
-//     marginBlockEnd: '1em',
-//     marginInlineStart: '0px',
-//     marginInlineEnd: '0px',
-//     paddingInlineStart: '40px',
-//   },
-//   '& ul ul, ol ul': {
-//     listStyleType: 'circle',
-//     listStylePosition: 'inside',
-//     marginLeft: '15px',
-//   },
-//   '& ol ol, ul ol': {
-//     listStyleType: 'lower-latin',
-//     listStylePosition: 'inside',
-//     marginLeft: '15px',
-//   },
-//   '& h2, h3, h4, blockquote': {
-//     fontWeight: 'bold',
-//     fontSize: '1.3em',
-//     marginTop: '20px',
-//     marginBottom: '10px',
-//   },
-//   '& p': {
-//     marginTop: '15px',
-//   },
-//   '& em': {
-//     fontStyle: 'italic',
-//   },
-//   '& img': {
-//     display: 'block',
-//     margin: '12px auto',
-//   },
-// }
 
 export const BlogDetailPage = ({ params }: { params: { id: string } }) => {
   const { data } = useSuspenseQuery({
@@ -99,7 +22,41 @@ export const BlogDetailPage = ({ params }: { params: { id: string } }) => {
           {format(new Date(data?.createdAt), 'yyyy-MM-dd')}
         </p>
 
-        <div
+        <Box
+          style={{
+            '& a': {
+              color: '#006121',
+              textDecoration: 'underline',
+            },
+
+            '& img': {
+              maxWidth: '100%',
+            },
+
+            '& ul': {
+              display: 'block',
+              marginBlockStart: '1em',
+              marginBlockEnd: '1em',
+              marginInlineStart: '0px',
+              marginInlineEnd: '0px',
+              paddingInlineStart: '40px',
+            },
+
+            '& ol': {
+              display: 'block',
+              marginBlockStart: '1em',
+              marginBlockEnd: '1em',
+              marginInlineStart: '0px',
+              marginInlineEnd: '0px',
+              paddingInlineStart: '40px',
+            },
+
+            '& blockquote': {
+              borderLeft: '2px solid #ccc',
+              marginLeft: '1.5rem',
+              paddingLeft: '1rem',
+            },
+          }}
           className={cn(
             'prose prose-sm max-w-none',
             // Typography and text styling
@@ -109,11 +66,19 @@ export const BlogDetailPage = ({ params }: { params: { id: string } }) => {
             '[&_.imageWrapper]:bg-white [&_.imageWrapper]:relative [&_.imageWrapper]:mt-5 [&_.imageWrapper]:mb-5 [&_.imageWrapper]:max-w-[700px] [&_.imageWrapper]:w-full [&_.imageWrapper]:h-auto [&_.imageWrapper]:mx-auto',
             '[&_.imageWrapper_.logo]:absolute [&_.imageWrapper_.logo]:top-[10px] [&_.imageWrapper_.logo]:left-[10px] [&_.imageWrapper_.logo]:w-[50px] [&_.imageWrapper_.logo]:h-[50px]',
 
-            // List styles
-            '[&_ul]:list-disc [&_ul]:list-inside [&_ul]:block [&_ul]:my-2 [&_ul]:px-10',
-            '[&_ol]:list-decimal [&_ol]:list-inside [&_ol]:block [&_ol]:my-4 [&_ol]:px-10',
-            '[&_ul_ul],[&_ol_ul]:list-circle [&_ul_ul],[&_ol_ul]:list-inside [&_ul_ul],[&_ol_ul]:ml-[15px]',
-            '[&_ul_ol],[&_ol_ol]:list-[lower-latin] [&_ul_ol],[&_ol_ol]:list-inside [&_ul_ol],[&_ol_ol]:ml-[15px]',
+            // List styles - Updated for proper bullet/number alignment
+            '[&_ul]:list-disc [&_ul]:pl-10 [&_ul]:my-2 [&_ul_li]:pl-0',
+            '[&_ol]:list-decimal [&_ol]:pl-10 [&_ol]:my-4 [&_ol_li]:pl-0',
+            '[&_ul_ul]:list-circle [&_ul_ul]:mt-1 [&_ul_ul]:ml-4',
+            '[&_ol_ul]:list-circle [&_ol_ul]:mt-1 [&_ol_ul]:ml-4',
+            '[&_ul_ol]:list-[lower-latin] [&_ul_ol]:mt-1 [&_ul_ol]:ml-4',
+            '[&_ol_ol]:list-[lower-latin] [&_ol_ol]:mt-1 [&_ol_ol]:ml-4',
+            // Fix for list item text wrapping
+            '[&_ul_li]:gap-2',
+            '[&_ol_li]:gap-2',
+            // Fix for list markers
+            '[&_ul_li]:marker:text-black [&_ul_li]:marker:content-["•_"]',
+            '[&_ol_li]:marker:text-black',
 
             // Heading and blockquote styles
             '[&_h2],[&_h3],[&_h4],[&_blockquote]:font-bold [&_h2],[&_h3],[&_h4],[&_blockquote]:text-[1.3em] [&_h2],[&_h3],[&_h4],[&_blockquote]:my-5',
@@ -127,7 +92,6 @@ export const BlogDetailPage = ({ params }: { params: { id: string } }) => {
             // Image styles
             '[&_img]:block [&_img]:my-3 [&_img]:mx-auto',
           )}
-          // style={{ ...innerHtmlStyle }}
           // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
           dangerouslySetInnerHTML={{ __html: data?.content }}
         />
