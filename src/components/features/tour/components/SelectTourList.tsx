@@ -52,10 +52,6 @@ export const SelectTourList = ({
     return total + ticket.price * ticket.quantity
   }, 0)
 
-  const totalQuantity = watchTickets?.reduce((total, ticket) => {
-    return total + ticket.quantity
-  }, 0)
-
   const { saveBooking } = useTourBooking()
 
   const onSubmit = (data: TourSchema) => {
@@ -105,11 +101,19 @@ export const SelectTourList = ({
     }
   }, [opened, reset, remove])
 
-  console.log('selectedTour', selectedTour)
-
   return (
     <div className="flex flex-col gap-4">
-      <StepSelect step={step} />
+      <div className="flex justify-between">
+        <StepSelect step={step} />
+
+        <button
+          type="button"
+          className="w-6 h-6 rounded-full text-white bg-[#C13332]"
+          onClick={onClose}
+        >
+          X
+        </button>
+      </div>
 
       {step === 0 && (
         <>

@@ -40,7 +40,7 @@ export const Feedback = () => {
                 <div className="flex items-center">
                   {Array.from({ length: fb.star }).map((_, index) => (
                     // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                    <span key={index} className="text-xl text-[#EBF218]">
+                    <span key={index} className="text-xl text-[#E7B00D]">
                       ★
                     </span>
                   ))}

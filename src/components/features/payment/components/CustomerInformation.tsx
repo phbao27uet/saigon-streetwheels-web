@@ -19,7 +19,7 @@ import {
 export const CustomerInformation = () => {
   const { clearBooking, booking } = useTourBooking()
   const [checked, setChecked] = useState(false)
-  const [checkedNewsletter, setCheckedNewsletter] = useState(false)
+  // const [checkedNewsletter, setCheckedNewsletter] = useState(false)
   const [selectedCountry, setSelectedCountry] =
     useState<(typeof countries)[0]>()
   const router = useRouter()
@@ -252,7 +252,7 @@ export const CustomerInformation = () => {
             checked={checked}
             onChange={(event) => setChecked(event.currentTarget.checked)}
           />
-          <Checkbox
+          {/* <Checkbox
             label={
               "Yes, I would like to receive Stromma's newsletter (in Swedish)"
             }
@@ -261,7 +261,7 @@ export const CustomerInformation = () => {
             onChange={(event) =>
               setCheckedNewsletter(event.currentTarget.checked)
             }
-          />
+          /> */}
         </div>
       </div>
 
