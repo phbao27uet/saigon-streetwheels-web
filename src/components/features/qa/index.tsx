@@ -115,7 +115,7 @@ export const QA = () => {
   return (
     <Section titleClassName="text-[#C80D13] text-3xl" title="Q&A">
       {DATA.map((item, index) => (
-        <div key={index} className="mb-4">
+        <div key={index} className="mb-6">
           <h3 className="text-2xl font-medium text-[#C13332] mb-2">
             {item.title}
           </h3>
