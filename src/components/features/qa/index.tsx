@@ -1,4 +1,7 @@
+'use client'
+
 import { Section } from '@/components/shared'
+import { Accordion } from '@mantine/core'
 
 const DATA = [
   {
@@ -114,18 +117,24 @@ const DATA = [
 export const QA = () => {
   return (
     <Section titleClassName="text-[#C80D13] text-3xl" title="Q&A">
-      {DATA.map((item, index) => (
-        <div key={index} className="mb-6">
-          <h3 className="text-2xl font-medium text-[#C13332] mb-2">
-            {item.title}
-          </h3>
-          <p
-            className="text-base whitespace-pre-line leading-[25px]"
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-            dangerouslySetInnerHTML={{ __html: item.content }}
-          />
-        </div>
-      ))}
+      <Accordion>
+        {DATA.map((item, index) => (
+          <Accordion.Item value={item.title} key={index}>
+            <Accordion.Control>
+              <h3 className="text-2xl font-medium text-[#C13332] mb-2">
+                {item.title}
+              </h3>
+            </Accordion.Control>
+            <Accordion.Panel>
+              <p
+                className="text-base whitespace-pre-line leading-[25px]"
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+                dangerouslySetInnerHTML={{ __html: item.content }}
+              />
+            </Accordion.Panel>
+          </Accordion.Item>
+        ))}
+      </Accordion>
     </Section>
   )
 }
