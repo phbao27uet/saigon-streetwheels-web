@@ -9,20 +9,58 @@ import type { DataPagination, IFeedback } from '@/libs/types'
 import { Image } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 
+import { Swiper } from '@/components/shared/slides'
+import { SwiperSlide } from 'swiper/react'
+import type { PaginationOptions } from 'swiper/types'
+
 export const Feedback = () => {
   const { data: fbs, isLoading } = useQuery<DataPagination<IFeedback[]>>({
     queryKey: [FeedbackAPIQueryKey.GET_FEEDBACKS],
     queryFn: getListFeedback,
   })
 
+  const pagination: PaginationOptions = {
+    clickable: true,
+  }
+
   if (isLoading) return null
 
   return (
     <div id="feedback">
       <Section title="FEEDBACK FROM CUSTOMER" className="pb-28">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-[150px] lg:gap-y-[100px] gap-6 p-4">
-          {fbs?.data?.slice(0, 3)?.map((fb, index) => (
-            <div
+        <Swiper
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
+          pagination={pagination}
+          className="p-3 md:p-10"
+          loop={true}
+          autoplay={{
+            delay: 5000,
+          }}
+          breakpoints={{
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 24,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 16,
+            },
+            500: {
+              slidesPerView: 2,
+              spaceBetween: 16,
+            },
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 8,
+            },
+          }}
+        >
+          {fbs?.data?.map((fb, index) => (
+            <SwiperSlide key={fb.id} className="h-full ">
+              <div
               // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               key={index}
               className="w-full h-fit flex flex-col gap-2 items-center relative"
@@ -45,11 +83,14 @@ export const Feedback = () => {
                     </span>
                   ))}
                 </div>
-                <p className="text-lg">{fb.content}</p>
+                <p className="text-lg leading-[25px] text-left">
+                  {fb.content}
+                </p>
               </div>
             </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </Section>
     </div>
   )
