@@ -11,7 +11,7 @@ export const ListTourPage = () => {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useGetInfiniteTours({ perPage: 1 })
+  } = useGetInfiniteTours({ })
 
   const displayedTours = tours ? tours.pages.flatMap((page) => page.data) : []
 
