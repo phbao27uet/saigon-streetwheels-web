@@ -56,6 +56,9 @@ export const SwiperWithThumb = ({
         onSwiper={(swiper) => {
           mainSwiperRef.current = swiper
         }}
+        autoplay={{
+          delay: 5000,
+        }}
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
@@ -94,6 +97,9 @@ export const SwiperWithThumb = ({
           watchSlidesProgress={true}
           modules={[Navigation, Thumbs]}
           className="px-12"
+          autoplay={{
+            delay: 5000,
+          }}
           breakpoints={{
             1280: {
               slidesPerView: 4,
