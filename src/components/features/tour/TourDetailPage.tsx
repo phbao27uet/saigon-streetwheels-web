@@ -6,8 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Image, Modal } from '@mantine/core'
 import { Container } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { IconClock, IconLocation } from '@tabler/icons-react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { SelectTour } from './components'
+import { PaymentPartner, SelectTour } from './components'
 import { useGetDetailTour } from './hooks'
 import { type TourSchema, tourSchema } from './schemas'
 
@@ -89,14 +90,45 @@ export const TourDetailPage = ({ id }: { id: string }) => {
 
           <div className="mt-8 md:mt-20">
             <div className="flex items-center gap-4">
-              <h2 className="text-xl md:text-2xl">About this tour</h2>
+              <h2 className="text-xl md:text-2xl text-[#1B7C8B] font-bold">
+                About this tour
+              </h2>
               <div className="w-full max-w-[300px] h-[1px] bg-black" />
             </div>
 
             <p className="text-base md:text-xl mt-4">{data.description}</p>
           </div>
+
+          <div className="flex items-center gap-4">
+            <IconLocation />
+            <div className="flex flex-col gap-2">
+              <p className="font-bold">Departures From:</p>
+              <p className="text-sm">{data.departureLocation}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <IconClock />
+            <div className="flex flex-col gap-2">
+              <p className="font-bold">Duration:</p>
+              <p className="text-sm">6 hours 30 mins</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 md:mt-20">
+          <div className="flex items-center gap-4">
+            <h2 className="text-xl md:text-2xl text-[#C13332] font-bold uppercase">
+              More information
+            </h2>
+            <div className="w-full h-[1px] bg-black" />
+          </div>
+
+          <p className="text-base md:text-xl mt-4">{data.description}</p>
         </div>
       </Container>
+
+      <PaymentPartner />
     </FormProvider>
   )
 }

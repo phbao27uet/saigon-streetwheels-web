@@ -15,6 +15,8 @@ const QuanLyDanhGiaPage = async () => {
 
   return (
     <div>
+      <p className="text-2xl font-bold my-4">Quản lý đánh giá</p>
+
       <ListFeedbackAdmin />
     </div>
   )

@@ -14,7 +14,7 @@ export const bookingStatus: Record<BookingStatus, string> = {
 export const columnsBooking: MRT_ColumnDef<IBooking>[] = [
   {
     accessorKey: 'paypalOrderId',
-    header: 'Mã Code',
+    header: 'Mã tour',
     enableEditing: false,
   },
   {

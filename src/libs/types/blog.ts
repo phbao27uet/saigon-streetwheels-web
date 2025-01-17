@@ -74,3 +74,14 @@ export interface IFeedback {
   createdAt: string
   updatedAt: string
 }
+
+export interface INews {
+  id: number
+  title: string
+  description: string
+  content: string
+  featureImage: string
+  isMain: boolean
+  createdAt: string
+  updatedAt: string
+}

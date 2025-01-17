@@ -15,6 +15,8 @@ const ThongKeTheoKhachHangPage = async () => {
 
   return (
     <div>
+      <p className="text-2xl font-bold my-4">Thống kê theo khách hàng</p>
+
       <ListKHAdmin />
     </div>
   )
