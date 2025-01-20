@@ -2,11 +2,11 @@
 
 import { ButtonCustomGreen } from '@/components/shared/buttons'
 import { SwiperWithThumb } from '@/components/shared/slides'
+import { cn, convertMinutesToDayHourMinute } from '@/libs/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Image, Modal } from '@mantine/core'
 import { Container } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconClock, IconLocation } from '@tabler/icons-react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { PaymentPartner, SelectTour } from './components'
 import { useGetDetailTour } from './hooks'
@@ -71,7 +71,7 @@ export const TourDetailPage = ({ id }: { id: string }) => {
             </div>
 
             <div className="flex flex-col gap-2 mt-4">
-              {[1, 2, 3].map((_, index) => (
+              {data?.shortDescription.map((item, index) => (
                 // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 <div key={index} className="flex gap-2 items-center">
                   <Image
@@ -80,9 +80,7 @@ export const TourDetailPage = ({ id }: { id: string }) => {
                     width={20}
                     height={20}
                   />
-                  <p className="text-sm md:text-base">
-                    20 stops near popular attractions & places
-                  </p>
+                  <p className="text-sm md:text-base">{item}</p>
                 </div>
               ))}
             </div>
@@ -90,7 +88,7 @@ export const TourDetailPage = ({ id }: { id: string }) => {
 
           <div className="mt-8 md:mt-20">
             <div className="flex items-center gap-4">
-              <h2 className="text-xl md:text-2xl text-[#1B7C8B] font-bold">
+              <h2 className="text-xl md:text-2xl text-[#1B7C8B] font-bold uppercase">
                 About this tour
               </h2>
               <div className="w-full max-w-[300px] h-[1px] bg-black" />
@@ -99,33 +97,63 @@ export const TourDetailPage = ({ id }: { id: string }) => {
             <p className="text-base md:text-xl mt-4">{data.description}</p>
           </div>
 
-          <div className="flex items-center gap-4">
-            <IconLocation />
+          <div className="flex items-start gap-2 bg-white p-4 w-full md:max-w-[300px]">
+            <Image src="/svgs/pin.svg" alt="pin" width={28} height={28} />
             <div className="flex flex-col gap-2">
-              <p className="font-bold">Departures From:</p>
-              <p className="text-sm">{data.departureLocation}</p>
+              <p className="font-bold text-lg">Departures from:</p>
+              <p className="text-base">{data.departureLocation}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <IconClock />
-            <div className="flex flex-col gap-2">
-              <p className="font-bold">Duration:</p>
-              <p className="text-sm">6 hours 30 mins</p>
+          {data.duration ? (
+            <div className="flex items-start gap-2 bg-white p-4 w-full md:max-w-[300px]">
+              <Image src="/svgs/clock.svg" alt="clock" width={28} height={28} />
+              <div className="flex flex-col gap-2">
+                <p className="font-bold text-lg">Duration:</p>
+                <p className="text-base">
+                  {convertMinutesToDayHourMinute(data.duration)}
+                </p>
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
+      </Container>
 
-        <div className="mt-8 md:mt-20">
-          <div className="flex items-center gap-4">
-            <h2 className="text-xl md:text-2xl text-[#C13332] font-bold uppercase">
-              More information
-            </h2>
-            <div className="w-full h-[1px] bg-black" />
+      <Container size={'xl'}>
+        {data.information && (
+          <div className="mt-8 md:mt-20">
+            <div className="flex items-center gap-4">
+              <h2 className="text-xl md:text-2xl text-[#C13332] font-bold uppercase md:min-w-[270px]">
+                More information
+              </h2>
+              <div className="w-full h-[1px] bg-black" />
+            </div>
+
+            <p
+              className="text-base md:text-xl mt-4"
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+              dangerouslySetInnerHTML={{ __html: data.information }}
+            />
           </div>
+        )}
 
-          <p className="text-base md:text-xl mt-4">{data.description}</p>
-        </div>
+        {data.emoji && (
+          <div className="my-8 md:my-20 bg-white p-2 md:p-8 border-red-600 border-2">
+            <p
+              className={cn(
+                'overflow-x-auto',
+                '[&_tr:first-of-type]:uppercase [&_tr:first-of-type]:font-bold [&_tr:first-of-type]:text-[#C13332]',
+                '[&_tr:first-of-type_td]:after:mt-2 [&_tr:first-of-type_td]:after:border-b [&_tr:first-of-type_td]:after:border-[#EDE7E7] [&_tr:first-of-type_td]:after:content-[""] [&_tr:first-of-type_td]:after:w-full [&_tr:first-of-type_td]:after:block',
+                '[&_tr_td]:text-start [&_tr:first-of-type_td]:py-2',
+                '[&_tr:nth-of-type(2)_td]:align-top [&_tr:nth-of-type(2)_td]:pt-2',
+                '[&_tr:nth-of-type(2)_td_p]:leading-10',
+                '[&_tr_td]:p-5 [&_tr_td]:min-w-[300px]',
+              )}
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+              dangerouslySetInnerHTML={{ __html: data.emoji }}
+            />
+          </div>
+        )}
       </Container>
 
       <PaymentPartner />

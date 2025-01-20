@@ -28,4 +28,9 @@ export interface ITour {
 
   isOutstanding: boolean
   isAvailable: boolean
+
+  duration: number
+  shortDescription: string[]
+  information: string
+  emoji: string
 }

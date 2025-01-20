@@ -1,16 +1,21 @@
 'use client'
 
-import { MultipleImageUpload, SingleImageUploader } from '@/components/shared'
+import {
+  MultipleImageUpload,
+  MyEditor,
+  SingleImageUploader,
+} from '@/components/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Button,
   Card,
   Input,
+  NumberInput,
   Stack,
   Switch,
+  TagsInput,
   Text,
   TextInput,
-  Textarea,
 } from '@mantine/core'
 import { useParams } from 'next/navigation'
 import { useEffect } from 'react'
@@ -91,18 +96,6 @@ export const TourForm = () => {
                   control={formReturn.control}
                 />
               </Stack>
-              <TextInput
-                label="Địa điểm xuất phát"
-                placeholder="Nhập địa điểm xuất phát"
-                {...formReturn.register('departureLocation')}
-                error={formReturn.formState.errors.departureLocation?.message}
-              />
-              <Textarea
-                label="Mô tả tour"
-                placeholder="Nhập mô tả chi tiết về tour"
-                {...formReturn.register('description')}
-                error={formReturn.formState.errors.description?.message}
-              />
 
               <Controller
                 control={formReturn.control}
@@ -112,6 +105,75 @@ export const TourForm = () => {
                     label="Nổi bật"
                     checked={!!field.value}
                     onChange={field.onChange}
+                  />
+                )}
+              />
+
+              <TextInput
+                label="Địa điểm xuất phát"
+                placeholder="Nhập địa điểm xuất phát"
+                {...formReturn.register('departureLocation')}
+                error={formReturn.formState.errors.departureLocation?.message}
+              />
+
+              <Controller
+                control={formReturn.control}
+                name="duration"
+                render={({ field: { value, onChange } }) => (
+                  <NumberInput
+                    label="Thời gian tour (phút)"
+                    placeholder="Thời gian tour"
+                    value={value}
+                    onChange={onChange}
+                    error={formReturn.formState.errors.duration?.message}
+                    className="flex-1"
+                  />
+                )}
+              />
+
+              <Controller
+                control={formReturn.control}
+                name="shortDescription"
+                render={({ field }) => (
+                  <TagsInput
+                    label="Mô tả ngắn"
+                    placeholder="Nhập mô tả ngắn"
+                    {...field}
+                    error={
+                      formReturn.formState.errors.shortDescription?.message
+                    }
+                    clearable
+                    allowDuplicates
+                  />
+                )}
+              />
+
+              <Controller
+                name="information"
+                control={formReturn.control}
+                render={({ field: { onChange, value, ref } }) => (
+                  <MyEditor
+                    innerRef={ref}
+                    id="information"
+                    onChange={onChange}
+                    value={value}
+                    error={formReturn.formState.errors.information?.message}
+                    label={'Thông tin'}
+                  />
+                )}
+              />
+
+              <Controller
+                name="emoji"
+                control={formReturn.control}
+                render={({ field: { onChange, value, ref } }) => (
+                  <MyEditor
+                    innerRef={ref}
+                    id="emoji"
+                    onChange={onChange}
+                    value={value}
+                    error={formReturn.formState.errors.emoji?.message}
+                    label={'Thông tin emoji'}
                   />
                 )}
               />
