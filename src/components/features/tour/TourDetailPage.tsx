@@ -97,7 +97,7 @@ export const TourDetailPage = ({ id }: { id: string }) => {
             <p className="text-base md:text-xl mt-4">{data.description}</p>
           </div>
 
-          <div className="flex items-start gap-2 bg-white p-4 w-full md:max-w-[300px]">
+          <div className="flex items-start gap-2 bg-white p-4 w-full">
             <Image src="/svgs/pin.svg" alt="pin" width={28} height={28} />
             <div className="flex flex-col gap-2">
               <p className="font-bold text-lg">Departures from:</p>
@@ -106,7 +106,7 @@ export const TourDetailPage = ({ id }: { id: string }) => {
           </div>
 
           {data.duration ? (
-            <div className="flex items-start gap-2 bg-white p-4 w-full md:max-w-[300px]">
+            <div className="flex items-start gap-2 bg-white p-4 w-full">
               <Image src="/svgs/clock.svg" alt="clock" width={28} height={28} />
               <div className="flex flex-col gap-2">
                 <p className="font-bold text-lg">Duration:</p>
