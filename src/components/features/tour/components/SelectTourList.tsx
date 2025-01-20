@@ -1,6 +1,10 @@
 'use client'
 
-import { ButtonCustom, ButtonCustomRed } from '@/components/shared/buttons'
+import {
+  ButtonCustom,
+  ButtonCustomRed,
+  ButtonSendMail,
+} from '@/components/shared/buttons'
 import { Calendar } from '@/components/shared/inputs'
 import type { ITour } from '@/libs/types'
 import { cn } from '@/libs/utils'
@@ -203,31 +207,38 @@ export const SelectTourList = ({
               </div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row gap-2 items-center justify-end mt-4">
-            <div className="flex gap-2 items-center">
-              <p className="text-xl font-bold">TOTAL PRICE:</p>
-              <p className="text-xl font-bold text-[#C80D13]">
-                {totalPrice?.toFixed(2)} USD
-              </p>
+
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between mt-4">
+            <div className="basis-1/2">
+              <ButtonSendMail />
             </div>
 
-            <ButtonCustomRed
-              onClick={() => {
-                if (totalPrice === 0) {
-                  toast.error('Please select the number of tickets')
-                  return
-                }
+            <div className="flex flex-col md:flex-row gap-2 items-center justify-end basis-1/2">
+              <div className="flex gap-2 items-center">
+                <p className="text-xl font-bold">TOTAL PRICE:</p>
+                <p className="text-xl font-bold text-[#C80D13]">
+                  {totalPrice?.toFixed(2)} USD
+                </p>
+              </div>
 
-                if (!watch('date')) {
-                  toast.error('Please select the date')
-                  return
-                }
+              <ButtonCustomRed
+                onClick={() => {
+                  if (totalPrice === 0) {
+                    toast.error('Please select the number of tickets')
+                    return
+                  }
 
-                setStep(1)
-              }}
-            >
-              CONTINUE
-            </ButtonCustomRed>
+                  if (!watch('date')) {
+                    toast.error('Please select the date')
+                    return
+                  }
+
+                  setStep(1)
+                }}
+              >
+                CONTINUE
+              </ButtonCustomRed>
+            </div>
           </div>
         </>
       )}

@@ -36,6 +36,7 @@ export function Header() {
       '/blog',
       '/payment',
       '/qa',
+      '/news',
     ]),
   })
 
@@ -168,8 +169,8 @@ const useStyles = tss
     },
 
     logo: {
-      padding: '8px 16px',
-      height: headerScrolled ? 70 : 80,
+      padding: '16px 24px',
+      height: headerScrolled ? 90 : 100,
       backgroundColor:
         headerScrolled || hasBackgroundHeader ? '#fff' : 'transparent',
       transition: 'height 0.3s ease',

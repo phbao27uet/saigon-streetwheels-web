@@ -34,29 +34,29 @@ const ABOUT_URBAN_TOUR: IFooterItem[] = [
 const FOLLOW_US_ON: IFooterItem[] = [
   {
     title: 'Facebook',
-    href: '#',
+    href: 'https://www.facebook.com/saigonurbantours',
     icon: <Image src="/svgs/fb.svg" alt="facebook" />,
   },
   {
     title: 'Whatsapp',
-    href: '#',
+    href: 'https://wa.me/message/PWBWP5HAB7FHM1',
     icon: <Image src="/svgs/whatsapp.svg" alt="whatsapp" />,
   },
   {
     title: 'Instagram',
-    href: '#',
+    href: 'https://www.instagram.com/saigonurbantours',
     icon: <Image src="/svgs/ig.svg" alt="instagram" />,
   },
   {
     title: 'Youtube',
-    href: '#',
+    href: 'https://www.youtube.com/@SaigonUrbanTours',
     icon: <Image src="/svgs/youtube.svg" alt="youtube" />,
   },
 ]
 
 const FooterItem = ({ title, href, icon }: IFooterItem) => {
   return (
-    <Link href={href} className="text-white">
+    <Link href={href} target="_blank" className="text-white">
       <div className="flex items-center gap-2">
         {icon}
         <p>{title}</p>
@@ -71,15 +71,16 @@ const Footer = () => {
       <div className="bg-[#1d7d8c] flex items-center justify-center">
         <div id="footer" />
         <Container size="lg" className="py-8">
-          <Link href="/home">
-            <div className="w-full h-full max-w-[150px] max-h-[150px]">
-              <Image
-                src="/images/logo.jpg"
-                alt="logo"
-                className="h-full w-full rounded-[20px]"
-              />
-            </div>
-          </Link>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Link href="/home" className="w-fit h-[90px] bg-white rounded-[12px] px-6 py-4 flex items-center justify-center">
+                <Image
+                  src="/images/logo-removebg.png"
+                  alt="logo"
+                  className="h-full w-auto"
+                />
+            </Link>
+        </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
             <div>
               <p className="text-white">
@@ -88,7 +89,7 @@ const Footer = () => {
                 more recently with desktop publishing software like Aldus
                 PageMaker including versions of Lorem Ipsum.
               </p>
-              <p className="text-white uppercase mt-4 text-xl font-bold text-center">
+              <p className="text-white uppercase mt-4 mb-6 text-xl font-bold text-center">
                 Payment Partner
               </p>
               <Image src="/svgs/thanh-toan.svg" alt="thanh-toan" />

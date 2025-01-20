@@ -15,6 +15,8 @@ const QuanLyAlbumPage = async () => {
 
   return (
     <div>
+      <p className="text-2xl font-bold my-4">Quản lý album</p>
+
       <ListAlbumAdmin />
     </div>
   )

@@ -1,5 +1,6 @@
 import {
   positiveDecimalNumberSchema,
+  textBaseSchema,
   textSchema,
   timeSchema,
 } from '@/libs/schemas'
@@ -21,11 +22,17 @@ export const createTourSchema = z.object({
   title: textSchema,
   featureImage: textSchema,
   images: z.array(textSchema),
-  description: textSchema,
+  description: textBaseSchema,
   departureLocation: textSchema,
   times: z.array(tourTimeSchema).min(1, 'Phải có ít nhất một khung giờ'),
   ticketTypes: z.array(ticketTypeSchema).min(1, 'Phải có ít nhất một loại vé'),
   isOutstanding: z.boolean().optional(),
+  shortDescription: z
+    .array(textBaseSchema)
+    .min(1, 'Phải có ít nhất một mô tả ngắn'),
+  duration: z.number().min(1, 'Phải có ít nhất một thời gian'),
+  information: textBaseSchema,
+  emoji: textBaseSchema,
 })
 
 export type CreateTourSchema = z.infer<typeof createTourSchema>
@@ -94,4 +101,21 @@ export const defaultValuesTour: CreateTourSchema = {
       price: 0,
     },
   ],
+  shortDescription: [],
+  duration: 0,
+  information: '',
+  emoji: `<table style="border-collapse: collapse; width: 100%;" border="1"><colgroup><col style="width: 33.2904%;"><col style="width: 33.2904%;"><col style="width: 33.2904%;"></colgroup>
+<tbody>
+<tr>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table>`,
 }

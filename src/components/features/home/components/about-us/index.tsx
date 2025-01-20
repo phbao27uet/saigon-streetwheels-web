@@ -1,133 +1,121 @@
 'use client'
-import { ButtonCustom } from '@/components/shared'
+import { NewsAPIQueryKey } from '@/components/features/admin'
+import { Swiper } from '@/components/shared'
 import { Section } from '@/components/shared/layouts'
+import { request } from '@/libs/requests'
+import type { DataPagination, INews } from '@/libs/types'
 import { Image } from '@mantine/core'
-import { useState } from 'react'
-
-const IMAGES = [
-  {
-    src: '/images/home/au-1.jpeg',
-    alt: 'about-us-1',
-  },
-  {
-    src: '/images/home/au-2.jpeg',
-    alt: 'about-us-2',
-  },
-  {
-    src: '/images/home/au-3.jpeg',
-    alt: 'about-us-3',
-  },
-  {
-    src: '/images/home/au-4.jpeg',
-    alt: 'about-us-4',
-  },
-]
+import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
+import { SwiperSlide } from 'swiper/react'
 
 export const AboutUs = () => {
-  const [showMore, setShowMore] = useState(false)
+  const { data } = useQuery<INews>({
+    queryKey: [NewsAPIQueryKey.GET_NEWS, 'MAIN'],
+    queryFn: async () => {
+      const news = await request.get('/news/main')
+      return news.data
+    },
+  })
 
   return (
-    <div className="min-h-[70vh] md:min-h-screen relative bg-[#f5f2f1] py-8">
+    <div className="min-h-[70vh] md:min-h-screen relative bg-[#f5f2f1] pt-8">
       <div id="about-us" className="relative -top-[8rem]" />
-      <Section title="ABOUT US" className="pb-28">
+      <Section title="ABOUT US" className="pb-5">
         <div className="relative flex-responsive gap-8">
           <div className="basis-1/2 w-fit self-center">
             <Image
-              className="md:w-full sm:w-[500px] w-[300px]"
-              src={'/images/home/au-main.jpeg'}
+              className="md:w-full sm:w-[500px] w-[300px] rounded-[10px]"
+              src={data?.featureImage || '/images/home/au-main.jpeg'}
               alt="about-us"
             />
           </div>
           <div className="basis-1/2 flex flex-col">
             <h1 className="text-4xl font-bold text-[#C13332] capitalize">
-              saigon urban tour
+              {data?.title}
             </h1>
-            <div className="mt-4">
-              <p>
-                Welcome to Vietnam! We are Saigon Urban Tour (SUT)—a team of
-                three founders, all born and raised in the vibrant city of
-                Saigon. After years of working as tour guides and operators for
-                various companies, we decided to create something new—a fresh,
-                innovative way to showcase the city we love and call home. With
-                a deep understanding of Saigon’s cuisine and streets, we at SUT
-                are dedicated to providing you, our guests, with a journey that
-                is safe, enriching, and full of joy.
-              </p>
-              <p>
-                Our team of passionate guides is equipped with excellent
-                communication skills in foreign languages and expert motorbike
-                handling, refined through years of navigating the bustling
-                streets of major cities. We are committed to ensuring your
-                safety and delight as we guide you through the vibrant streets
-                and hidden gems of Saigon.
-              </p>
-              <p>
-                Our Vision
-                <br />
-                We aspire to become a leading motorbike tour provider, embodying
-                the friendly and welcoming spirit of Saigon while promoting
-                safe, sustainable, and authentic travel experiences.
-              </p>
-              {!showMore && <span>...</span>}
-              {showMore && (
-                <>
-                  <p>
-                    The Story Behind Saigon Urban Tour
-                    <br />
-                    The name Saigon Urban Tour reflects our deep connection to
-                    the heart and soul of this city. "Urban" encapsulates the
-                    dynamic energy of Saigon, where modernity and tradition
-                    intertwine seamlessly. Our tours highlight the charm of
-                    daily life—whether it’s the aroma of fresh street food
-                    wafting through an alley, the hum of motorbikes weaving
-                    through the streets, or the genuine smiles of locals
-                    greeting one another.
-                  </p>
-
-                  <p>
-                    The name Saigon Urban Tour reflects our deep connection to
-                    the heart and soul of this city. "Urban" encapsulates the
-                    dynamic energy of Saigon, where modernity and tradition
-                    intertwine seamlessly. Our tours highlight the charm of
-                    daily life—whether it’s the aroma of fresh street food
-                    wafting through an alley, the hum of motorbikes weaving
-                    through the streets, or the genuine smiles of locals
-                    greeting one another.
-                  </p>
-
-                  <p>
-                    Join us at Saigon Urban Tour, where every journey is a story
-                    waiting to be shared. Together, let’s uncover the charm and
-                    beauty of this incredible city!
-                  </p>
-                </>
-              )}
+            <div className="mt-4 whitespace-pre-line">
+              <p>{data?.description}</p>
             </div>
-
-            <ButtonCustom
-              className="w-fit mt-5"
-              size="lg"
-              onClick={() => setShowMore(!showMore)}
-            >
-              {showMore ? 'Show Less' : 'Learn More'}
-            </ButtonCustom>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
-          {IMAGES.map((image) => (
-            <AboutUsImage key={image.alt} {...image} />
-          ))}
-        </div>
+        <AboutUsImages />
       </Section>
     </div>
   )
 }
 
-const AboutUsImage = ({ src, alt }: { src: string; alt: string }) => {
+const AboutUsImages = () => {
+  const { data } = useQuery<DataPagination<INews[]>>({
+    queryKey: [NewsAPIQueryKey.GET_NEWS],
+    queryFn: async () => {
+      const news = await request.get(
+        '/news?filters=[{"field":"isMain","value":false,"operator":"equals"}]',
+      )
+      return news.data
+    },
+  })
+
   return (
-    <div className="h-[150px]">
-      <Image className="block rounded-lg h-full w-full" src={src} alt={alt} />
-    </div>
+    <Swiper
+      style={{
+        width: '100%',
+        height: '100%',
+        marginTop: '20px',
+      }}
+      loop={true}
+      autoplay={{
+        delay: 5000,
+      }}
+      breakpoints={{
+        1280: {
+          slidesPerView: 4,
+          spaceBetween: 16,
+        },
+        0: {
+          slidesPerView: 1,
+          spaceBetween: 16,
+        },
+      }}
+    >
+      {data?.data.map((news) => (
+        <SwiperSlide key={news.id} className="flex h-full">
+          <AboutUsImage
+            key={news.title}
+            id={news.id}
+            title={news.title}
+            description={news.description}
+            src={news.featureImage}
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  )
+}
+
+const AboutUsImage = ({
+  id,
+  src,
+  title,
+  description,
+}: { src: string; id: number; title: string; description: string }) => {
+  return (
+    <Link
+      href={`/news/${id}`}
+      className="flex flex-col bg-white shadow-2xl h-full min-h-full rounded-lg overflow-auto flex-1"
+    >
+      <div className="relative pt-[80%]">
+        <Image
+          className="block rounded-lg h-full w-full absolute inset-0 object-cover"
+          src={src}
+          alt={title}
+        />
+      </div>
+      <div className="flex flex-col p-4 text-center min-h-[160px]">
+        <h3 className="text-xl font-semibold mb-2 line-clamp-2">{title}</h3>
+        <p className="text-base text-left line-clamp-3">{description}</p>
+      </div>
+    </Link>
   )
 }

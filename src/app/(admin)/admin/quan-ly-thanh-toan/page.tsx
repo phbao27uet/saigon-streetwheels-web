@@ -15,6 +15,8 @@ const QuanLyThanhToanPage = async () => {
 
   return (
     <div>
+      <p className="text-2xl font-bold my-4">Quản lý thanh toán</p>
+
       <ListBookingAdmin />
     </div>
   )

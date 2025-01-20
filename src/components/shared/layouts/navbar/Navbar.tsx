@@ -33,6 +33,10 @@ const adminVietnameseSideBar = [
         label: 'Quản lý bài viết',
         link: '/admin/quan-ly-bai-viet',
       },
+      {
+        label: 'Quản lý bài giới thiệu',
+        link: '/admin/quan-ly-bai-gioi-thieu',
+      },
     ],
   },
   {
