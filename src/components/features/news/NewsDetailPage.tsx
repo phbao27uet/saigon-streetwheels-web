@@ -5,13 +5,13 @@ import { cn } from '@/libs/utils'
 import { Box } from '@mantine/core'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { format } from 'date-fns'
-import { getDetailBlog } from '../admin'
-import { BlogAPIQueryKey } from '../admin'
+import { getDetailNews } from '../admin'
+import { NewsAPIQueryKey } from '../admin'
 
 export const NewsDetailPage = ({ params }: { params: { id: string } }) => {
   const { data } = useSuspenseQuery({
-    queryKey: [BlogAPIQueryKey.GET_BLOG, params.id],
-    queryFn: getDetailBlog(params.id),
+    queryKey: [NewsAPIQueryKey.GET_NEWS, params.id],
+    queryFn: getDetailNews(params.id),
   })
 
   return (

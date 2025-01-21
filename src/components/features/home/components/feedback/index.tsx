@@ -61,33 +61,33 @@ export const Feedback = () => {
           {fbs?.data?.map((fb, index) => (
             <SwiperSlide key={fb.id} className="h-full ">
               <div
-              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-              key={index}
-              className="w-full h-fit flex flex-col gap-2 items-center relative"
-            >
-              <div className="w-full max-w-[300px] h-[250px]">
-                <Image
-                  className="w-full h-full object-cover rounded-lg"
-                  src={fb.image}
-                  alt={fb.image}
-                />
-              </div>
-
-              <div className="flex flex-col gap-2 items-start justify-start">
-                <p className="text-2xl font-bold text-[#C13332]">{fb.name}</p>
-                <div className="flex items-center">
-                  {Array.from({ length: fb.star }).map((_, index) => (
-                    // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                    <span key={index} className="text-xl text-[#E7B00D]">
-                      ★
-                    </span>
-                  ))}
+                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                key={index}
+                className="w-full h-fit flex flex-col gap-2 items-center relative"
+              >
+                <div className="w-full md:max-w-[300px] h-[250px]">
+                  <Image
+                    className="w-full h-full object-cover rounded-lg"
+                    src={fb.image}
+                    alt={fb.image}
+                  />
                 </div>
-                <p className="text-lg leading-[25px] text-left">
-                  {fb.content}
-                </p>
+
+                <div className="flex flex-col gap-2 items-start justify-start">
+                  <p className="text-2xl font-bold text-[#C13332]">{fb.name}</p>
+                  <div className="flex items-center">
+                    {Array.from({ length: fb.star }).map((_, index) => (
+                      // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                      <span key={index} className="text-xl text-[#E7B00D]">
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-lg leading-[25px] text-left">
+                    {fb.content}
+                  </p>
+                </div>
               </div>
-            </div>
             </SwiperSlide>
           ))}
         </Swiper>
