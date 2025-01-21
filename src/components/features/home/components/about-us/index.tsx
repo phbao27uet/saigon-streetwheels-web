@@ -73,6 +73,14 @@ const AboutUsImages = () => {
           slidesPerView: 4,
           spaceBetween: 16,
         },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 16,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 16,
+        },
         0: {
           slidesPerView: 1,
           spaceBetween: 16,
