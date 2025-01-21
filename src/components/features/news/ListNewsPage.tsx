@@ -1,7 +1,7 @@
 'use client'
 
 import { SectionWithPagination } from '@/components/shared/layouts'
-import { BlogAPIQueryKey } from '../admin'
+import { NewsAPIQueryKey } from '../admin'
 import { NewsCard } from './components'
 import { getListNews } from './services'
 
@@ -11,7 +11,7 @@ export const ListNewsPage = () => {
       <SectionWithPagination
         title="NEWS"
         titleClassName="text-[#c13331]"
-        queryKey={[BlogAPIQueryKey.GET_BLOGS]}
+        queryKey={[NewsAPIQueryKey.GET_NEWS]}
         fetchFn={getListNews}
         renderItem={(news) => (
           <NewsCard
