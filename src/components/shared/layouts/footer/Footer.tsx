@@ -1,5 +1,6 @@
 'use client'
-import { Container, Image } from '@mantine/core'
+import { Image } from '@mantine/core'
+import { MainContainer } from '@shared/layouts'
 import Link from 'next/link'
 
 interface IFooterItem {
@@ -70,16 +71,19 @@ const Footer = () => {
     <>
       <div className="bg-[#1d7d8c] flex items-center justify-center">
         <div id="footer" />
-        <Container size="lg" className="py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Link href="/home" className="w-fit h-[90px] bg-white rounded-[12px] px-6 py-4 flex items-center justify-center">
-                <Image
-                  src="/images/logo-removebg.png"
-                  alt="logo"
-                  className="h-full w-auto"
-                />
+        <MainContainer className="py-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Link
+              href="/home"
+              className="w-fit h-[90px] bg-white rounded-[12px] px-6 py-4 flex items-center justify-center"
+            >
+              <Image
+                src="/images/logo-removebg.png"
+                alt="logo"
+                className="h-full w-auto"
+              />
             </Link>
-        </div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
             <div>
@@ -113,7 +117,7 @@ const Footer = () => {
               ))}
             </div>
           </div>
-        </Container>
+        </MainContainer>
       </div>
     </>
   )
