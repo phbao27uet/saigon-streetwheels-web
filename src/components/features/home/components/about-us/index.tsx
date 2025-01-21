@@ -23,21 +23,24 @@ export const AboutUs = () => {
       <div id="about-us" className="relative -top-[8rem]" />
       <Section title="ABOUT US" className="pb-5">
         <div className="relative flex-responsive gap-8">
-          <div className="basis-1/2 w-fit self-center">
+          <Link
+            href={`/news/${data?.id}`}
+            className="block basis-1/2 w-fit self-center"
+          >
             <Image
               className="md:w-full sm:w-[500px] w-[300px] rounded-[10px]"
               src={data?.featureImage || '/images/home/au-main.jpeg'}
               alt="about-us"
             />
-          </div>
-          <div className="basis-1/2 flex flex-col">
+          </Link>
+          <Link href={`/news/${data?.id}`} className="basis-1/2 flex flex-col">
             <h1 className="text-4xl font-bold text-[#C13332] capitalize">
               {data?.title}
             </h1>
             <div className="mt-4 whitespace-pre-line">
               <p>{data?.description}</p>
             </div>
-          </div>
+          </Link>
         </div>
 
         <AboutUsImages />
@@ -59,6 +62,7 @@ const AboutUsImages = () => {
 
   return (
     <Swiper
+      hideNavigation
       style={{
         width: '100%',
         height: '100%',
@@ -66,7 +70,7 @@ const AboutUsImages = () => {
       }}
       loop={true}
       autoplay={{
-        delay: 5000,
+        delay: 3000,
       }}
       breakpoints={{
         1280: {
