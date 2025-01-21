@@ -71,7 +71,7 @@ const Footer = () => {
     <>
       <div className="bg-[#1d7d8c] flex items-center justify-center">
         <div id="footer" />
-        <MainContainer className="py-8 px-4">
+        <MainContainer className="py-8 px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <Link
               href="/home"
