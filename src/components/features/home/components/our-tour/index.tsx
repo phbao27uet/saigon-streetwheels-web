@@ -19,6 +19,10 @@ export const OurTour = () => {
     clickable: true,
   }
 
+  if (displayedTours.length === 0) {
+    return null
+  }
+
   return (
     <Section title="Our Tours" className="w-full">
       <div id="our-tour" className="relative -top-[12rem]" />

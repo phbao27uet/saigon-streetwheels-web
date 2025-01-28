@@ -16,6 +16,7 @@ import {
   TagsInput,
   Text,
   TextInput,
+  Textarea,
 } from '@mantine/core'
 import { useParams } from 'next/navigation'
 import { useEffect } from 'react'
@@ -62,6 +63,8 @@ export const TourForm = () => {
       }
     }
   }, [tourQuery.data])
+
+  console.log('error', formReturn.formState.errors)
 
   return (
     <FormProvider {...formReturn}>
@@ -149,6 +152,19 @@ export const TourForm = () => {
               />
 
               <Controller
+                name="description"
+                control={formReturn.control}
+                render={({ field: { onChange, value, ref } }) => (
+                  <Textarea
+                    onChange={onChange}
+                    value={value}
+                    error={formReturn.formState.errors.description?.message}
+                    label={'Mô tả chi tiết'}
+                  />
+                )}
+              />
+
+              <Controller
                 name="information"
                 control={formReturn.control}
                 render={({ field: { onChange, value, ref } }) => (
@@ -158,7 +174,7 @@ export const TourForm = () => {
                     onChange={onChange}
                     value={value}
                     error={formReturn.formState.errors.information?.message}
-                    label={'Thông tin'}
+                    label={'Thông tin thêm'}
                   />
                 )}
               />
