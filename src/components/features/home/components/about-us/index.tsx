@@ -34,10 +34,10 @@ export const AboutUs = () => {
             />
           </Link>
           <Link href={`/news/${data?.id}`} className="basis-1/2 flex flex-col">
-            <h1 className="text-4xl font-bold text-[#C13332] capitalize">
+            <h1 className="text-4xl font-bold text-[#C13332] capitalize text-center font-alike">
               {data?.title}
             </h1>
-            <div className="mt-4 whitespace-pre-line">
+            <div className="mt-4 whitespace-pre-line font-alike">
               <p>{data?.description}</p>
             </div>
           </Link>

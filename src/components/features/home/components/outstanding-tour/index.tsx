@@ -31,6 +31,7 @@ export const OutstandingTour = () => {
           width: '100%',
           height: '100%',
         }}
+        className="px-3 md:px-10"
         pagination={pagination}
         loop={true}
         autoplay={{
@@ -39,15 +40,15 @@ export const OutstandingTour = () => {
         breakpoints={{
           1280: {
             slidesPerView: 4,
-            spaceBetween: 40,
+            spaceBetween: 16,
           },
           1024: {
             slidesPerView: 3,
-            spaceBetween: 40,
+            spaceBetween: 16,
           },
           768: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 16,
           },
           0: {
             slidesPerView: 1,

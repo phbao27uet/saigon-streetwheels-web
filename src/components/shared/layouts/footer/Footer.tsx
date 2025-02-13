@@ -11,6 +11,10 @@ interface IFooterItem {
 
 const ABOUT_URBAN_TOUR: IFooterItem[] = [
   {
+    title: 'Privacy Policy',
+    href: '#',
+  },
+  {
     title: 'About Us',
     href: '/home#about-us',
   },
@@ -69,7 +73,7 @@ const FooterItem = ({ title, href, icon }: IFooterItem) => {
 const Footer = () => {
   return (
     <>
-      <div className="bg-[#1d7d8c] flex items-center justify-center">
+      <div className="bg-[#000] flex items-center justify-center">
         <div id="footer" />
         <MainContainer className="py-8 px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -87,11 +91,10 @@ const Footer = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
             <div>
-              <p className="text-white">
-                sentially unchanged. It was popularised in the 1960s with the
-                release of Letraset sheets containing Lorem Ipsum passages, and
-                more recently with desktop publishing software like Aldus
-                PageMaker including versions of Lorem Ipsum.
+              <p className="text-white text-center">
+                SaiGon Urban Tour Thank you for always choosing and trusting us.
+                We will try to be better and bring a great experience to you, it
+                is an honor to serve you.
               </p>
               <p className="text-white uppercase mt-4 mb-6 text-xl font-bold text-center">
                 Payment Partner
@@ -100,9 +103,7 @@ const Footer = () => {
             </div>
 
             <div className="flex flex-col gap-4 items-center">
-              <p className="text-xl font-bold uppercase text-white">
-                About urban tour
-              </p>
+              <p className="text-xl font-bold uppercase text-white">Read Me</p>
               {ABOUT_URBAN_TOUR.map((item) => (
                 <FooterItem key={item.title} {...item} />
               ))}
@@ -110,7 +111,7 @@ const Footer = () => {
 
             <div className="flex flex-col gap-4 items-center">
               <p className="text-xl font-bold uppercase text-white">
-                Follow us on
+                Contact Information
               </p>
               {FOLLOW_US_ON.map((item) => (
                 <FooterItem key={item.title} {...item} />
