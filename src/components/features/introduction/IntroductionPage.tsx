@@ -3,10 +3,12 @@
 import SkewButton from '@/components/shared/buttons/SkewButton'
 import { Container, Image } from '@mantine/core'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRouter } from 'nextjs-toploader/app'
+import { useEffect, useState } from 'react'
 import { SliderCustom } from './components'
 
 export const IntroductionPage = () => {
+  const router = useRouter()
   const [backgroundImage, setBackgroundImage] = useState(
     '/images/introduction/i-1.jpeg',
   )
@@ -14,6 +16,19 @@ export const IntroductionPage = () => {
   const handleBackgroundChange = (newImageUrl: string) => {
     setBackgroundImage(newImageUrl)
   }
+
+  useEffect(() => {
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    window.addEventListener('mousewheel', (event: any) => {
+      if (event.wheelDelta < 0) {
+        router.push('/home')
+      }
+    })
+
+    return () => {
+      window.removeEventListener('mousewheel', () => {})
+    }
+  }, [router])
 
   return (
     <div
@@ -28,7 +43,7 @@ export const IntroductionPage = () => {
       >
         <div className="w-full md:w-1/3 flex flex-col items-center md:items-start z-10">
           <Link href="/home">
-            <div className="w-full h-full max-w-[200px] max-h-[200px]">
+            <div className="w-full h-full max-w-[300px] max-h-[250px]">
               <Image
                 src="/images/logo.jpg"
                 alt="logo"
@@ -42,7 +57,14 @@ export const IntroductionPage = () => {
               SAIGON URBAN TOUR
             </h1>
             <p className="text-white text-sm md:text-base">
-            Welcome to Vietnam! We are Saigon Urban Tour (SUT)—a team of three founders, all born and raised in the vibrant city of Saigon. After years of working as tour guides and operators for various companies, we decided to create something new—a fresh, innovative way to showcase the city we love and call home. With a deep understanding of Saigon’s cuisine and streets, we at SUT are dedicated to providing you, our guests, with a journey that is safe, enriching, and full of joy.
+              Welcome to Vietnam! We are Saigon Urban Tour (SUT)—a team of three
+              founders, all born and raised in the vibrant city of Saigon. After
+              years of working as tour guides and operators for various
+              companies, we decided to create something new—a fresh, innovative
+              way to showcase the city we love and call home. With a deep
+              understanding of Saigon’s cuisine and streets, we at SUT are
+              dedicated to providing you, our guests, with a journey that is
+              safe, enriching, and full of joy.
             </p>
 
             <Link

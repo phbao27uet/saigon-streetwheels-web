@@ -28,7 +28,7 @@ export const AboutUs = () => {
             className="block basis-1/2 w-fit self-center"
           >
             <Image
-              className="md:w-full sm:w-[500px] w-[300px] rounded-[10px]"
+              className="md:w-full sm:w-[500px] rounded-[10px]"
               src={data?.featureImage || '/images/home/au-main.jpeg'}
               alt="about-us"
             />

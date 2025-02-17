@@ -19,7 +19,7 @@ const ABOUT_URBAN_TOUR: IFooterItem[] = [
     href: '/home#about-us',
   },
   {
-    title: 'Our Tours',
+    title: 'Our team',
     href: '/our-tour',
   },
   {
@@ -27,35 +27,81 @@ const ABOUT_URBAN_TOUR: IFooterItem[] = [
     href: '#footer',
   },
   {
-    title: 'Blog',
-    href: '/home#tourism-news',
+    title: 'FAQ',
+    href: '/qa',
   },
   {
-    title: 'Q&A',
+    title: 'Refund and Conditions',
+    href: '#',
+  },
+  {
+    title: 'What is a customize for',
+    href: '#',
+  },
+]
+
+const OTHER_LINKS: IFooterItem[] = [
+  {
+    title: 'Introduce SaiGon\nUrbans Tour',
+    href: '/introduce',
+  },
+  {
+    title: 'SaiGon Urban Tour\nBlog',
     href: '/blog',
+  },
+  {
+    title: 'Privacy Policy',
+    href: '#',
+  },
+  {
+    title: 'Terms & Conditions',
+    href: '#',
+  },
+  {
+    title: 'About Tours',
+    href: '/our-tour',
+  },
+  {
+    title: 'Operation regulations',
+    href: '#',
   },
 ]
 
 const FOLLOW_US_ON: IFooterItem[] = [
+  // {
+  //   title: 'Facebook',
+  //   href: 'https://www.facebook.com/saigonurbantours',
+  //   icon: <Image src="/svgs/fb.svg" alt="facebook" />,
+  // },
+  // {
+  //   title: 'Whatsapp',
+  //   href: 'https://wa.me/message/PWBWP5HAB7FHM1',
+  //   icon: <Image src="/svgs/whatsapp.svg" alt="whatsapp" />,
+  // },
+  // {
+  //   title: 'Instagram',
+  //   href: 'https://www.instagram.com/saigonurbantours',
+  //   icon: <Image src="/svgs/ig.svg" alt="instagram" />,
+  // },
+  // {
+  //   title: 'Youtube',
+  //   href: 'https://www.youtube.com/@SaigonUrbanTours',
+  //   icon: <Image src="/svgs/youtube.svg" alt="youtube" />,
+  // },
   {
-    title: 'Facebook',
-    href: 'https://www.facebook.com/saigonurbantours',
-    icon: <Image src="/svgs/fb.svg" alt="facebook" />,
+    title: 'Email: sgurbantours@gmail.com',
+    href: 'mailto:saigonurbantours@gmail.com',
+    icon: <Image src="/svgs/email.svg" alt="email" />,
   },
   {
-    title: 'Whatsapp',
-    href: 'https://wa.me/message/PWBWP5HAB7FHM1',
-    icon: <Image src="/svgs/whatsapp.svg" alt="whatsapp" />,
+    title: 'Phone number: +84 366 469 960',
+    href: 'tel:+84366469960',
+    icon: <Image src="/svgs/green-phone.svg" alt="phone" />,
   },
   {
-    title: 'Instagram',
-    href: 'https://www.instagram.com/saigonurbantours',
-    icon: <Image src="/svgs/ig.svg" alt="instagram" />,
-  },
-  {
-    title: 'Youtube',
-    href: 'https://www.youtube.com/@SaigonUrbanTours',
-    icon: <Image src="/svgs/youtube.svg" alt="youtube" />,
+    title: 'Emergency contact: +84 982 837 905',
+    href: 'tel:+84982837905',
+    icon: <Image src="/svgs/phone.svg" className="w-5 h-5" alt="phone" />,
   },
 ]
 
@@ -89,7 +135,7 @@ const Footer = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
             <div>
               <p className="text-white text-center">
                 SaiGon Urban Tour Thank you for always choosing and trusting us.
@@ -103,14 +149,25 @@ const Footer = () => {
             </div>
 
             <div className="flex flex-col gap-4 items-center">
-              <p className="text-xl font-bold uppercase text-white">Read Me</p>
+              <p className="text-xl font-bold uppercase text-[#EBF218]">
+                Read Me
+              </p>
               {ABOUT_URBAN_TOUR.map((item) => (
                 <FooterItem key={item.title} {...item} />
               ))}
             </div>
 
             <div className="flex flex-col gap-4 items-center">
-              <p className="text-xl font-bold uppercase text-white">
+              <p className="text-xl font-bold uppercase text-[#EBF218]">
+                Other
+              </p>
+              {OTHER_LINKS.map((item) => (
+                <FooterItem key={item.title} {...item} />
+              ))}
+            </div>
+
+            <div className="flex flex-col gap-4 items-center">
+              <p className="text-xl font-bold uppercase text-[#EBF218]">
                 Contact Information
               </p>
               {FOLLOW_US_ON.map((item) => (
