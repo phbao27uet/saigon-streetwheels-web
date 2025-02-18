@@ -4,6 +4,7 @@ import { useGetInfiniteTours } from '@/components/features/tour/hooks'
 import { TourCard } from '@/components/shared/cards'
 import { Section } from '@/components/shared/layouts'
 import { Swiper } from '@/components/shared/slides'
+import { cn } from '@/libs/utils'
 import { format } from 'date-fns'
 import { SwiperSlide } from 'swiper/react'
 import type { PaginationOptions } from 'swiper/types'
@@ -25,7 +26,13 @@ export const OurTour = () => {
 
   return (
     <Section title="Our Tours" className="w-full">
-      <div id="our-tour" className="relative -top-[12rem]" />
+      <div
+        id="our-tour"
+        className={cn(
+          'relative -top-[12rem]',
+          displayedTours.length < 4 && '[&_.swiper-initialized]:!pb-4',
+        )}
+      />
       <Swiper
         style={{
           width: '100%',
