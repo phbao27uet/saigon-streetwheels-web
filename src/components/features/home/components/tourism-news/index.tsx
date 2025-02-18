@@ -20,7 +20,7 @@ export const TourismNews = () => {
       <Section
         title="Travel Guide"
         titleClassName="text-[#C80D13]"
-        className="pt-6"
+        className="py-6"
       >
         <Swiper
           style={{

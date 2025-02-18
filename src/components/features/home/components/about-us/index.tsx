@@ -21,7 +21,7 @@ export const AboutUs = () => {
   return (
     <div className="min-h-[70vh] md:min-h-screen relative bg-[#f5f2f1] pt-8">
       <div id="about-us" className="relative -top-[8rem]" />
-      <Section title="ABOUT US" className="pb-5">
+      <Section title="ABOUT US" className="pb-5 [&_.swiper-initialized]:!pb-0">
         <div className="relative flex-responsive gap-8">
           <Link
             href={`/news/${data?.id}`}
@@ -115,7 +115,7 @@ const AboutUsImage = ({
   return (
     <Link
       href={`/news/${id}`}
-      className="flex flex-col bg-white shadow-2xl h-full min-h-full rounded-lg overflow-auto flex-1"
+      className="flex flex-col bg-white h-full min-h-full rounded-lg overflow-auto flex-1"
     >
       <div className="relative pt-[80%]">
         <Image
