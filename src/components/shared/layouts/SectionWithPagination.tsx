@@ -42,7 +42,7 @@ export const SectionWithPagination = <T,>({
   return (
     <Container
       size="xl"
-      className={cn('flex flex-col gap-4 py-10 w-full', className)}
+      className={cn('flex flex-col gap-4 w-full', className)}
     >
       <motion.p
         initial={{ opacity: 0, y: 20 }}

@@ -18,7 +18,7 @@ export const Section = ({
   titleClassName,
 }: React.PropsWithChildren<SectionProps>) => {
   return (
-    <Container size="xl" className={cn('flex flex-col gap-8 py-10', className)}>
+    <Container size="xl" className={cn('flex flex-col gap-8', className)}>
       {title && (
         <motion.p
           initial={{ opacity: 0, y: 20 }}
