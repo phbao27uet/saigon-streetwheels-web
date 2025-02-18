@@ -9,6 +9,7 @@ export const ListBlogPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <SectionWithPagination
+        className="pt-10"
         title="TRAVEL GUIDE"
         titleClassName="text-[#c13331]"
         queryKey={[BlogAPIQueryKey.GET_BLOGS]}
