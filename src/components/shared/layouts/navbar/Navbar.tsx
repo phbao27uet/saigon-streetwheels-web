@@ -5,6 +5,7 @@ import {
   IconBook,
   IconCashRegister,
   IconMap,
+  IconMessage,
   IconPhoto,
   IconStar,
 } from '@tabler/icons-react'
@@ -38,6 +39,16 @@ const adminVietnameseSideBar = [
         link: '/admin/quan-ly-bai-gioi-thieu',
       },
     ],
+  },
+  {
+    label: 'Ảnh trang chủ',
+    icon: IconPhoto,
+    link: '/admin/quan-ly-anh-home',
+  },
+  {
+    label: 'Q&A',
+    icon: IconMessage,
+    link: '/admin/quan-ly-qa',
   },
   {
     label: 'Tours',

@@ -19,14 +19,16 @@ export const IntroductionPage = () => {
 
   useEffect(() => {
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    window.addEventListener('mousewheel', (event: any) => {
+    const handleScroll = (event: any) => {
       if (event.wheelDelta < 0) {
         router.push('/home')
       }
-    })
+    }
+
+    window.addEventListener('mousewheel', handleScroll)
 
     return () => {
-      window.removeEventListener('mousewheel', () => {})
+      window.removeEventListener('mousewheel', handleScroll)
     }
   }, [router])
 
@@ -62,7 +64,7 @@ export const IntroductionPage = () => {
               years of working as tour guides and operators for various
               companies, we decided to create something new—a fresh, innovative
               way to showcase the city we love and call home. With a deep
-              understanding of Saigon’s cuisine and streets, we at SUT are
+              understanding of Saigon's cuisine and streets, we at SUT are
               dedicated to providing you, our guests, with a journey that is
               safe, enriching, and full of joy.
             </p>

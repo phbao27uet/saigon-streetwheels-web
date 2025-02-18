@@ -1,7 +1,10 @@
 'use client'
 
 import { Section } from '@/components/shared'
+import type { DataPagination, IQA } from '@/libs/types'
 import { Accordion } from '@mantine/core'
+import { useQuery } from '@tanstack/react-query'
+import { QAAPIQueryKey, getListQA } from '../admin/quan-ly-qa'
 
 const DATA = [
   {
@@ -115,13 +118,20 @@ const DATA = [
 ]
 
 export const QA = () => {
+  const { data, isLoading } = useQuery<DataPagination<IQA[]>>({
+    queryKey: [QAAPIQueryKey.GET_QA],
+    queryFn: () => getListQA(200),
+  })
+
+  if (isLoading) return null
+
   return (
     <Section titleClassName="text-[#C80D13] text-3xl" title="Q&A">
       <Accordion>
-        {DATA.map((item, index) => (
+        {data?.data?.map((item, index) => (
           <Accordion.Item value={item.title} key={index}>
             <Accordion.Control>
-              <h3 className="text-2xl font-medium text-[#C13332] mb-2">
+              <h3 className="text-2xl font-medium text-[#C13332] mb-2 font-alike">
                 {item.title}
               </h3>
             </Accordion.Control>

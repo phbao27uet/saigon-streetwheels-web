@@ -16,6 +16,9 @@ import {
   customerInformationSchema,
 } from '../schemas'
 
+const FEE_TRANSACTION = 0.3
+const INITIAL_PRICE = 0
+
 export const CustomerInformation = () => {
   const { clearBooking, booking } = useTourBooking()
   const [checked, setChecked] = useState(false)
@@ -39,7 +42,7 @@ export const CustomerInformation = () => {
 
   const totalPrice = booking.ticketTypes.reduce((acc, ticket) => {
     return acc + ticket.price * ticket.quantity
-  }, 0)
+  }, INITIAL_PRICE + FEE_TRANSACTION)
 
   const handleSubmitForm = handleSubmit((data) => {
     return data
@@ -235,17 +238,26 @@ export const CustomerInformation = () => {
           />
         </div>
 
+        <p className="text-base text-[#696363]">
+          This payment method is subject to a fixed transaction fee of $0.30 per
+          transaction as required by the bank. Please understand that this is a
+          mandatory fee that customers have to purchase, and SUT does not cover
+          this charged fee.
+        </p>
+
         <div className="flex flex-col gap-4">
           <Checkbox
             label={
               <p className="text-base font-bold">
                 I hereby certify that I have read and agree to{' '}
                 <span className="text-[#F81818]">
-                  Lu Phong terms and conditions including refund and
+                  Saigon Urban Tours terms and conditions including refund and
                   cancellation policy
                 </span>{' '}
                 and that I have read{' '}
-                <span className="text-[#F81818]">Lu Phong privacy policy.</span>
+                <span className="text-[#F81818]">
+                  Saigon Urban Tours privacy policy.
+                </span>
               </p>
             }
             color="red"

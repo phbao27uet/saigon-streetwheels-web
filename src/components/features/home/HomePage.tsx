@@ -9,7 +9,9 @@ import {
   TourismNews,
 } from './components'
 
-export const HomePage = () => {
+export const revalidate = 0
+
+export const HomePage = async () => {
   return (
     <div className="flex flex-col bg-[#f5f2f1]">
       <HereSection />
