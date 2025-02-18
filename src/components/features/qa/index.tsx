@@ -126,7 +126,11 @@ export const QA = () => {
   if (isLoading) return null
 
   return (
-    <Section titleClassName="text-[#C80D13] text-3xl" title="Q&A">
+    <Section
+      titleClassName="text-[#C80D13] text-3xl"
+      title="Q&A"
+      className="pt-10"
+    >
       <Accordion>
         {data?.data?.map((item, index) => (
           <Accordion.Item value={item.title} key={index}>
