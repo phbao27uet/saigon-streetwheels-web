@@ -27,7 +27,7 @@ export const Feedback = () => {
 
   return (
     <div id="feedback">
-      <Section title="FEEDBACK FROM CUSTOMER" className="pb-10 pt-6">
+      <Section title="FEEDBACK FROM CUSTOMER" className="pb-10 pt-10">
         <Swiper
           style={{
             width: '100%',

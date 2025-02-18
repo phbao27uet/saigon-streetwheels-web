@@ -29,7 +29,7 @@ export const OutstandingTour = () => {
       title="Outstanding Tours"
       className={cn(
         'w-full pt-4',
-        displayedTours.length < 4 && '[&_.swiper-initialized]:!pb-6',
+        displayedTours.length < 4 && '[&_.swiper-initialized]:!pb-4',
       )}
     >
       <div id="outstanding-tour" className="relative -top-[12rem]" />
