@@ -17,7 +17,11 @@ export const TourismNews = () => {
   return (
     <div className="bg-white">
       <div id="tourism-news" className="relative -top-[8rem]" />
-      <Section title="Travel Guide" titleClassName="text-[#C80D13]">
+      <Section
+        title="Travel Guide"
+        titleClassName="text-[#C80D13]"
+        className="py-6"
+      >
         <Swiper
           style={{
             width: '100%',

@@ -16,7 +16,7 @@ export const OurMoment = () => {
   if (isLoading) return null
 
   return (
-    <Section title="Our Moment" className="w-full">
+    <Section title="Our Moment" className="w-full pt-6">
       <div className="px-3 md:px-10">
         <SwiperWithThumb
           images={albums?.data.map((al) => al.image) || []}
