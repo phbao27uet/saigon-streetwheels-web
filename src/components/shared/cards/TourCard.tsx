@@ -30,11 +30,15 @@ export const TourCard = ({
         />
       </div>
       <div className="flex flex-col py-2 flex-grow gap-1 bg-[#f5f2f1] items-start">
-        <p className="font-bold text-2xl text-left">{title}</p>
+        <p className="font-bold text-2xl text-left line-clamp-3 min-h-[96px]">
+          {title}
+        </p>
         <p className="text-gray-700 text-xl text-left">{departureDate}</p>
-        <p className="text-xl font-semibold text-[#FA0404] text-left">${price}</p>
-        <div className="flex justify-between w-full items-center mt-2">
-          <ButtonCustomGreen size="xs" fullWidth>
+        <p className="text-xl font-semibold text-[#FA0404] text-left">
+          ${price}
+        </p>
+        <div className="flex justify-between w-full items-center py-4">
+          <ButtonCustomGreen size="md" fullWidth>
             Booking Now
           </ButtonCustomGreen>
         </div>

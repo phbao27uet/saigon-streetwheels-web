@@ -34,7 +34,7 @@ export const Feedback = () => {
             height: '100%',
           }}
           pagination={pagination}
-          className="p-3 md:p-10"
+          className="px-3 md:px-10"
           loop={true}
           autoplay={{
             delay: 5000,

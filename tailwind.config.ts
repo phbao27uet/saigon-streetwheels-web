@@ -28,6 +28,8 @@ const config: Config = {
       },
       fontFamily: {
         rubik: ['Rubik', 'sans-serif'],
+        alike: ['Alike', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
       },
       ringColor: {
         primary: '#1B264A',

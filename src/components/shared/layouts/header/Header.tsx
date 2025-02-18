@@ -15,7 +15,7 @@ import { DrawerHeader } from './components'
 
 export const HEADER = [
   { title: 'ABOUT US', href: '/home#about-us' },
-  { title: 'OUR TOUR', href: '/our-tour' },
+  { title: 'OUR TOURS', href: '/our-tour' },
   { title: 'CONTACT US', href: '#footer' },
   // { title: 'BLOG', href: '/home#tourism-news' },
   { title: 'BLOG', href: '/blog' },

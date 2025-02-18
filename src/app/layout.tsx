@@ -22,8 +22,13 @@ import {
 } from '@/providers'
 import { DatesProvider } from '@mantine/dates'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Alike, Inter } from 'next/font/google'
 import type React from 'react'
+
+const alike = Alike({
+  subsets: ['latin'],
+  weight: ['400'],
+})
 
 const inter = Inter({
   subsets: ['latin'],
@@ -49,7 +54,7 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/svgs/motorbike.svg" />
         <link rel="preload" as="image" href="/images/home/hero-1.jpg" />
       </head>
-      <body className={inter.className}>
+      <body className={`${alike.className} ${inter.className}`}>
         <WebVitals />
         <PayPalProvider>
           <JotaiProvider>

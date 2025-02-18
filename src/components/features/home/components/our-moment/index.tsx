@@ -17,7 +17,7 @@ export const OurMoment = () => {
 
   return (
     <Section title="Our Moment" className="w-full">
-      <div className="p-3 md:p-10">
+      <div className="px-3 md:px-10">
         <SwiperWithThumb
           images={albums?.data.map((al) => al.image) || []}
           classNameWrapper="pd-[100%] md:pt-[50%]"

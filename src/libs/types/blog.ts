@@ -65,6 +65,13 @@ export interface IAlbum {
   updatedAt: string
 }
 
+export interface IImageHome {
+  id: number
+  imageUrl: string
+  createdAt: string
+  updatedAt: string
+}
+
 export interface IFeedback {
   id: number
   name: string
@@ -82,6 +89,14 @@ export interface INews {
   content: string
   featureImage: string
   isMain: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface IQA {
+  id: number
+  title: string
+  content: string
   createdAt: string
   updatedAt: string
 }
