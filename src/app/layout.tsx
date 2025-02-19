@@ -25,6 +25,8 @@ import type { Metadata } from 'next'
 import { Alike, Inter } from 'next/font/google'
 import type React from 'react'
 
+import Favicon from '@public/favicon.ico'
+
 const alike = Alike({
   subsets: ['latin'],
   weight: ['400'],
@@ -38,6 +40,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Saigon Urban Tours',
   description: 'Saigon Urban Tours - Book your tour now!',
+  icons: [{ rel: 'icon', url: Favicon.src }],
 }
 
 export default function RootLayout({
