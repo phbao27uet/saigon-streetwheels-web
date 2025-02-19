@@ -25,7 +25,7 @@ export const OurTour = () => {
   }
 
   return (
-    <Section title="Our Tours" className="w-full">
+    <Section title="Our Tours" className="w-full pt-4">
       <div
         id="our-tour"
         className={cn(
