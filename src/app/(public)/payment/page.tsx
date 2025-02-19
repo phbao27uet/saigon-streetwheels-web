@@ -2,7 +2,7 @@ import { BookingConfirmation } from '@/components/features/payment'
 
 const Payment = () => {
   return (
-    <div>
+    <div className="py-6">
       <BookingConfirmation />
     </div>
   )
