@@ -54,7 +54,7 @@ export const TourDetailPage = ({ id }: { id: string }) => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex flex-col gap-2">
                 <del className="text-2xl md:text-3xl">
-                  {data.ticketTypes[0].price * 1.5} USD
+                  {(data.ticketTypes[0].price * 1.5).toFixed(2)} USD
                 </del>
                 <p className="text-2xl md:text-3xl font-bold text-red-500">
                   {data.ticketTypes[0].price} USD
