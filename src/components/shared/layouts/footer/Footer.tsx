@@ -125,7 +125,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <Link
               href="/home"
-              className="w-fit h-[90px] bg-white rounded-[12px] px-6 py-4 flex items-center justify-center"
+              className="w-fit h-[80px] bg-white rounded-[12px] px-6 py-4 flex items-center justify-center"
             >
               <Image
                 src="/images/logo-removebg.png"

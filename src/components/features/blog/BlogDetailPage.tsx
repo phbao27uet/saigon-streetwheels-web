@@ -15,7 +15,11 @@ export const BlogDetailPage = ({ params }: { params: { id: string } }) => {
   })
 
   return (
-    <Section titleClassName="text-[#C80D13] text-3xl" title={data?.title}>
+    <Section
+      titleClassName="text-[#C80D13] text-3xl"
+      title={data?.title}
+      className="pt-6"
+    >
       <div className="flex flex-col gap-4">
         <p className="font-bold text-xl">{data?.description}</p>
         <p className="text-[#666363] font-bold text-xl">

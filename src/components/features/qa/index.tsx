@@ -129,7 +129,7 @@ export const QA = () => {
     <Section
       titleClassName="text-[#C80D13] text-3xl"
       title="Q&A"
-      className="pt-10"
+      className="py-6"
     >
       <Accordion>
         {data?.data?.map((item, index) => (
