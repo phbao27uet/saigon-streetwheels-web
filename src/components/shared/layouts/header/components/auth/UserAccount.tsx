@@ -194,6 +194,7 @@ export function UserAccount({ user }: Props) {
             onClick={async () => {
               await signOut({
                 callbackUrl: '/login',
+                redirect: true,
               })
               localStorage.removeItem('isLogin')
             }}
