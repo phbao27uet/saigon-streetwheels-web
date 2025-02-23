@@ -1,3 +1,5 @@
+'use client'
+
 import { request } from '@/libs/requests'
 import type { IUser } from '@/libs/types/user'
 import { handleError } from '@/libs/utils/messages'
@@ -19,7 +21,7 @@ import { IconChevronDown, IconLogout } from '@tabler/icons-react'
 import { useMutation } from '@tanstack/react-query'
 import cx from 'clsx'
 import { signOut } from 'next-auth/react'
-import {} from 'next/navigation'
+import { useRouter } from 'nextjs-toploader/app'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -32,6 +34,7 @@ interface Props {
 
 export function UserAccount({ user }: Props) {
   const [userMenuOpened, setUserMenuOpened] = useState(false)
+  const router = useRouter()
 
   const {
     control: controlChangePassword,
@@ -196,6 +199,7 @@ export function UserAccount({ user }: Props) {
                 callbackUrl: '/login',
                 redirect: true,
               })
+              router.push('/login')
               localStorage.removeItem('isLogin')
             }}
           >
