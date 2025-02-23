@@ -1,36 +1,34 @@
-"use client";
+'use client'
 
-import { Skeleton } from "@mantine/core";
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { request } from "@libs/requests";
-import { UserAccount } from "./UserAccount";
-import { IUser } from "@/libs/types/user";
+import type { IUser } from '@/libs/types/user'
+import { Skeleton } from '@mantine/core'
+import { useQuery } from '@tanstack/react-query'
+import { UserAccount } from './UserAccount'
 
 export const Auth = () => {
   const { data, isLoading } = useQuery<IUser>({
-    queryKey: ["me"],
+    queryKey: ['me'],
     queryFn: () => {
       // const res = await request.get("auth/me");
-      
+
       const res = {
         data: {
-            id: 1,
-            name: 'John Doe',
-            email: 'john.doe@example.com',
-            role: 'ADMIN',
+          id: 1,
+          name: 'Admin',
+          email: 'admin@gmail.com',
+          role: 'ADMIN',
         },
       }
 
-      return res.data as unknown as IUser;
+      return res.data as unknown as IUser
     },
-  });
+  })
 
   if (isLoading) {
-    return <Skeleton height={24} circle />;
+    return <Skeleton height={24} circle />
   }
 
-  const isLogin = !!data?.email;
+  const isLogin = !!data?.email
 
-  return !isLogin ? <>None</> : <UserAccount user={data} />;
-};
+  return !isLogin ? <>None</> : <UserAccount user={data} />
+}
