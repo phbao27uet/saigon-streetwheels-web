@@ -20,7 +20,7 @@ export const LatestNewsCard = ({ id, image, title, description }: Props) => {
             src={image}
           />
         </div>
-        <p className="mt-1 text-left text-xl text-[#1B7C8B] font-bold">
+        <p className="mt-1 text-left text-xl text-[#1B7C8B] font-bold line-clamp-3 min-h-[84px]">
           {title}
         </p>
         <p className="mt-1 text-left text-xl text-black line-clamp-2">

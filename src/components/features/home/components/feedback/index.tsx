@@ -42,7 +42,7 @@ export const Feedback = () => {
           breakpoints={{
             1024: {
               slidesPerView: 4,
-              spaceBetween: 24,
+              spaceBetween: 16,
             },
             768: {
               slidesPerView: 3,
@@ -54,7 +54,7 @@ export const Feedback = () => {
             },
             0: {
               slidesPerView: 1,
-              spaceBetween: 8,
+              spaceBetween: 10,
             },
           }}
         >
@@ -77,8 +77,11 @@ export const Feedback = () => {
                   <p className="text-2xl font-bold text-[#C13332]">{fb.name}</p>
                   <div className="flex items-center">
                     {Array.from({ length: fb.star }).map((_, index) => (
-                      // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                      <span key={index} className="text-xl text-[#E7B00D]">
+                      <span
+                        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                        key={index}
+                        className="text-xl text-[#E7B00D] leading-[8px]"
+                      >
                         ★
                       </span>
                     ))}

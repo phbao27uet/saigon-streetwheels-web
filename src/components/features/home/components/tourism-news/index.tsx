@@ -36,11 +36,11 @@ export const TourismNews = () => {
           breakpoints={{
             1024: {
               slidesPerView: 3,
-              spaceBetween: 40,
+              spaceBetween: 16,
             },
             768: {
               slidesPerView: 2,
-              spaceBetween: 20,
+              spaceBetween: 16,
             },
             0: {
               slidesPerView: 1,
