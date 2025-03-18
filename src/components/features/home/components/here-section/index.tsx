@@ -5,10 +5,7 @@ import { cn } from '@/libs/utils'
 
 export const HereSection = () => {
   const imageQuery = useGetDetailImage('HOME')
-
   const imageUrl = imageQuery.data?.imageUrl
-
-  console.log(imageUrl)
 
   return (
     <div
