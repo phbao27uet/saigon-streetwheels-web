@@ -74,7 +74,14 @@ export const columnsBooking: MRT_ColumnDef<IBooking>[] = [
     header: 'Ngày đặt',
     enableEditing: false,
     Cell: ({ row }) => {
-      return <div>{format(row.original.createdAt, 'dd/MM/yyyy')}</div>
+      return (
+        <div>
+          {format(
+            row.original.bookingDate || row.original.createdAt,
+            'dd/MM/yyyy',
+          )}
+        </div>
+      )
     },
   },
   {
