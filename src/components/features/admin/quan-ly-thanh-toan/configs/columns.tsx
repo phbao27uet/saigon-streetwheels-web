@@ -38,6 +38,11 @@ export const columnsBooking: MRT_ColumnDef<IBooking>[] = [
     enableEditing: false,
   },
   {
+    accessorKey: 'bookerAddress',
+    header: 'Địa chỉ đón',
+    enableEditing: false,
+  },
+  {
     accessorKey: 'status',
     header: 'Trạng thái thanh toán',
     enableEditing: false,
@@ -65,7 +70,7 @@ export const columnsBooking: MRT_ColumnDef<IBooking>[] = [
     },
   },
   {
-    accessorKey: 'time.createdAt',
+    accessorKey: 'bookingDate',
     header: 'Ngày đặt',
     enableEditing: false,
     Cell: ({ row }) => {
