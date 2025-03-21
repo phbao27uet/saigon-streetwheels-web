@@ -31,7 +31,7 @@ export interface IBooking {
   createdAt: string
   updatedAt: string
   status: BookingStatus
-
+  bookingDate: string
   bookingDetails: IBookingDetail[]
   time: ITimeSlot
 }
