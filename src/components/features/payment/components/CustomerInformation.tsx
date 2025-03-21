@@ -58,6 +58,8 @@ export const CustomerInformation = () => {
     }
   }
 
+  console.log({ bookingDate: booking?.date })
+
   return (
     <div className="flex flex-col gap-4">
       <p className="font-bold text-3xl">CUSTOMER INFORMATION</p>
@@ -195,6 +197,7 @@ export const CustomerInformation = () => {
                     quantity: ticket.quantity,
                     ticketTypeId: ticket.id,
                   })),
+                  bookingDate: booking?.date,
                 }
 
                 const res = await request.post('/bookings', {
